@@ -2,9 +2,9 @@
 
 
 //getters
-std::string City::getName(){ return name ; }
-bool City::getISAvailable(){ return isAvailable ; }
-std::vector<City> City::getNeighbors(){ return neighbors ; }
+const std::string City::getName(){ return name ; }
+const bool City::getISAvailable(){ return isAvailable ; }
+const std::vector<City> City::getNeighbors(){ return neighbors ; }
 
 
 //setters
