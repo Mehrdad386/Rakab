@@ -12,13 +12,13 @@ public:
 
     Player ( Player& ) ;
 
-    std::string getName() ;
+    const std::string getName() ;
 
-    int getAge() ;
+    const int getAge() ;
 
-    std::string getColor () ;
+    const std::string getColor () ;
 
-    bool getIsPassed() ;
+    const bool getIsPassed() ;
 
     void setName( std::string ) ;
 

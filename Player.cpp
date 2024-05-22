@@ -1,10 +1,10 @@
 #include"Player.h"
 
 //getters
-std::string Player::getName(){ return name ; }
-int Player::getAge(){ return age ; }
-std::string Player::getColor(){ return color ; }
-bool Player::getIsPassed(){ return isPassed ; }
+const std::string Player::getName(){ return name ; }
+const int Player::getAge(){ return age ; }
+const std::string Player::getColor(){ return color ; }
+const bool Player::getIsPassed(){ return isPassed ; }
 
 
 //setters
