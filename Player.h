@@ -1,6 +1,8 @@
 #ifndef PLAYER
 #define PLAYER
 #include<string>
+#include"City.h"
+#include<vector>
 
 class Player {
 
@@ -30,6 +32,14 @@ public:
 
     void play() ;
 
+    void printCities() ;
+
+    void printCards() ;
+
+    void CountScore() ;
+
+    void movePlayedCard() ;
+
 
 private:
 
@@ -37,6 +47,7 @@ private:
     std::string color ;
     int age ;
     bool isPassed ;
+    std::vector<City> cities ; //owned cities
 
 
 };

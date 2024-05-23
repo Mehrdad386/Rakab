@@ -1,4 +1,5 @@
 #include"Player.h"
+#include<iostream>
 
 //getters
 const std::string Player::getName(){ return name ; }
@@ -24,5 +25,20 @@ Player::Player( std::string name , std::string color , bool isPassed , int age )
     setAge(age) ;
     setIsPasssed(isPassed) ;
     setColor(color) ;
+}
+
+
+
+//other methods
+
+void Player::play(){
+
+}
+
+void Player::printCities(){
+    std::cout<<name<<':' ;
+    
+    for(int i{} ; i<cities.size() ; i++)
+       std::cout<< ' '<<cities[i].getName();
 }
 
