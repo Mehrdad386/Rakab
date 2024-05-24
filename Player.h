@@ -12,8 +12,6 @@ public:
 
     Player ( std::string , std::string , bool , int) ;
 
-    Player ( Player& ) ;
-
     const std::string getName() ;
 
     const int getAge() ;
@@ -34,11 +32,11 @@ public:
 
     void printCities() ;
 
-    void printCards() ;
+    //void printCards() ;
 
-    void CountScore() ;
+    //void CountScore() ;
 
-    void movePlayedCard() ;
+   // void movePlayedCard() ;
 
 
 private:
