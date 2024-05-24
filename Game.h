@@ -1,17 +1,13 @@
 #ifndef GAME
 #define GAME
 #include"Manager.h"
-#include"City.h"
+#include"Map.h"
 #include"Player.h"
 #include<vector>
 
 class Game{
 
 public:
-
-    Game() ; //defualt game
-
-    void generateGame() ; //to generate game map and cards
 
     void takeGameInfo () ; //this function will take basic game information to create a game
 
@@ -27,7 +23,7 @@ public:
 
 private:
 
-    std::vector<City> cities ;
+    Map map ;
     std::vector<Player> players ;
     Manager manager ;
 
