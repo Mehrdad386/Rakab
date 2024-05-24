@@ -19,7 +19,7 @@ void Manager::startMenue(){
             clear() ;
             break;
         case 2:
-            help();
+            help("none");
             break;
         case 3:
             exitGame();

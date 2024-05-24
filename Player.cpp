@@ -18,7 +18,6 @@ void Player::setIsPasssed( bool isPassed ){ this->isPassed = isPassed ; }
 //constructors
 Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false){}
 
-Player::Player( Player& player ){ *this = player ; }
 
 Player::Player( std::string name , std::string color , bool isPassed , int age ){
     setName(name) ;
