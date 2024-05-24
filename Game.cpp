@@ -2,21 +2,6 @@
 #include"Game.h"
 
 
-//constructors
-Game::Game(){
-    generateGame() ;
-}
-
-void Game::generateGame(){
-
-    std::vector<std::string> citiesName{"Bella" , "Caline" , "Enna" , "Atela" , "Pladaci" , "Borge" , "Dimase" , "Morina" , "Olivadi","Rollo", "Elinia" , "Lia" , "Armento"} ;
-    cities.resize(citiesName.size()) ;
-    for(int i{} ; i<citiesName.size() ; i++){
-        cities[i].setName(citiesName[i]) ;
-    }
-
-}
-
 
 
 void Game::takeGameInfo(){

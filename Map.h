@@ -19,10 +19,13 @@ public:
 
     void setCities( std::vector<City> ) ;
 
+    void generateMap() ;
+
 private:
 
     int size ;
     std::vector<City> cities ;
+    std::vector<std::vector<bool>> isNeighbor ;
 
 };
 
