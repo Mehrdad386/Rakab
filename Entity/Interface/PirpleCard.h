@@ -1,13 +1,17 @@
+#ifndef PIRPLECARD_H
+#define PIRPLECARD_H
 #include <string>
+#include "../Interface/Card.h"
 
-
-class PirpleCard
+class PirpleCard : Card
 {
-    public:
-    void doAbility();
+public:
+    virtual void ability();
     std::string getName();
     void setName(std::string);
-    private:
+
+private:
     std::string Name;
     std::string Ability;
 };
+#endif

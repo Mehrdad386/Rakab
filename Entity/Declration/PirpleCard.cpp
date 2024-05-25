@@ -8,3 +8,7 @@ std::string PirpleCard::getName()
 {
     return Name;
 }
+void PirpleCard::ability()
+{
+    
+}
