@@ -6,11 +6,10 @@ std::vector<std::vector<Card>> Matarsak::ability(std::vector<std::vector<Card>> 
     {
         for (size_t j = 0; j < vec.size(); j++)
         {
-            if (vec[i][j].)
+            if (vec[i][j].getName()==name)
             {
-                /* code */
+                vec[i].erase(vec[j].begin()+j);
             }
-            
         }
         
     }

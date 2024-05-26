@@ -1,6 +1,6 @@
 #include "../Interface/ShahDokht.h"
 
-void ShahDokht::ability()
+int ShahDokht::ability()
 {
-    
+    return 1;
 }

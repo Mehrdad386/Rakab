@@ -5,9 +5,10 @@
 class TablZan : PirpleCard
 {
     public:
-    void ability() override;
+   std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>) override;
 
 private:
+bool isYellow(std::string);
 };
 
 #endif

@@ -2,10 +2,10 @@
 #define SHAHDOKHT_H
 #include "../Interface/PirpleCard.h"
 
-class ShahDokht : PirpleCard
+class ShahDokht : public PirpleCard
 {
 public:
-    void ability() override;
+    int ability() override;
 
 private:
 };
