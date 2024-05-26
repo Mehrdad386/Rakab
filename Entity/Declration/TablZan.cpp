@@ -13,6 +13,7 @@ std::vector<std::vector<Card>> TablZan::ability(std::vector<std::vector<Card>> v
         }
         
     }
+    return vec;
 }
 
 bool TablZan::isYellow(std::string name)

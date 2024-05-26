@@ -8,8 +8,8 @@ class PirpleCard : public Card
 {
 public:
     virtual std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>);
-    std::string getName();
-    void setName(std::string);
+    virtual std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>,std::string);
+    virtual int ability();
 
 private:
     

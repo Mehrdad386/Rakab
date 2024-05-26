@@ -13,5 +13,5 @@ std::vector<std::vector<Card>> Matarsak::ability(std::vector<std::vector<Card>> 
         }
         
     }
-    
+    return vec;
 }
