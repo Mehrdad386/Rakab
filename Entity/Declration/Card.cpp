@@ -9,3 +9,8 @@ int Card::getPower()
 {
     return Power;
 }
+
+std::string Card::getName()
+{
+    return Name;
+}

@@ -12,7 +12,7 @@ public:
     void setName(std::string);
 
 private:
-    std::string Name;
+    
     std::string Ability;
 };
 #endif

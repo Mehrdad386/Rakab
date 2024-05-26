@@ -5,9 +5,10 @@
 class Matarsak :PirpleCard
 {
     public:
-    void ability() override;
+    std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>,std::string name ) override;
 
 private:
+
 };
 
 #endif
