@@ -12,4 +12,5 @@ std::vector<std::vector<Card>> Zemestan::ability(std::vector<std::vector<Card>> 
             }
         }
     }
+    return vec;
 }
