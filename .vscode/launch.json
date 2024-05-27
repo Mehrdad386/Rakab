@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Uni/Code/Project/Declration",
-      "program": "d:/Uni/Code/Project/Declration/build/Debug/outDebug",
+      "cwd": "d:/Uni/Code/Project Rakab",
+      "program": "d:/Uni/Code/Project Rakab/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

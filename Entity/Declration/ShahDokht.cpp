@@ -1,6 +1,8 @@
 #include "../Interface/ShahDokht.h"
 
-int ShahDokht::ability()
+Player ShahDokht::ability(Player p )
 {
-    return 1;
+    p.
+    setCanWar
+    ((p.getCanWar()+1));
 }

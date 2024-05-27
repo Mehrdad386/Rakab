@@ -32,6 +32,10 @@ public:
 
     void printCities() ;
 
+    void setCanWar(int );
+
+    const int getCanWar();
+
     //void printCards() ;
 
     //void CountScore() ;
@@ -45,6 +49,7 @@ private:
     std::string color ;
     int age ;
     bool isPassed ;
+    int CanWar;
     std::vector<City> cities ; //owned cities
 
 

@@ -1,17 +1,27 @@
 #include "../Interface/Matarsak.h"
 
-std::vector<std::vector<Card>> Matarsak::ability(std::vector<std::vector<Card>> vec,std::string name)
+std::vector<std::vector<Card>> Matarsak::ability(std::vector<std::vector<Card>> vec, Player &p)
 {
+    std::string cardName = getCardName();
+    Card chosenCard;
     for (size_t i = 0; i < vec.size(); i++)
     {
         for (size_t j = 0; j < vec.size(); j++)
         {
-            if (vec[i][j].getName()==name)
+            if (vec[i][j].getName() == cardName)
             {
-                vec[i].erase(vec[j].begin()+j);
+                chosenCard = vec[i][j];
+                vec[i].erase(vec[j].begin() + j);
+                //add chosen card to player
             }
         }
-        
     }
     return vec;
+}
+std::string Matarsak::getCardName()
+{
+    std::string cardName;
+    std::cout << "Please Enter Card Name\n";
+    std::cin >> cardName;
+    return cardName;
 }

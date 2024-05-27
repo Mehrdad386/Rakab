@@ -5,7 +5,7 @@
 class ShahDokht : public PirpleCard
 {
 public:
-    int ability() override;
+    Player ability(Player) override;
 
 private:
 };

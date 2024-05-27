@@ -3,6 +3,7 @@
 Card::Card(int power, std::string name)
 {
     setPower(power);
+    setName(name);
 }
 
 void Card::setPower(int power)
