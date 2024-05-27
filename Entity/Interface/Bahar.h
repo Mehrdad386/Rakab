@@ -4,9 +4,10 @@
 
 class Bahar : public PirpleCard
 {
-    public:
+public:
+    Bahar(){};
     PlayedCard ability(PlayedCard) override;
 
-    private:
+private:
 };
 #endif

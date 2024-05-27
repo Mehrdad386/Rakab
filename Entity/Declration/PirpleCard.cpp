@@ -1,19 +1,30 @@
 #include "../Interface/PirpleCard.h"
 #include "../Interface/Player.h"
-#include <vector>
 
-std::vector<std::vector<Card>> PirpleCard::ability(std::vector<std::vector<Card>> vec)
+//Constructor
+PirpleCard::PirpleCard(std::string ability)
 {
-    return vec;
+    setAbility(ability);
 }
-std::vector<std::vector<Card>> PirpleCard::ability(std::vector<std::vector<Card>> vec,Player& p)
+
+//Stters
+void PirpleCard::setAbility(std::string ability)
 {
-    return vec;
+    Ability = ability;
 }
+
+//Getters
+const std::string PirpleCard::getAbility()
+{
+    return Ability;
+}
+
+//Inheritance
 Player PirpleCard::ability(Player p)
 {
     return p;
 }
+
 PlayedCard PirpleCard::ability(PlayedCard PC)
 {
     return PC;

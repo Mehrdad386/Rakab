@@ -4,12 +4,12 @@
 
 class TablZan : PirpleCard
 {
-    public:
+public:
+    TablZan(){};
     virtual PlayedCard ability(PlayedCard);
 
-
 private:
-bool isYellow(std::string);
+    bool isYellow(std::string);//check card is yellow or not ?
 };
 
 #endif

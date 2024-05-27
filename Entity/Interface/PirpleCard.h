@@ -9,13 +9,18 @@ struct PlayedCard
     std::vector<Card> cards;
 };
 
-
 class PirpleCard : public Card
 {
 public:
-    virtual std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>);
-    virtual std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>,Player&);
-     virtual PlayedCard ability(PlayedCard);
+    //Constructor
+    PirpleCard() : Ability(" "){};
+    PirpleCard(std::string);
+    //Setters
+    void setAbility(std::string);
+    //Getters
+    const std::string getAbility();
+    //Inheritance
+    virtual PlayedCard ability(PlayedCard);
     virtual Player ability(Player);
 
 private:

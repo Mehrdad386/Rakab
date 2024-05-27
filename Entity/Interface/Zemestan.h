@@ -5,6 +5,7 @@
 class Zemestan : PirpleCard
 {
 public:
+    Zemestan(){};
     PlayedCard ability(PlayedCard) override;
 
 private:

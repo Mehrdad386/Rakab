@@ -2,15 +2,15 @@
 #define MATARSAK_H
 #include "../Interface/PirpleCard.h"
 
-class Matarsak :PirpleCard
+class Matarsak : PirpleCard
 {
-    public:
+public:
+    Matarsak(){};
     virtual PlayedCard ability(PlayedCard);
 
-
 private:
-std::string getCardName();
-int findCard(PlayedCard);
+    std::string getCardName();//get the card name from player for delete
+    int findCard(PlayedCard); // find the choosen card index
 };
 
 #endif

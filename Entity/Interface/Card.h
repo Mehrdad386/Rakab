@@ -7,12 +7,18 @@
 class Card
 {
 public:
+    //constructor
     Card():Power(0),Name(""){};
     Card(int , std::string);
+
+    //setters
     void setPower(int);
-    int getPower();
     void setName(std::string);
-    std::string getName();
+
+    //getters
+    const int getPower();
+    const std::string getName();
+
 private:
     int Power;
     std::string Name;
