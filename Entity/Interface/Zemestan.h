@@ -4,15 +4,10 @@
 
 class Zemestan : PirpleCard
 {
-    public:
-    std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>) override;
+public:
+    PlayedCard ability(PlayedCard) override;
 
-    private:
+private:
 };
-
-
-
-
-
 
 #endif

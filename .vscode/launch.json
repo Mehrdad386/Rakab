@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Uni/Code/Project Rakab",
-      "program": "d:/Uni/Code/Project Rakab/build/Debug/outDebug",
+      "cwd": "c:/Users/Novin SOft/Desktop/New folder/Rakab",
+      "program": "c:/Users/Novin SOft/Desktop/New folder/Rakab/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

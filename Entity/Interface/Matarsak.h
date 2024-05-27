@@ -5,10 +5,12 @@
 class Matarsak :PirpleCard
 {
     public:
-    std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>,Player &) override;
+    virtual PlayedCard ability(PlayedCard);
+
 
 private:
 std::string getCardName();
+int findCard(PlayedCard);
 };
 
 #endif

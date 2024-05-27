@@ -5,7 +5,8 @@
 class TablZan : PirpleCard
 {
     public:
-   std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>) override;
+    virtual PlayedCard ability(PlayedCard);
+
 
 private:
 bool isYellow(std::string);
