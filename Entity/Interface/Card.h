@@ -4,6 +4,8 @@
 class Card
 {
 public:
+    Card():Power(0),Name(""){};
+    Card(int , std::string);
     void setPower(int);
     int getPower();
     void setName(std::string);

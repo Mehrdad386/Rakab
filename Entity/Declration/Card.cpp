@@ -1,8 +1,18 @@
 #include "../Interface/Card.h"
 
+Card::Card(int power, std::string name)
+{
+    setPower(power);
+}
+
 void Card::setPower(int power)
 {
-    Power=power;
+    Power = power;
+}
+
+void Card::setName(std::string name)
+{
+    Name = name;
 }
 
 int Card::getPower()
