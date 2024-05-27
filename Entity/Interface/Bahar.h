@@ -5,7 +5,7 @@
 class Bahar : public PirpleCard
 {
     public:
-    std::vector<std::vector<Card>> ability(std::vector<std::vector<Card>>) override;
+    PlayedCard ability(PlayedCard) override;
 
     private:
 };

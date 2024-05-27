@@ -1,0 +1,1 @@
+g++ *.cpp .\Entity\Declration\*.cpp .\Entity\Interface\*.h -o app

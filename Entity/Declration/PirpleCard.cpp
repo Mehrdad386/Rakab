@@ -14,3 +14,7 @@ Player PirpleCard::ability(Player p)
 {
     return p;
 }
+PlayedCard PirpleCard::ability(PlayedCard PC)
+{
+    return PC;
+}

@@ -1,5 +1,5 @@
-#ifndef ZEMESTAN_H
-#define ZEMESTAN_H
+#ifndef ZEMESTAN
+#define ZEMESTAN
 #include "../Interface/PirpleCard.h"
 
 class Zemestan : PirpleCard
