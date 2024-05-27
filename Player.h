@@ -20,6 +20,8 @@ public:
 
     const bool getIsPassed() ;
 
+    const std::vector<City> getCities() ;
+
     void setName( std::string ) ;
 
     void setAge( int ) ;
@@ -32,11 +34,11 @@ public:
 
     void printCities() ;
 
-    //void printCards() ;
+    void printCards() ;
 
-    //void CountScore() ;
+    void CountScore() ;
 
-   // void movePlayedCard() ;
+    void movePlayedCard() ;
 
 
 private:

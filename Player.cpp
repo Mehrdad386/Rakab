@@ -1,11 +1,12 @@
-#include"Player.h"
 #include<iostream>
+#include"Player.h"
 
 //getters
 const std::string Player::getName(){ return name ; }
 const int Player::getAge(){ return age ; }
 const std::string Player::getColor(){ return color ; }
 const bool Player::getIsPassed(){ return isPassed ; }
+
 
 
 //setters
@@ -39,5 +40,11 @@ void Player::printCities(){
     
     for(int i{} ; i<cities.size() ; i++)
        std::cout<< ' '<<cities[i].getName();
+}
+
+
+void Player::printCities(){
+    for(int i {} ; i<cities.size() ; i++)
+        std::cout<<cities[i].getName()<<' ' ;
 }
 

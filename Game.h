@@ -26,6 +26,7 @@ private:
     Map map ;
     std::vector<Player> players ;
     Manager manager ;
+    int turn ;
 
 };
 
