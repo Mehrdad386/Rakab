@@ -49,7 +49,6 @@ void Game::print(){
     //second part
     std::cout<<"------------------------------------------------------" ;
     for(int i{} ; i<players.size() ; i++){
-        std::cout<<players[i].getName()<<": " ;
         players[i].printCities() ;
         std::cout<<std::endl ;
     }

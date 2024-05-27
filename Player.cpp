@@ -40,11 +40,7 @@ void Player::printCities(){
     
     for(int i{} ; i<cities.size() ; i++)
        std::cout<< ' '<<cities[i].getName();
-}
 
-
-void Player::printCities(){
-    for(int i {} ; i<cities.size() ; i++)
-        std::cout<<cities[i].getName()<<' ' ;
+    std::cout<<std::endl ;
 }
 
