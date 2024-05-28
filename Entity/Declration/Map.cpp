@@ -26,7 +26,7 @@ void Map::generateMap()
     cities.resize(citiesName.size());
     for (int i{}; i < citiesName.size(); i++)
     {
-        cities[i].setName(citiesName[i]);
+        cities[i] = City(citiesName[i] , true , i ) ;
     }
 
     std::vector<std::vector<bool>> isNeighbor{
@@ -43,5 +43,18 @@ void Map::generateMap()
         {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0}};
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0}
+    };
+    
+    std::vector<int> neighbors ;
+
+    for(int i{} ;i<citiesName.size(); i++){
+        for(int j ; j<citiesName.size() ; j++){
+            if(isNeighbor[i][j])
+                neighbors.push_back(j) ;
+        }
+        cities[i].setNeighbors(neighbors) ;
+    }
+
 }
+

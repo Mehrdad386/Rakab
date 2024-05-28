@@ -9,26 +9,31 @@ public:
 
     City() ;
 
-    City( std::string , bool , std::vector<City> ) ; 
+    City( std::string , bool , int ) ; 
 
     const std::string getName() ;
 
     const bool getISAvailable() ;
 
-    const std::vector<City> getNeighbors () ;
+    const int getNumber() ;
+
+    const std::vector<int> getNeighbors () ;
 
     void setName( std::string ) ;
     
     void setIsAvailable( bool isAvaiable ) ;
 
-    void setNeighbors( std::vector<City> ) ;
+    void setNumber ( int ) ;
+
+    void setNeighbors( std::vector<int> ) ;
 
 
 private:
 
+    int number ;
     std::string name ;
     bool isAvailable ;
-    std::vector<City> neighbors ;
+    std::vector<int> neighbors ;
 
 };
 
