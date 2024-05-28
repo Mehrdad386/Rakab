@@ -1,13 +1,23 @@
 #ifndef GAME_H
 #define GAME_H
+#include<vector>
 #include"Manager.h"
 #include"Map.h"
 #include"Player.h"
-#include<vector>
+#include"Card.h"
+#include"YellowCard.h"
+#include"PirpleCard.h"
+#include"TablZan.h"
+#include"ShahDokht.h"
+#include"Bahar.h"
+#include"Zemestan.h"
+#include"Matarsak.h"
 
 class Game{
 
 public:
+
+    Game() ;
 
     void takeGameInfo () ; //this function will take basic game information to create a game
 
@@ -21,10 +31,13 @@ public:
 
     void gameFlow() ; //main function that relate all functions to each other
 
+    void generateCards() ;
+
 private:
 
     Map map ;
     std::vector<Player> players ;
+    std::vector<Card> cards ; //total cards of game
     Manager manager ;
     int turn ;
 

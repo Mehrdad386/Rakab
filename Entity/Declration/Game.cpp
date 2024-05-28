@@ -1,8 +1,13 @@
 #include<iostream>
+#include<stdlib.h>
 #include"../Interface/Game.h"
+#include<time.h>
 
 
 
+Game::Game(){
+    std::srand(time(0)) ;
+}
 
 void Game::takeGameInfo(){
     std::cout<<"enter the number of players: " ;
@@ -66,4 +71,43 @@ void Game::input(){
     if(input == "pass"){
         turn++ ;
     }
+}
+
+
+void Game::fillCards(){
+
+}
+
+void Game::generateCards(){
+    
+    YellowCard y1 (1) ;
+    YellowCard y2 (2) ;
+    YellowCard y3 (3) ;
+    YellowCard y4 (4) ;
+    YellowCard y5 (5) ;
+    YellowCard y6 (6) ;
+    YellowCard y10 (10) ;
+
+    for(int i {} ; i<10 ; i++){
+        cards.push_back(y1) ;
+        if(i<8)
+            cards.push_back(y2) ;
+            cards.push_back(y3) ;
+            cards.push_back(y4) ;
+            cards.push_back(y5) ;
+            cards.push_back(y6) ;
+            cards.push_back(y10) ;
+    }
+
+
+}
+
+
+void Game::setWar(){
+
+}
+
+
+void Game::gameFlow(){
+
 }
