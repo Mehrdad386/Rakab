@@ -1,5 +1,5 @@
 #include<iostream>
-#include"Player.h"
+#include"../Interface/Player.h"
 
 //getters
 const std::string Player::getName(){ return name ; }

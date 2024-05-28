@@ -1,4 +1,4 @@
-#include "Map.h"
+#include "../Interface/Map.h"
 
 // getters
 const int Map::getSize() { return size; }
