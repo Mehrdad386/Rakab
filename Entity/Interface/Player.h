@@ -1,8 +1,10 @@
 #ifndef PLAYER
 #define PLAYER
 #include<string>
-#include"../Interface/City.h"
 #include<vector>
+#include"../Interface/City.h"
+#include"../Interface/Card.h"
+
 
 class Player {
 
@@ -20,6 +22,8 @@ public:
 
     const bool getIsPassed() ;
 
+    const std::vector<Card> getCards() ;
+
     void setName( std::string ) ;
 
     void setAge( int ) ;
@@ -27,6 +31,8 @@ public:
     void setColor( std::string ) ;
 
     void setIsPasssed( bool ) ;
+
+    void setCards( std::vector<Card> ) ;
 
     void play() ;
 
@@ -36,12 +42,11 @@ public:
 
     const int getCanWar();
 
-    //void printCards() ;
+    void printCards() ;
 
-    //void CountScore() ;
+    void removeCard( Card ) ;
 
-   // void movePlayedCard() ;
-
+    void addCard( Card ) ;
 
 private:
 
@@ -51,6 +56,7 @@ private:
     bool isPassed ;
     int CanWar;
     std::vector<City> cities ; //owned cities
+    std::vector<Card> cards ;
 
 
 };
