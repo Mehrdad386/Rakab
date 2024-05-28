@@ -46,6 +46,24 @@ void Game::takeGameInfo(){
 
 void Game::print(){
 
+    //second part
+    std::cout<<"------------------------------------------------------" ;
+    for(int i{} ; i<players.size() ; i++){
+        players[i].printCities() ;
+        std::cout<<std::endl ;
+    }
+    std::cout<<"------------------------------------------------------" ;
+    //third part
+    input() ;
+    std::cout<<"------------------------------------------------------" ;
+
+}
 
 
+void Game::input(){
+    std::cout<<"play a card or pass" ;
+    std::string input ;
+    if(input == "pass"){
+        turn++ ;
+    }
 }
