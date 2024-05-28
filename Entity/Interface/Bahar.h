@@ -1,6 +1,6 @@
 #ifndef BAHAR_H
 #define BAHAR_H
-#include "../Interface/PirpleCard.h"
+#include "PirpleCard.h"
 
 class Bahar : public PirpleCard
 {

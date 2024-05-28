@@ -1,5 +1,5 @@
-#ifndef CITY
-#define CITY
+#ifndef CITY_H
+#define CITY_H
 #include<string>
 #include<vector>
 

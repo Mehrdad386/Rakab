@@ -1,6 +1,6 @@
 #ifndef SHAHDOKHT_H
 #define SHAHDOKHT_H
-#include "../Interface/PirpleCard.h"
+#include "PirpleCard.h"
 
 class ShahDokht : public PirpleCard
 {

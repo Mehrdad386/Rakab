@@ -1,7 +1,8 @@
 #ifndef PIRPLECARD_H
 #define PIRPLECARD_H
 #include <vector>
-#include "../Interface/Card.h"
+#include "Card.h"
+#include"player.h"
 
 struct PlayedCard
 {

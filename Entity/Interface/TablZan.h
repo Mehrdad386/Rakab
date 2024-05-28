@@ -1,6 +1,6 @@
 #ifndef TABLZAN_H
 #define TABLZAN_H
-#include "../Interface/PirpleCard.h"
+#include "PirpleCard.h"
 
 class TablZan : PirpleCard
 {

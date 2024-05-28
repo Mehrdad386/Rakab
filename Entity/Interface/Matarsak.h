@@ -1,6 +1,6 @@
 #ifndef MATARSAK_H
 #define MATARSAK_H
-#include "../Interface/PirpleCard.h"
+#include "PirpleCard.h"
 
 class Matarsak : PirpleCard
 {

@@ -1,5 +1,5 @@
-#ifndef MAP
-#define MAP
+#ifndef MAP_H
+#define MAP_H
 #include<vector>
 #include"City.h"
 

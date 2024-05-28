@@ -1,9 +1,9 @@
-#ifndef PLAYER
-#define PLAYER
+#ifndef PLAYER_H
+#define PLAYER_H
 #include<string>
 #include<vector>
-#include"../Interface/City.h"
-#include"../Interface/Card.h"
+#include"City.h"
+#include"Card.h"
 
 
 class Player {
