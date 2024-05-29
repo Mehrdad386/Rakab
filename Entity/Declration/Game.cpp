@@ -73,11 +73,20 @@ void Game::input(){
     }
 }
 
-
+//to fill the players hand based on the number of the token cities by them
 void Game::fillCards(){
+
+    for(int i{} ; i< players.size() ; i++){
+        for(int j{} ; j< 10 + players[i].getNumberOfCities() ; j++){
+            int random = rand()%cards.size() ;
+            players[i].addCard(cards[random]) ;
+            cards.erase(cards.begin() + random) ;
+        }
+    }
 
 }
 
+//to make cards vector based on game info
 void Game::generateCards(){
     
     YellowCard y1 (1) ;
@@ -106,7 +115,7 @@ void Game::generateCards(){
     }
 
     for(int i{} ; i<16 ; i++){
-        
+
         cards.push_back(matarsak) ;
 
         if(i<6){

@@ -9,6 +9,7 @@ const std::string Player::getColor(){ return color ; }
 const bool Player::getIsPassed(){ return isPassed ; }
 const int Player::getCanWar() { return CanWar; } // add by SIna
 const std::vector<Card> Player::getCards(){ return cards ; }
+const int Player::getNumberOfCities(){ return numberOfCities ; }
 
 
 
@@ -22,7 +23,7 @@ void Player::setCards( std::vector<Card> cards ){ this->cards = cards ; }
 
 
 //constructors
-Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false){}
+Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false) , numberOfCities(0) {}
 
 
 Player::Player( std::string name , std::string color , bool isPassed , int age ){
@@ -71,6 +72,11 @@ void Player::removeCard( Card card ){
     cards.erase( cards.begin() + counter) ;
 }
 
+
+void Player::addCity( City city ){
+    cities.push_back(city) ;
+    numberOfCities++ ;
+}
 
 
 

@@ -24,6 +24,8 @@ public:
 
     const std::vector<Card> getCards() ;
 
+    const int getNumberOfCities() ;
+
     void setName( std::string ) ;
 
     void setAge( int ) ;
@@ -48,6 +50,8 @@ public:
 
     void addCard( Card ) ;
 
+    void addCity( City city ) ;
+
 private:
 
     std::string name ;
@@ -57,6 +61,7 @@ private:
     int CanWar;
     std::vector<City> cities ; //owned cities
     std::vector<Card> cards ;
+    int numberOfCities ;
 
 
 };
