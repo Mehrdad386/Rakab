@@ -197,9 +197,17 @@ void Game::setWar()
 
 void Game::endWar()
 {
+    Winner.addCity(war) ;
+    war = City() ;
+    
+}
+
+Player Game::findWinner()
+{
 
 }
 
 void Game::gameFlow()
 {
+    
 }

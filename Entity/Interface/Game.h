@@ -48,6 +48,7 @@ private:
     int turn ;
     City war ; //to hold the city that is on war
     City peace ; //to hold the city that is on peace
+    Player& Winner ; //winner player on war
 
 };
 
