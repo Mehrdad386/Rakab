@@ -29,15 +29,18 @@ public:
 
     void setWar() ; //this function will set a city in war situation
 
+    void endWar() ;  //this function will end the ward and return played cards to cards of game
+
     void gameFlow() ; //main function that relate all functions to each other
 
-    void generateCards() ;
+    void generateCards() ; //this function will generate game based on game information
 
 private:
 
     Map map ;
     std::vector<Player> players ;
     std::vector<Card> cards ; //total cards of game
+    std::vector<PlayedCard> playedCards ;
     Manager manager ;
     int turn ;
 

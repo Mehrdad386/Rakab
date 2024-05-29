@@ -138,6 +138,10 @@ void Game::setWar(){
 
 }
 
+void Game::endWar(){
+
+}
+
 
 void Game::gameFlow(){
 

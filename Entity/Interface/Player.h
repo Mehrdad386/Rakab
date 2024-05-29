@@ -26,6 +26,8 @@ public:
 
     const int getNumberOfCities() ;
 
+    const int getCanWar();
+
     void setName( std::string ) ;
 
     void setAge( int ) ;
@@ -36,13 +38,11 @@ public:
 
     void setCards( std::vector<Card> ) ;
 
+    void setCanWar(int );
+
     void play() ;
 
     void printCities() ;
-
-    void setCanWar(int );
-
-    const int getCanWar();
 
     void printCards() ;
 

@@ -23,7 +23,7 @@ void Player::setCards( std::vector<Card> cards ){ this->cards = cards ; }
 
 
 //constructors
-Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false) , numberOfCities(0) {}
+Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false) , numberOfCities(0) , CanWar(0) {}
 
 
 Player::Player( std::string name , std::string color , bool isPassed , int age ){
@@ -36,10 +36,6 @@ Player::Player( std::string name , std::string color , bool isPassed , int age )
 
 
 //other methods
-
-void Player::play(){
-
-}
 
 void Player::printCities(){
     std::cout<<name<<':' ;
@@ -79,4 +75,7 @@ void Player::addCity( City city ){
 }
 
 
+void Player::play(){
+    
+}
 
