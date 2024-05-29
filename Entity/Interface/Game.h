@@ -38,11 +38,14 @@ public:
 private:
 
     Map map ;
+    std::vector<City> cities ;
     std::vector<Player> players ;
     std::vector<Card> cards ; //total cards of game
     std::vector<PlayedCard> playedCards ;
     Manager manager ;
     int turn ;
+    City war ; //to hold the city that is on war
+    City peace ; //to hold the city that is on peace
 
 };
 
