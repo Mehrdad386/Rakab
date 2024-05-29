@@ -3,8 +3,9 @@
 #include "../Interface/Game.h"
 #include <time.h>
 
-Game::Game()
+Game::Game() : Winner(players[0])
 {
+
     std::srand(time(0));
     generateCards() ;
     cities = map.getCities() ;
