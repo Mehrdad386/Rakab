@@ -40,7 +40,7 @@ public:
 
     void setCanWar(int );
 
-    void play() ;
+    void play( std::string choice ) ;
 
     void printCities() ;
 

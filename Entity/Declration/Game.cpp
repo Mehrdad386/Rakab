@@ -66,11 +66,25 @@ void Game::print(){
 
 
 void Game::input(){
-    std::cout<<"play a card or pass" ;
-    std::string input ;
-    if(input == "pass"){
+
+    if(!players[turn].getIsPassed()){
+        std::cout<<"choose a card to play or pass(use camel case): " ;
+        std::string choice ;
+        std::cin>>choice ;
+
+        if(choice == "pass"){
+            players[turn].setIsPasssed(true) ;
+            turn++ ;
+        }
+        else{
+            players[turn].play(choice) ;
+            turn++ ;
+        }
+    }
+    else{
         turn++ ;
     }
+
 }
 
 //to fill the players hand based on the number of the token cities by them

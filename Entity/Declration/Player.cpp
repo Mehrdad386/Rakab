@@ -75,7 +75,7 @@ void Player::addCity( City city ){
 }
 
 
-void Player::play(){
-    
+void Player::play( std::string choice ){
+
 }
 
