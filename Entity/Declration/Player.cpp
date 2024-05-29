@@ -75,7 +75,30 @@ void Player::addCity( City city ){
 }
 
 
-void Player::play( std::string choice ){
+Card Player::play( std::string choice ){
+    
+    int i{} ;
+    for( i ; i<cards.size() ; i++){
+        if(cards[i].getName() == choice ){
+            break ;
+        }
+        if(i == cards.size() - 1 && cards[i].getName() != choice){
+            i = -1 ;
+            break;
+        }
+    }
+
+    if(i == -1){
+        std::cout<<"invalid card , choose again: " ;
+        std::cin>>choice ;
+        return play(choice) ;
+    }
+    else{
+        Card temp = cards[i] ;
+        cards.erase(cards.begin() + i - 1) ;
+        return temp ;
+    }
+
 
 }
 

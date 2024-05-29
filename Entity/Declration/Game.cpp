@@ -77,7 +77,7 @@ void Game::input(){
             turn++ ;
         }
         else{
-            players[turn].play(choice) ;
+            playedCards[turn].cards.push_back(players[turn].play(choice)) ;    
             turn++ ;
         }
     }
@@ -94,7 +94,7 @@ void Game::fillCards(){
         for(int j{} ; j< 10 + players[i].getNumberOfCities() ; j++){
             int random = rand()%cards.size() ;
             players[i].addCard(cards[random]) ;
-            cards.erase(cards.begin() + random) ;
+            cards.erase(cards.begin() + random - 1) ;
         }
     }
 
@@ -103,13 +103,13 @@ void Game::fillCards(){
 //to make cards vector based on game info
 void Game::generateCards(){
     
-    YellowCard y1 (1) ;
-    YellowCard y2 (2) ;
-    YellowCard y3 (3) ;
-    YellowCard y4 (4) ;
-    YellowCard y5 (5) ;
-    YellowCard y6 (6) ;
-    YellowCard y10 (10) ;
+    YellowCard y1 (1 , "1") ;
+    YellowCard y2 (2 , "2") ;
+    YellowCard y3 (3 , "3") ;
+    YellowCard y4 (4 , "4") ;
+    YellowCard y5 (5 , "5") ;
+    YellowCard y6 (6 , "6" ) ;
+    YellowCard y10 (10 , "10") ;
     Bahar bahar ;
     Zemestan zemestan;
     ShahDokht shahdokht ;
