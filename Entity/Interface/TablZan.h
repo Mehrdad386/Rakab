@@ -2,7 +2,7 @@
 #define TABLZAN_H
 #include "PirpleCard.h"
 
-class TablZan : PirpleCard
+class TablZan : public PirpleCard
 {
 public:
     TablZan(){};

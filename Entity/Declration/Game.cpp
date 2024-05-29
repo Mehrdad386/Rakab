@@ -87,7 +87,13 @@ void Game::generateCards(){
     YellowCard y5 (5) ;
     YellowCard y6 (6) ;
     YellowCard y10 (10) ;
-
+    Bahar bahar ;
+    Zemestan zemestan;
+    ShahDokht shahdokht ;
+    TablZan tablzan ;
+    Matarsak matarsak ;
+    
+    //pushing yellow cards
     for(int i {} ; i<10 ; i++){
         cards.push_back(y1) ;
         if(i<8)
@@ -97,6 +103,22 @@ void Game::generateCards(){
             cards.push_back(y5) ;
             cards.push_back(y6) ;
             cards.push_back(y10) ;
+    }
+
+    for(int i{} ; i<16 ; i++){
+        
+        cards.push_back(matarsak) ;
+
+        if(i<6){
+            cards.push_back(tablzan) ;
+        }
+
+        if(i<3){
+            cards.push_back(bahar) ;
+            cards.push_back(zemestan) ;
+            cards.push_back(shahdokht) ;
+        }
+
     }
 
 

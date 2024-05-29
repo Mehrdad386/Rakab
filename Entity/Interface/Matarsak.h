@@ -2,7 +2,7 @@
 #define MATARSAK_H
 #include "PirpleCard.h"
 
-class Matarsak : PirpleCard
+class Matarsak : public PirpleCard
 {
 public:
     Matarsak(){};

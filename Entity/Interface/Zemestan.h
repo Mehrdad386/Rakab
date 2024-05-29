@@ -2,7 +2,7 @@
 #define ZEMESTAN_H
 #include "PirpleCard.h"
 
-class Zemestan : PirpleCard
+class Zemestan : public PirpleCard
 {
 public:
     Zemestan(){};
