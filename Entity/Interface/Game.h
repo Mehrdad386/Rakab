@@ -35,6 +35,8 @@ public:
 
     void generateCards() ; //this function will generate game based on game information
 
+    Player findWinner() ;
+
 private:
 
     Map map ;
