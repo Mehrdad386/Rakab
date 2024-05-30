@@ -204,7 +204,12 @@ void Game::endWar( int winner )
 
 int Game::findWinner()
 {
+    int score [players.size()]{} ;
+    for(int i {} ; i<players.size() ; i++){
+        for(int j{} ; j<playedCards[i].cards.size() ; j++){
 
+        }
+    }
 }
 
 void Game::gameFlow()
