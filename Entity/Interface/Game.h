@@ -29,13 +29,13 @@ public:
 
     void setWar() ; //this function will set a city in war situation
 
-    void endWar() ;  //this function will end the ward and return played cards to cards of game
+    void endWar( int ) ;  //this function will end the ward and return played cards to cards of game
 
     void gameFlow() ; //main function that relate all functions to each other
 
     void generateCards() ; //this function will generate game based on game information
 
-    Player findWinner() ;
+    int findWinner() ; //this function will return index of winner
 
 private:
 
@@ -48,7 +48,7 @@ private:
     int turn ;
     City war ; //to hold the city that is on war
     City peace ; //to hold the city that is on peace
-    Player& Winner ; //winner player on war
+    
 
 };
 

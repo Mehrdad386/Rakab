@@ -3,9 +3,8 @@
 #include "../Interface/Game.h"
 #include <time.h>
 
-Game::Game() : Winner(players[0])
+Game::Game()
 {
-
     std::srand(time(0));
     generateCards() ;
     cities = map.getCities() ;
@@ -196,14 +195,14 @@ void Game::setWar()
     }
 }
 
-void Game::endWar()
+void Game::endWar( int winner )
 {
-    Winner.addCity(war) ;
+    players[winner].addCity(war) ;
     war = City() ;
     
 }
 
-Player Game::findWinner()
+int Game::findWinner()
 {
 
 }
