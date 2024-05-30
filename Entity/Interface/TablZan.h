@@ -2,10 +2,10 @@
 #define TABLZAN_H
 #include "PirpleCard.h"
 
-class TablZan : PirpleCard
+class TablZan : public PirpleCard
 {
 public:
-    TablZan(){};
+    TablZan(){ setPriority(3) ; };
     virtual PlayedCard ability(PlayedCard);
 
 private:

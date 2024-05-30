@@ -1,10 +1,16 @@
 #ifndef YELLOWCARD_H
 #define YELLOWCARD_H
-
 #include <string>
+#include"Card.h"
 
-class YellowCard
+class YellowCard : public Card
 {
+
+public:
+
+    YellowCard( int  , std::string ) ;
+
+private:
 
 };
 

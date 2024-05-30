@@ -11,12 +11,14 @@ void Map::setCities(std::vector<City> cities) { this->cities = cities; }
 // constructors
 Map::Map()
 {
+    generateMap() ;
 }
 
 Map::Map(int size, std::vector<City> cities)
 {
     setSize(size);
     setCities(cities);
+    generateMap() ;
 }
 
 // to generate map based on game info

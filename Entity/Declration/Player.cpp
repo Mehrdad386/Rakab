@@ -9,6 +9,7 @@ const std::string Player::getColor(){ return color ; }
 const bool Player::getIsPassed(){ return isPassed ; }
 const int Player::getCanWar() { return CanWar; } // add by SIna
 const std::vector<Card> Player::getCards(){ return cards ; }
+const int Player::getNumberOfCities(){ return numberOfCities ; }
 
 
 
@@ -22,7 +23,7 @@ void Player::setCards( std::vector<Card> cards ){ this->cards = cards ; }
 
 
 //constructors
-Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false){}
+Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false) , numberOfCities(0) , CanWar(0) {}
 
 
 Player::Player( std::string name , std::string color , bool isPassed , int age ){
@@ -35,10 +36,6 @@ Player::Player( std::string name , std::string color , bool isPassed , int age )
 
 
 //other methods
-
-void Player::play(){
-
-}
 
 void Player::printCities(){
     std::cout<<name<<':' ;
@@ -72,5 +69,36 @@ void Player::removeCard( Card card ){
 }
 
 
+void Player::addCity( City city ){
+    cities.push_back(city) ;
+    numberOfCities++ ;
+}
 
+
+Card Player::play( std::string choice ){
+    
+    int i{} ;
+    for( i ; i<cards.size() ; i++){
+        if(cards[i].getName() == choice ){
+            break ;
+        }
+        if(i == cards.size() - 1 && cards[i].getName() != choice){
+            i = -1 ;
+            break;
+        }
+    }
+
+    if(i == -1){
+        std::cout<<"invalid card , choose again: " ;
+        std::cin>>choice ;
+        return play(choice) ;
+    }
+    else{
+        Card temp = cards[i] ;
+        cards.erase(cards.begin() + i - 1) ;
+        return temp ;
+    }
+
+
+}
 
