@@ -14,17 +14,20 @@ class PirpleCard : public Card
 {
 public:
     //Constructor
-    PirpleCard() : Ability(" "){};
+    PirpleCard() : Ability(" ") {};
     PirpleCard(std::string);
     //Setters
     void setAbility(std::string);
+    void setPriority ( int ) ;
     //Getters
     const std::string getAbility();
+    const int getPriority () ;
     //Inheritance
     virtual PlayedCard ability(PlayedCard);
     virtual Player ability(Player);
 
 private:
     std::string Ability;
+    int priority ;
 };
 #endif
