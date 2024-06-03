@@ -204,7 +204,7 @@ void Game::endWar(int winner)
     war = City();
 }
 
-Player Game::findWinner(std::vector<PlayedCard> pc)
+int Game::findWinner(std::vector<PlayedCard> pc)
 {
     Bahar b;
     Zemestan z;
@@ -245,7 +245,7 @@ Player Game::findWinner(std::vector<PlayedCard> pc)
         }
         count = 0;
     }
-    return pc[index].person;
+    return index;
 }
 
 char Game::calculationBaharZamastan(std::vector<PlayedCard> pc)

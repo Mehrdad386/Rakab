@@ -5,7 +5,11 @@
 class Bahar : public PirpleCard
 {
 public:
-    Bahar(){ setPriority(4) ; };
+    Bahar()
+    {
+        setPriority(4);
+        setName("Bahar");
+    };
     PlayedCard ability(PlayedCard) override;
 
 private:
