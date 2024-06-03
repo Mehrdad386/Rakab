@@ -6,8 +6,10 @@
 Game::Game()
 {
     std::srand(time(0));
+
     generateCards();
     cities = map.getCities();
+
 }
 
 void Game::takeGameInfo()
@@ -275,8 +277,10 @@ char Game::calculationBaharZamastan(std::vector<PlayedCard> pc)
     }
 
     return 'E';
+
 }
 
 void Game::gameFlow()
 {
+
 }
