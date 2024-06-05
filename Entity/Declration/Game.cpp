@@ -123,9 +123,10 @@ void Game::fillCards()
         {
             int random = rand() % cards.size();
             players[i].addCard(cards[random]);
-            cards.erase(cards.begin() + random - 1);
+            cards.erase(cards.begin() + random );
         }
     }
+
 }
 
 // to make cards vector based on game info

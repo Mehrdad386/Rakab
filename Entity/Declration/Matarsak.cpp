@@ -8,7 +8,7 @@ PlayedCard Matarsak::ability(PlayedCard pc)
 {
     int index = findCard(pc);
     Card c = pc.cards[index];
-    pc.cards.erase(pc.cards.begin() + index - 1); // delet card form array
+    pc.cards.erase(pc.cards.begin() + index ); // delet card form array
     pc.person.addCard(c);
     return pc;
 }
