@@ -5,7 +5,10 @@
 class ShahDokht : public PirpleCard
 {
 public:
-    ShahDokht(){ setPriority(5) ; };
+    ShahDokht(){ 
+        setPriority(5); 
+        setName("ShahDokht") ;
+    };
     Player ability(Player) override;
 
 private:

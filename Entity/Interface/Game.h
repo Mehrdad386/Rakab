@@ -12,6 +12,7 @@
 #include"Bahar.h"
 #include"Zemestan.h"
 #include"Matarsak.h"
+#include"ShirDokht.h"
 
 class Game{
 

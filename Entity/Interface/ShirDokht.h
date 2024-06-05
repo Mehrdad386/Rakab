@@ -5,7 +5,9 @@
 class ShirDokht : public PirpleCard
 {
     public:
-    ShirDokht();
+    ShirDokht(){
+        setName("ShirDokht") ;
+    };
     PlayedCard ability(PlayedCard) override;
     private:
 
