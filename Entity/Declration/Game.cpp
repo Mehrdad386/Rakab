@@ -6,8 +6,10 @@
 Game::Game()
 {
     std::srand(time(0));
-    generateCards() ;
-    cities = map.getCities() ;
+
+    generateCards();
+    cities = map.getCities();
+
 }
 
 void Game::takeGameInfo()
@@ -176,43 +178,109 @@ void Game::generateCards()
 
 void Game::setWar()
 {
-    std::string city ;
-    do{
-    std::cout<<"choose a city for war(first letter Upper case , other lower): " ;
-    std::cin>>city ;
-    }while(city != "Caline" || city != "Enna" || city != "Atela" || city != "Pladaci" || city != "Borge" || city != "Dimase" || city != "Morina" || city != "Olivadi" ||city != "Rollo" || city != "Talmone" || city != "Armento" || city != "Elinia" ||city != "Lia") ;
+    std::string city;
+    do
+    {
+        std::cout << "choose a city for war(first letter Upper case , other lower): ";
+        std::cin >> city;
+    } while (city != "Caline" || city != "Enna" || city != "Atela" || city != "Pladaci" || city != "Borge" || city != "Dimase" || city != "Morina" || city != "Olivadi" || city != "Rollo" || city != "Talmone" || city != "Armento" || city != "Elinia" || city != "Lia");
 
-    for(int i{} ; i<map.getCities().size() ; i++){
-        if(city == cities[i].getName() && cities[i].getISAvailable()){
-            cities[i].setIsAvailable(false) ;
-            war = cities[i] ;
+    for (int i{}; i < map.getCities().size(); i++)
+    {
+        if (city == cities[i].getName() && cities[i].getISAvailable())
+        {
+            cities[i].setIsAvailable(false);
+            war = cities[i];
         }
-        else if(city == cities[i].getName() && !cities[i].getISAvailable()){
-            std::cout<<"city is unavailable"<<'\n' ;
-            setWar() ;
+        else if (city == cities[i].getName() && !cities[i].getISAvailable())
+        {
+            std::cout << "city is unavailable" << '\n';
+            setWar();
         }
-
     }
 }
 
-void Game::endWar( int winner )
+void Game::endWar(int winner)
 {
-    players[winner].addCity(war) ;
-    war = City() ;
-    
+    players[winner].addCity(war);
+    war = City();
 }
 
-int Game::findWinner()
+int Game::findWinner(std::vector<PlayedCard> pc)
 {
-    int score [players.size()]{} ;
-    for(int i {} ; i<players.size() ; i++){
-        for(int j{} ; j<playedCards[i].cards.size() ; j++){
+    Bahar b;
+    Zemestan z;
+    Player p;
+    int count{0}, finalPoint{0}, index;
+    char result = calculationBaharZamastan(pc);
+    switch (result)
+    {
+    case 'B':
+        for (size_t i = 0; i < pc.size(); i++)
+        {
+            b.ability(pc[i]);
+        }
+        break;
+    case 'Z':
+        for (size_t i = 0; i < pc.size(); i++)
+        {
+            z.ability(pc[i]);
+        }
+        break;
+    case 'E':
+        break;
 
+    default:
+        std::cout << "UNHANDELED ERROR WE FUCKED!";
+        break;
+    }
+    for (size_t i = 0; i < pc.size(); i++)
+    {
+        for (size_t j = 0; j < pc[i].cards.size(); j++)
+        {
+            count += pc[i].cards[j].getPower();
+        }
+        if (count > finalPoint)
+        {
+            finalPoint = count;
+            index = i;
+        }
+        count = 0;
+    }
+    return index;
+}
+
+char Game::calculationBaharZamastan(std::vector<PlayedCard> pc)
+{
+    int countBahar{0}, countZemestan{0};
+    for (size_t i = 0; i < pc.size(); i++)
+    {
+        for (size_t j = 0; j < pc[i].cards.size(); j++)
+        {
+            if (pc[i].cards[j].getName() == "Bahar")
+            {
+                countBahar++;
+            }
+            if (pc[i].cards[j].getName() == "Zemastan")
+            {
+                countZemestan++;
+            }
         }
     }
+    if (countBahar > countZemestan)
+    {
+        return 'B';
+    }
+    else if (countZemestan > countBahar)
+    {
+        return 'Z';
+    }
+
+    return 'E';
+
 }
 
 void Game::gameFlow()
 {
-    
+
 }
