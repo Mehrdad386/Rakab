@@ -28,7 +28,7 @@ public:
 
     void input() ; //this function will ask player which card he wants to play
 
-    void setWar() ; //this function will set a city in war situation
+    void setWar( std::string warior ) ; //this function will set a city in war situation
 
     void endWar( int ) ;  //this function will end the ward and return played cards to cards of game
 
@@ -42,6 +42,8 @@ public:
     char calculationBaharZamastan(std::vector<PlayedCard>); //if bahar cards are more than zemestan it return true if not return false
 
     void handleTurn() ;
+
+    int findYoungest() ;
 
 private:
 

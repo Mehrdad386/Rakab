@@ -68,7 +68,7 @@ void Game::print()
 
         for (int j{}; j < playedCards[i].cards.size(); j++)
         {
-            std::cout << playedCards[i].cards[j].getName();
+            std::cout << playedCards[i].cards[j].getName()<<' ';
         }
 
         std::cout << std::endl;
@@ -177,14 +177,17 @@ void Game::generateCards()
     }
 }
 
-void Game::setWar()
+void Game::setWar( std::string warior )
 {
     std::string city;
+
+    std::cout<<warior<<' ' ;
+
     do
     {
         std::cout << "choose a city for war(first letter Upper case , other lower): ";
         std::cin >> city;
-    } while (city != "Caline" || city != "Enna" || city != "Atela" || city != "Pladaci" || city != "Borge" || city != "Dimase" || city != "Morina" || city != "Olivadi" || city != "Rollo" || city != "Talmone" || city != "Armento" || city != "Elinia" || city != "Lia");
+    } while (city != "Caline" && city != "Enna" && city != "Atela" && city != "Pladaci" && city != "Borge" && city != "Dimase" && city != "Morina" && city != "Olivadi" && city != "Rollo" && city != "Talmone" && city != "Armento" && city != "Elinia" && city != "Lia");
 
     for (int i{}; i < map.getCities().size(); i++)
     {
@@ -196,7 +199,7 @@ void Game::setWar()
         else if (city == cities[i].getName() && !cities[i].getISAvailable())
         {
             std::cout << "city is unavailable" << '\n';
-            setWar();
+            setWar( warior );
         }
     }
 }
@@ -285,10 +288,28 @@ void Game::handleTurn(){
         turn = 0 ;
 }
 
+
+int Game::findYoungest(){
+
+    int youngest{} ;
+    int minAge = players[0].getAge() ;
+
+    for(int i{} ; i<players.size() ; i++){
+        if(players[i].getAge()<minAge){
+            youngest = i ;
+        }
+    }
+
+    return youngest ;
+}
+
 void Game::gameFlow()
 {
     takeGameInfo();
     fillCards();
+    setWar(players[findYoungest()].getName()) ;
+
+
     while (true)
     {
         int passed{};
@@ -303,7 +324,7 @@ void Game::gameFlow()
         }
         else
         {
-            handleTurn() ;
+           handleTurn() ;
             print();
         }
     }
