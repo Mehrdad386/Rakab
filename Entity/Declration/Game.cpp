@@ -104,7 +104,13 @@ void Game::input()
         }
         else
         {
-            playedCards[turn].cards.push_back(players[turn].play(choice));
+            Card Played = players[turn].play(choice) ;
+            if(Played.getName() == "Matarsak"){
+                Matarsak temp ;
+                Card c = temp.ability(playedCards[turn]) ;
+                players[turn].addCard(c) ;
+            }
+            playedCards[turn].cards.push_back(Played);
             turn++;
         }
     }

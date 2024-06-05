@@ -4,13 +4,13 @@ Matarsak::Matarsak(){
     setName("Matarsak") ;
 }
 
-PlayedCard Matarsak::ability(PlayedCard pc)
+Card Matarsak::ability(PlayedCard& pc)
 {
     int index = findCard(pc);
     Card c = pc.cards[index];
     pc.cards.erase(pc.cards.begin() + index ); // delet card form array
-    pc.person.addCard(c);
-    return pc;
+    return c ; ;
+
 }
 
 int Matarsak::findCard(PlayedCard pc)
