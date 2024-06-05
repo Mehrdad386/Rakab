@@ -37,13 +37,15 @@ public:
     void generateCards() ; //this function will generate game based on game information
 
 
-    int findWinner(std::vector<PlayedCard>) ; //this function will return index of winner
+    int findWinner() ; //this function will return index of winner
 
-    char calculationBaharZamastan(std::vector<PlayedCard>); //if bahar cards are more than zemestan it return true if not return false
+    void setWinner() ; //this function will give the win prices to winner
 
-    void handleTurn() ;
+    char calculationBaharZamastan(); //if bahar cards are more than zemestan it return true if not return false
 
-    int findYoungest() ;
+    void handleTurn() ; //to check that turn to get out of range
+
+    int findYoungest() ; //to find youngest player
 
 private:
 

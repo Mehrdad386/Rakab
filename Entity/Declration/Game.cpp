@@ -60,6 +60,7 @@ void Game::print()
 {
     system("CLS");
     std::cout << "the turn is: " << turn + 1 << std::endl;
+    std::cout<<war.getName()<<" is on war\n" ;
     // first part
     std::cout << "------------------------------------------------------\n";
     for (int i{}; i < players.size(); i++)
@@ -211,25 +212,25 @@ void Game::endWar(int winner)
     war = City();
 }
 
-int Game::findWinner(std::vector<PlayedCard> pc)
+int Game::findWinner()
 {
     Bahar b;
     Zemestan z;
     Player p;
     int count{0}, finalPoint{0}, index;
-    char result = calculationBaharZamastan(pc);
+    char result = calculationBaharZamastan();
     switch (result)
     {
     case 'B':
-        for (size_t i = 0; i < pc.size(); i++)
+        for (size_t i = 0; i < playedCards.size(); i++)
         {
-            b.ability(pc[i]);
+            b.ability(playedCards[i]);
         }
         break;
     case 'Z':
-        for (size_t i = 0; i < pc.size(); i++)
+        for (size_t i = 0; i < playedCards.size(); i++)
         {
-            z.ability(pc[i]);
+            z.ability(playedCards[i]);
         }
         break;
     case 'E':
@@ -239,11 +240,11 @@ int Game::findWinner(std::vector<PlayedCard> pc)
         std::cout << "UNHANDELED ERROR WE FUCKED!";
         break;
     }
-    for (size_t i = 0; i < pc.size(); i++)
+    for (size_t i = 0; i < playedCards.size(); i++)
     {
-        for (size_t j = 0; j < pc[i].cards.size(); j++)
+        for (size_t j = 0; j < playedCards[i].cards.size(); j++)
         {
-            count += pc[i].cards[j].getPower();
+            count += playedCards[i].cards[j].getPower();
         }
         if (count > finalPoint)
         {
@@ -255,18 +256,18 @@ int Game::findWinner(std::vector<PlayedCard> pc)
     return index;
 }
 
-char Game::calculationBaharZamastan(std::vector<PlayedCard> pc)
+char Game::calculationBaharZamastan()
 {
     int countBahar{0}, countZemestan{0};
-    for (size_t i = 0; i < pc.size(); i++)
+    for (size_t i = 0; i < playedCards.size(); i++)
     {
-        for (size_t j = 0; j < pc[i].cards.size(); j++)
+        for (size_t j = 0; j < playedCards[i].cards.size(); j++)
         {
-            if (pc[i].cards[j].getName() == "Bahar")
+            if (playedCards[i].cards[j].getName() == "Bahar")
             {
                 countBahar++;
             }
-            if (pc[i].cards[j].getName() == "Zemastan")
+            if (playedCards[i].cards[j].getName() == "Zemastan")
             {
                 countZemestan++;
             }
@@ -325,8 +326,16 @@ void Game::gameFlow()
         }
         else
         {
-           handleTurn() ;
+            handleTurn() ;
             print();
         }
     }
+    setWinner() ;
+
+
 }
+
+void Game::setWinner(){
+    std::cout<<players[findWinner()].getName()<<" won!\n" ;
+    players[findWinner()].addCity(war) ;
+} 
