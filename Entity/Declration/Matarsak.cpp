@@ -1,5 +1,9 @@
 #include "../Interface/Matarsak.h"
 
+Matarsak::Matarsak(){
+    setName("Matarsak") ;
+}
+
 PlayedCard Matarsak::ability(PlayedCard pc)
 {
     int index = findCard(pc);

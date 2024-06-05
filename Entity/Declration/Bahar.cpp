@@ -1,6 +1,11 @@
 #include "../Interface/Bahar.h"
 #include "../Interface/Player.h"
 
+
+Bahar::Bahar()   {
+    setPriority(4);
+    setName("Bahar");
+};
 PlayedCard Bahar::ability(PlayedCard pc)
 {
     int bigNumber{0};

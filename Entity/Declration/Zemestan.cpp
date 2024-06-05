@@ -1,5 +1,10 @@
 #include "../Interface/Zemestan.h"
 
+Zemestan::Zemestan(){
+    setPriority(2);
+    setName("Zemestan");
+};
+
 PlayedCard Zemestan::ability(PlayedCard pc)
 {
     for (size_t i = 0; i < pc.cards.size(); i++)

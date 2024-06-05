@@ -1,5 +1,11 @@
 #include "../Interface/TablZan.h"
 
+
+TablZan::TablZan(){ 
+        setPriority(3) ; 
+        setName("TablZan") ;
+};
+
 PlayedCard TablZan::ability(PlayedCard pc)
 {
     for (size_t i = 0; i < pc.cards.size(); i++)

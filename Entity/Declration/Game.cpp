@@ -92,7 +92,7 @@ void Game::input()
 
     if (!players[turn].getIsPassed())
     {
-        std::cout << "choose a card to play or pass(use camel case): ";
+        std::cout << "choose a card to play or pass: ";
         std::string choice;
         std::cin >> choice;
 
