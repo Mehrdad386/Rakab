@@ -7,10 +7,9 @@ Game::Game()
 {
     std::srand(time(0));
 
-    turn = 0 ;
+    turn = 0;
     generateCards();
     cities = map.getCities();
-
 }
 
 void Game::takeGameInfo()
@@ -60,6 +59,7 @@ void Game::takeGameInfo()
 void Game::print()
 {
     system("CLS");
+    std::cout << "the turn is: " << turn + 1 << std::endl;
     // first part
     std::cout << "------------------------------------------------------\n";
     for (int i{}; i < players.size(); i++)
@@ -88,7 +88,7 @@ void Game::print()
 
 void Game::input()
 {
-    players[turn].printCards() ;
+    players[turn].printCards();
 
     if (!players[turn].getIsPassed())
     {
@@ -141,7 +141,7 @@ void Game::generateCards()
     YellowCard y10(10, "10");
     Bahar bahar;
     Zemestan zemestan;
-    ShirDokht shirdokht ;
+    ShirDokht shirdokht;
     TablZan tablzan;
     Matarsak matarsak;
 
@@ -278,13 +278,33 @@ char Game::calculationBaharZamastan(std::vector<PlayedCard> pc)
     }
 
     return 'E';
+}
 
+void Game::handleTurn(){
+    if(turn>=players.size())
+        turn = 0 ;
 }
 
 void Game::gameFlow()
 {
-    takeGameInfo() ;
-    fillCards() ;
-    print() ;
-
+    takeGameInfo();
+    fillCards();
+    while (true)
+    {
+        int passed{};
+        for (int i{}; i < players.size(); i++)
+        {
+            if (players[i].getIsPassed())
+                passed++;
+        }
+        if (passed == players.size())
+        {
+            break;
+        }
+        else
+        {
+            handleTurn() ;
+            print();
+        }
+    }
 }

@@ -41,6 +41,7 @@ public:
 
     char calculationBaharZamastan(std::vector<PlayedCard>); //if bahar cards are more than zemestan it return true if not return false
 
+    void handleTurn() ;
 
 private:
 
