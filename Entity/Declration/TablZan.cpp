@@ -6,18 +6,16 @@ TablZan::TablZan(){
         setName("TablZan") ;
 };
 
-PlayedCard TablZan::ability(PlayedCard pc)
+void TablZan::ability(std::vector<Card> & cards)
 {
-    for (size_t i = 0; i < pc.cards.size(); i++)
+    for (size_t i = 0; i < cards.size(); i++)
     {
-        if (isYellow(pc.cards[i].getName()))
+        if (isYellow(cards[i].getName()))
         {
-            pc
-            .cards[i]
-            .setPower((pc.cards[i].getPower() * 2));
+            cards[i].setPower((cards[i].getPower() * 2));
         }
     }
-    return pc;
+
 }
 
 bool TablZan::isYellow(std::string name)

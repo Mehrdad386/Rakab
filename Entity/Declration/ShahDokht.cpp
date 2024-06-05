@@ -5,9 +5,9 @@ ShahDokht::ShahDokht(){
     setName("ShahDokht") ;
 };
 
-Player ShahDokht::ability(Player p)
+void ShahDokht::ability(Player& p)
 {
     p.setCanWar((p.getCanWar() + 1));
 
-    return p;
+
 }

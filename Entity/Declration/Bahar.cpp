@@ -1,36 +1,33 @@
 #include "../Interface/Bahar.h"
 #include "../Interface/Player.h"
 
-
-Bahar::Bahar()   {
+Bahar::Bahar()
+{
     setPriority(4);
     setName("Bahar");
 };
-PlayedCard Bahar::ability(PlayedCard pc)
+
+void Bahar::ability(std::vector<PlayedCard> &pc)
 {
     int bigNumber{0};
-    for (auto Card : pc.cards)
+    for (int i{}; i < pc.size(); i++)
     {
-        if (Card.getPower() > bigNumber)
+        for (auto Card : pc[i].cards)
         {
-            bigNumber = Card.getPower();
+            if (Card.getPower() > bigNumber && Card.getName() != "ShirZan")
+            {
+                bigNumber = Card.getPower();
+            }
         }
     }
+    for(int i{} ; i<pc.size() ; i++){
 
-    if (bigNumber == 0) // if there is no big card
-    {
-        return pc;
-    }
-
-    for (size_t i = 0; i < pc.cards.size(); i++)
-    {
-        if (pc.cards[i].getPower() == bigNumber)
+        for (size_t j = 0; i < pc[i].cards.size(); j++)
         {
-            pc
-            .cards[i]
-            .setPower(((bigNumber + 3)));
+            if (pc[i].cards[j].getPower() == bigNumber)
+            {
+                pc[i] .cards[j].setPower(((bigNumber + 3)));
+            }
         }
     }
-
-    return pc;
 }

@@ -6,7 +6,7 @@ class ShirDokht : public PirpleCard
 {
     public:
     ShirDokht();
-    PlayedCard ability(PlayedCard) override;
+    void ability(PlayedCard&) override;
     private:
 
 };

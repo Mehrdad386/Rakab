@@ -8,7 +8,7 @@ public:
 
     Zemestan() ;
 
-    PlayedCard ability(PlayedCard) override;
+    void ability(std::vector<PlayedCard> &) ;
 
 private:
 };

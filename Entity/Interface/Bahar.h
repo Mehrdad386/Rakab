@@ -7,7 +7,7 @@ class Bahar : public PirpleCard
 public:
     Bahar() ;
 
-    PlayedCard ability(PlayedCard) override;
+    void ability(std::vector<PlayedCard>&) ;
 
 private:
 };

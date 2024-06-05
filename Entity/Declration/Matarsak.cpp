@@ -4,12 +4,12 @@ Matarsak::Matarsak(){
     setName("Matarsak") ;
 }
 
-Card Matarsak::ability(PlayedCard& pc)
+void Matarsak::ability(PlayedCard& pc)
 {
     int index = findCard(pc);
     Card c = pc.cards[index];
     pc.cards.erase(pc.cards.begin() + index ); // delet card form array
-    return c ; ;
+    
 
 }
 

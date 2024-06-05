@@ -47,6 +47,8 @@ public:
 
     int findYoungest() ; //to find youngest player
 
+    bool isPlayedTablZan( int index ) ; //to check that is player played tablZan or not
+
 private:
 
     Map map ;

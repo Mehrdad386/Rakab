@@ -60,7 +60,7 @@ void Game::print()
 {
     system("CLS");
     std::cout << "the turn is: " << turn + 1 << std::endl;
-    std::cout<<war.getName()<<" is on war\n" ;
+    std::cout << war.getName() << " is on war\n";
     // first part
     std::cout << "------------------------------------------------------\n";
     for (int i{}; i < players.size(); i++)
@@ -69,7 +69,7 @@ void Game::print()
 
         for (int j{}; j < playedCards[i].cards.size(); j++)
         {
-            std::cout << playedCards[i].cards[j].getName()<<' ';
+            std::cout << playedCards[i].cards[j].getName() << ' ';
         }
 
         std::cout << std::endl;
@@ -104,11 +104,11 @@ void Game::input()
         }
         else
         {
-            Card Played = players[turn].play(choice) ;
-            if(Played.getName() == "Matarsak"){
-                Matarsak temp ;
-                Card c = temp.ability(playedCards[turn]) ;
-                players[turn].addCard(c) ;
+            Card Played = players[turn].play(choice);
+            if (Played.getName() == "Matarsak")
+            {
+                Matarsak temp;
+                temp.ability(playedCards[turn]);
             }
             playedCards[turn].cards.push_back(Played);
             turn++;
@@ -130,10 +130,9 @@ void Game::fillCards()
         {
             int random = rand() % cards.size();
             players[i].addCard(cards[random]);
-            cards.erase(cards.begin() + random );
+            cards.erase(cards.begin() + random);
         }
     }
-
 }
 
 // to make cards vector based on game info
@@ -185,11 +184,11 @@ void Game::generateCards()
     }
 }
 
-void Game::setWar( std::string warior )
+void Game::setWar(std::string warior)
 {
     std::string city;
 
-    std::cout<<warior<<' ' ;
+    std::cout << warior << ' ';
 
     do
     {
@@ -207,7 +206,7 @@ void Game::setWar( std::string warior )
         else if (city == cities[i].getName() && !cities[i].getISAvailable())
         {
             std::cout << "city is unavailable" << '\n';
-            setWar( warior );
+            setWar(warior);
         }
     }
 }
@@ -222,6 +221,7 @@ int Game::findWinner()
 {
     Bahar b;
     Zemestan z;
+    TablZan t ;
     Player p;
     int count{0}, finalPoint{0}, index;
     char result = calculationBaharZamastan();
@@ -250,8 +250,14 @@ int Game::findWinner()
     {
         for (size_t j = 0; j < playedCards[i].cards.size(); j++)
         {
-            count += playedCards[i].cards[j].getPower();
+            if (isPlayedTablZan(i))
+            {
+                t.ability(playedCards[i].cards) ;
+            }
+            else
+                count += playedCards[i].cards[j].getPower();
         }
+
         if (count > finalPoint)
         {
             finalPoint = count;
@@ -291,32 +297,50 @@ char Game::calculationBaharZamastan()
     return 'E';
 }
 
-void Game::handleTurn(){
-    if(turn>=players.size())
-        turn = 0 ;
+bool Game::isPlayedTablZan(int index)
+{
+    for (int i{}; i < playedCards[index].cards.size(); i++)
+    {
+        if (playedCards[index].cards[i].getName() == "TablZan")
+            return true;
+    }
+    return false;
 }
 
+void Game::handleTurn()
+{
+    if (turn >= players.size())
+        turn = 0;
+}
 
-int Game::findYoungest(){
+int Game::findYoungest()
+{
 
-    int youngest{} ;
-    int minAge = players[0].getAge() ;
+    int youngest{};
+    int minAge = players[0].getAge();
 
-    for(int i{} ; i<players.size() ; i++){
-        if(players[i].getAge()<minAge){
-            youngest = i ;
+    for (int i{}; i < players.size(); i++)
+    {
+        if (players[i].getAge() < minAge)
+        {
+            youngest = i;
         }
     }
 
-    return youngest ;
+    return youngest;
+}
+
+void Game::setWinner()
+{
+    std::cout << players[findWinner()].getName() << " won!\n";
+    players[findWinner()].addCity(war);
 }
 
 void Game::gameFlow()
 {
     takeGameInfo();
     fillCards();
-    setWar(players[findYoungest()].getName()) ;
-
+    setWar(players[findYoungest()].getName());
 
     while (true)
     {
@@ -332,16 +356,9 @@ void Game::gameFlow()
         }
         else
         {
-            handleTurn() ;
+            handleTurn();
             print();
         }
     }
-    setWinner() ;
-
-
+    setWinner();
 }
-
-void Game::setWinner(){
-    std::cout<<players[findWinner()].getName()<<" won!\n" ;
-    players[findWinner()].addCity(war) ;
-} 
