@@ -5,7 +5,7 @@
 class Matarsak : public PirpleCard
 {
 public:
-    Matarsak(){};
+    Matarsak() ;
     virtual PlayedCard ability(PlayedCard);
 
 private:

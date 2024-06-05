@@ -6,11 +6,7 @@ class Zemestan : public PirpleCard
 {
 public:
 
-    Zemestan()
-    {
-        setPriority(2);
-        setName("Zemestan");
-    };
+    Zemestan() ;
 
     PlayedCard ability(PlayedCard) override;
 

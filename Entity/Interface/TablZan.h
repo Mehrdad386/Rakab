@@ -5,7 +5,7 @@
 class TablZan : public PirpleCard
 {
 public:
-    TablZan(){ setPriority(3) ; };
+    TablZan() ; 
     virtual PlayedCard ability(PlayedCard);
 
 private:

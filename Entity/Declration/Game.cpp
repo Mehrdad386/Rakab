@@ -7,6 +7,7 @@ Game::Game()
 {
     std::srand(time(0));
 
+    turn = 0 ;
     generateCards();
     cities = map.getCities();
 
@@ -78,7 +79,6 @@ void Game::print()
     for (int i{}; i < players.size(); i++)
     {
         players[i].printCities();
-        std::cout << std::endl;
     }
     std::cout << "------------------------------------------------------\n";
     // third part
@@ -88,10 +88,11 @@ void Game::print()
 
 void Game::input()
 {
+    players[turn].printCards() ;
 
     if (!players[turn].getIsPassed())
     {
-        std::cout << "choose a card to play or pass(use camel case): ";
+        std::cout << "choose a card to play or pass: ";
         std::string choice;
         std::cin >> choice;
 
@@ -140,7 +141,7 @@ void Game::generateCards()
     YellowCard y10(10, "10");
     Bahar bahar;
     Zemestan zemestan;
-    ShahDokht shahdokht;
+    ShirDokht shirdokht ;
     TablZan tablzan;
     Matarsak matarsak;
 
@@ -171,7 +172,7 @@ void Game::generateCards()
         {
             cards.push_back(bahar);
             cards.push_back(zemestan);
-            cards.push_back(shahdokht);
+            cards.push_back(shirdokht);
         }
     }
 }
@@ -282,5 +283,8 @@ char Game::calculationBaharZamastan(std::vector<PlayedCard> pc)
 
 void Game::gameFlow()
 {
+    takeGameInfo() ;
+    fillCards() ;
+    print() ;
 
 }
