@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../Interface/Game.h"
 #include <time.h>
+#include <string>
 
 Game::Game()
 {
@@ -83,8 +84,7 @@ void Game::print()
     }
     std::cout << "------------------------------------------------------\n";
     // third part
-    input();
-    std::cout << "------------------------------------------------------\n";
+    // it is input so i call it in gameflow method
 }
 
 void Game::input()
@@ -93,7 +93,7 @@ void Game::input()
 
     if (!players[turn].getIsPassed())
     {
-        std::cout << "choose a card to play or pass: ";
+        std::cout << players[turn].getName() << " choose a card to play or pass: ";
         std::string choice;
         std::cin >> choice;
 
@@ -102,6 +102,17 @@ void Game::input()
             players[turn].setIsPasssed(true);
             turn++;
         }
+        else if (choice == "help")
+        {
+            if (choice.find("help ") == 0)
+            {
+                choice = choice.substr(5);
+                manager.help(choice);
+            }
+            else
+                manager.help("none");
+        }
+
         else
         {
             Card Played = players[turn].play(choice);
@@ -252,7 +263,7 @@ int Game::findWinner()
         {
             t.ability(playedCards[i].cards);
         }
-        
+
         for (size_t j = 0; j < playedCards[i].cards.size(); j++)
         {
 
@@ -359,6 +370,7 @@ void Game::gameFlow()
         {
             handleTurn();
             print();
+            input();
         }
     }
     setWinner();

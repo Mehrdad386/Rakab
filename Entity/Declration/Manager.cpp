@@ -34,9 +34,7 @@ void Manager::startMenue(){
 }
 
 
-void Manager::help( std::string help = "none" ){
-
-    system("CLS") ;
+void Manager::help( std::string help ){
 
     if(help == "none"){
         std::cout<<"bahar help\n" ;
