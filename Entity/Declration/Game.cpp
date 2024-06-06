@@ -119,7 +119,7 @@ void Game::input()
             if (Played.getName() == "Matarsak")
             {
                 Matarsak temp;
-                temp.ability(playedCards[turn]);
+                temp.ability(playedCards[turn] , players[turn]);
             }
             playedCards[turn].cards.push_back(Played);
             turn++;
