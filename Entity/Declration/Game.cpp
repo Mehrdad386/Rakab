@@ -221,8 +221,7 @@ int Game::findWinner()
 {
     Bahar b;
     Zemestan z;
-    TablZan t ;
-    Player p;
+    TablZan t;
     int count{0}, finalPoint{0}, index;
     char result = calculationBaharZamastan();
     switch (result)
@@ -230,13 +229,13 @@ int Game::findWinner()
     case 'B':
         for (size_t i = 0; i < playedCards.size(); i++)
         {
-            b.ability(playedCards[i]);
+            b.ability(playedCards);
         }
         break;
     case 'Z':
         for (size_t i = 0; i < playedCards.size(); i++)
         {
-            z.ability(playedCards[i]);
+            z.ability(playedCards);
         }
         break;
     case 'E':
@@ -246,16 +245,18 @@ int Game::findWinner()
         std::cout << "UNHANDELED ERROR WE FUCKED!";
         break;
     }
+
     for (size_t i = 0; i < playedCards.size(); i++)
     {
+        if (isPlayedTablZan(i))
+        {
+            t.ability(playedCards[i].cards);
+        }
+        
         for (size_t j = 0; j < playedCards[i].cards.size(); j++)
         {
-            if (isPlayedTablZan(i))
-            {
-                t.ability(playedCards[i].cards) ;
-            }
-            else
-                count += playedCards[i].cards[j].getPower();
+
+            count += playedCards[i].cards[j].getPower();
         }
 
         if (count > finalPoint)
