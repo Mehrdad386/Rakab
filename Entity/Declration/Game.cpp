@@ -350,6 +350,7 @@ void Game::setWinner()
 
 void Game::gameFlow()
 {
+    manager.startMenue() ;
     takeGameInfo();
     fillCards();
     setWar(players[findYoungest()].getName());
