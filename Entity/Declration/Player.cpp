@@ -10,7 +10,7 @@ const bool Player::getIsPassed(){ return isPassed ; }
 const int Player::getCanWar() { return CanWar; } // add by SIna
 const std::vector<Card> Player::getCards(){ return cards ; }
 const int Player::getNumberOfCities(){ return numberOfCities ; }
-
+const std::vector<City> Player::getCities(){ return cities ; }
 
 
 //setters
@@ -20,6 +20,7 @@ void Player::setColor ( std::string color ){ this->color = color ; }
 void Player::setIsPasssed( bool isPassed ){ this->isPassed = isPassed ; }
 void Player::setCanWar(int canwar) { CanWar = canwar; } // add by Sina
 void Player::setCards( std::vector<Card> cards ){ this->cards = cards ; }
+void Player::setNumberOfCities( int numberOfCities ){ this->numberOfCities = numberOfCities ; }
 
 
 //constructors
