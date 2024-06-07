@@ -49,6 +49,10 @@ public:
 
     bool isPlayedTablZan( int index ) ; //to check that is player played tablZan or not
 
+    void checkForEnd() ; //to check that has someone won the game and end it
+
+    bool checkNeighbors( std::vector<City> ) ; //to check the players cities relation to end the game if it is possible
+
 private:
 
     Map map ;

@@ -119,7 +119,7 @@ void Game::input()
             if (Played.getName() == "Matarsak")
             {
                 Matarsak temp;
-                temp.ability(playedCards[turn] , players[turn]);
+                temp.ability(playedCards[turn], players[turn]);
             }
             playedCards[turn].cards.push_back(Played);
             turn++;
@@ -344,13 +344,86 @@ int Game::findYoungest()
 
 void Game::setWinner()
 {
-    std::cout << players[findWinner()].getName() << " won!\n";
-    players[findWinner()].addCity(war);
+    int winner = findWinner();
+    std::cout << players[winner].getName() << " won!\n";
+    players[winner].addCity(war);
+    players[winner].setNumberOfCities(players[winner].getNumberOfCities() + 1);
+}
+
+void Game::checkForEnd()
+{
+
+    for (int i{}; i < players.size(); i++)
+    {
+
+        int numberOfCities = players[i].getNumberOfCities();
+
+        if (numberOfCities >= 3)
+        {
+            switch (numberOfCities)
+            {
+            case 5:
+                system("CLS");
+                std::cout << players[i].getName() << " won the game!\n";
+                exit(0);
+                break;
+            default : //to check 3 and 4
+                if (checkNeighbors(players[i].getCities()))
+                {
+                    system("CLS");
+                    std::cout << players[i].getName() << " won the game!\n";
+                    exit(0);
+                }
+                break;
+            }
+        }
+    }
+}
+
+bool Game::checkNeighbors(std::vector<City> playerCities)
+{
+
+    int number = playerCities.size();
+    int citiesNumber[number];
+    for (int i{}; i < number; i++)
+        citiesNumber[i] = playerCities[i].getNumber();
+
+    if (number == 3)
+    {
+        std::vector<int> nc = playerCities[0].getNeighbors();
+        int check{}; // i just wnat check that do we have first city's neighbors in player's cities so if check becomes 2 it means we have thme
+        for (int i{}; i < 2; i++)
+        {
+            for (int j{}; j < 2; j++)
+            {
+                if (nc[i] == citiesNumber[j])
+                    check++;
+            }
+        }
+        if (check == 2)
+            return true;
+    }
+
+    if (number == 4)
+    {
+        bool check[4]; // wh have 4 comb (comb 3 of 4)
+        for (int i{}; i < 4; i++)
+        {
+            City temp = playerCities[0];
+            playerCities.erase(playerCities.begin());
+            check[i] = checkNeighbors(playerCities);
+            playerCities.push_back(temp);
+            if (check[i] == true)
+                return true;
+        }
+    }
+
+    return false;
 }
 
 void Game::gameFlow()
 {
-    manager.startMenue() ;
+    manager.startMenue();
     takeGameInfo();
     fillCards();
     setWar(players[findYoungest()].getName());
