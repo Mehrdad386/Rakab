@@ -9,7 +9,7 @@ public:
     void ability(std::vector<Card> & cards);
 
 private:
-    bool isYellow(std::string);//check card is yellow or not ?
+
 };
 
 #endif

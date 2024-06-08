@@ -12,21 +12,25 @@ void Bahar::ability(std::vector<PlayedCard> &pc)
     int bigNumber{0};
     for (int i{}; i < pc.size(); i++)
     {
-        for (auto Card : pc[i].cards)
+        for (int j{}; j < pc[i].cards.size(); j++)
         {
-            if (Card.getPower() > bigNumber && Card.getName() != "ShirZan")
+            if (isYellow(pc[i].cards[j].getName()))
             {
-                bigNumber = Card.getPower();
+                if (pc[i].cards[j].getPower() > bigNumber)
+                {
+                    bigNumber = pc[i].cards[j].getPower();
+                }
             }
         }
     }
-    for(int i{} ; i<pc.size() ; i++){
+    for (int i{}; i < pc.size(); i++)
+    {
 
-        for (size_t j = 0; i < pc[i].cards.size(); j++)
+        for (int j = 0; i < pc[i].cards.size(); j++)
         {
             if (pc[i].cards[j].getPower() == bigNumber)
             {
-                pc[i] .cards[j].setPower(((bigNumber + 3)));
+                pc[i].cards[j].setPower(((bigNumber + 3)));
             }
         }
     }

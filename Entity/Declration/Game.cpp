@@ -238,18 +238,16 @@ int Game::findWinner()
     switch (result)
     {
     case 'B':
-        for (size_t i = 0; i < playedCards.size(); i++)
+        for (int i = 0; i < playedCards.size(); i++)
         {
             b.ability(playedCards);
         }
         break;
     case 'Z':
-        for (size_t i = 0; i < playedCards.size(); i++)
+        for (int i = 0; i < playedCards.size(); i++)
         {
             z.ability(playedCards);
         }
-        break;
-    case 'E':
         break;
 
     default:
@@ -302,7 +300,7 @@ char Game::calculationBaharZamastan()
             }
         }
     }
-    
+
     if (baharIndex>ZemestanIndex)
         return 'B';
     else

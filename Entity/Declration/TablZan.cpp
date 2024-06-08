@@ -18,14 +18,3 @@ void TablZan::ability(std::vector<Card> & cards)
 
 }
 
-bool TablZan::isYellow(std::string name)
-{
-    for (char c : name)
-    {
-        if (!isdigit(c))//check that char is int or not ?
-        {
-            return false;
-        }
-    }
-    return true;
-}

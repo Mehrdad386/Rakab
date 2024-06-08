@@ -25,6 +25,8 @@ public:
     //Inheritance
     virtual void ability(PlayedCard&);
     virtual void ability(Player&);
+    //other
+    bool PirpleCard::isYellow(std::string) ;
 
 private:
     std::string Ability;
