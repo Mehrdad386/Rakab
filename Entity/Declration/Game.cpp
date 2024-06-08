@@ -230,14 +230,14 @@ void Game::endWar(int winner)
 
 int Game::findWinner()
 {
-    Bahar b;
-    Zemestan z;
-    TablZan t;
-    int count[players.size()]{};
-    int finalPoint{0};
-    int index;
-    int numberOfWinners{};
-    char result = calculationBaharZamastan();
+    Bahar b;  //to use ability
+    Zemestan z; //to use ability
+    TablZan t; //to use ability
+    int score[players.size()]{}; //to hold scores
+    int finalPoint{0}; //to hold maximum score
+    int index; //to hold winner index
+    int numberOfWinners{}; // to hold number of winners
+    char result = calculationBaharZamastan(); //to check the season
     switch (result)
     {
     case 'B':
@@ -251,6 +251,8 @@ int Game::findWinner()
         {
             z.ability(playedCards);
         }
+    case 'E' : 
+
         break;
 
     default:
@@ -268,18 +270,18 @@ int Game::findWinner()
         for (int j = 0; j < playedCards[i].cards.size(); j++)
         {
 
-            count[i] += playedCards[i].cards[j].getPower();
+            score[i] += playedCards[i].cards[j].getPower();
         }
 
-        if (count[i] > finalPoint)
+        if (score[i] > finalPoint)
         {
-            finalPoint = count[i];
+            finalPoint = score[i];
             index = i;
         }
     }
     for (int i{}; i < players.size(); i++)
     {
-        if (count[i] == finalPoint)
+        if (score[i] == finalPoint)
             numberOfWinners++;
     }
 
@@ -289,10 +291,11 @@ int Game::findWinner()
         return -1;
 }
 
+//this function will check taht Bahar or Zemestan index and if they are played wich played last will effect
 char Game::calculationBaharZamastan()
 {
-    int baharIndex;
-    int ZemestanIndex;
+    int baharIndex = -1 ;
+    int ZemestanIndex = -1 ;
 
     for (size_t i = 0; i < playedCards.size(); i++)
     {
@@ -313,8 +316,10 @@ char Game::calculationBaharZamastan()
 
     if (baharIndex > ZemestanIndex)
         return 'B';
-    else
+    else if (ZemestanIndex > baharIndex)
         return 'Z';
+    else
+        return 'E' ;
 }
 
 bool Game::isPlayedTablZan(int index)
