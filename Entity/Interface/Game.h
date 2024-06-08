@@ -43,7 +43,7 @@ public:
 
     char calculationBaharZamastan(); //if bahar cards are more than zemestan it return true if not return false
 
-    void handleTurn() ; //to check that turn to get out of range
+    void handleTurn(int) ; //to check that turn to get out of range
 
     int findYoungest() ; //to find youngest player
 

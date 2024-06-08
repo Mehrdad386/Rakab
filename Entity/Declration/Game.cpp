@@ -319,10 +319,15 @@ bool Game::isPlayedTablZan(int index)
     return false;
 }
 
-void Game::handleTurn()
+void Game::handleTurn( int situation )
 {
-    if (turn >= players.size())
-        turn = 0;
+    if(situation == 1){
+        if (turn >= players.size())
+            turn = 0;
+    }
+    else{
+        turn = 0 ;
+    }
 }
 
 int Game::findYoungest()
@@ -335,7 +340,7 @@ int Game::findYoungest()
     {
         if (players[i].getAge() < minAge)
         {
-            minAge = players[i].getAge() ;
+            minAge = players[i].getAge();
             youngest = i;
         }
     }
@@ -349,12 +354,20 @@ void Game::setWinner()
     std::cout << players[winner].getName() << " won!\n";
     players[winner].addCity(war);
     players[winner].setNumberOfCities(players[winner].getCities().size());
-    players[winner].setCanWar(players[winner].getCanWar() + 1) ;
 
-    for(int i{} ; i<playedCards.size() ; i++){
-        for(int j{} ; j<playedCards[i].cards.size() ; j++){
-            cards.push_back(playedCards[i].cards[j]) ;
-            playedCards[i].cards.erase(playedCards[i].cards.begin() + j) ;
+    for(int i{} ; i<players.size() ; i++){
+        if(players[i].getCanWar()){
+            players[i].setCanWar(false) ;
+        }
+    }
+    players[winner].setCanWar(true);
+
+    for (int i{}; i < playedCards.size(); i++)
+    {
+        for (int j{}; j < playedCards[i].cards.size(); j++)
+        {
+            cards.push_back(playedCards[i].cards[j]);
+            playedCards[i].cards.erase(playedCards[i].cards.begin() + j);
         }
     }
 }
@@ -374,20 +387,20 @@ bool Game::checkForEnd()
             case 5:
                 system("CLS");
                 std::cout << players[i].getName() << " won the game!\n";
-                return true ;
+                return true;
                 break;
-            default : //to check 3 and 4
+            default: // to check 3 and 4
                 if (checkNeighbors(players[i].getCities()))
                 {
                     system("CLS");
                     std::cout << players[i].getName() << " won the game!\n";
-                    return true ;
+                    return true;
                 }
                 break;
             }
         }
     }
-    return false ;
+    return false;
 }
 
 bool Game::checkNeighbors(std::vector<City> playerCities)
@@ -436,48 +449,48 @@ void Game::gameFlow()
     manager.startMenue();
     takeGameInfo();
     fillCards();
-    players[findYoungest()].setCanWar(players[findYoungest()].getCanWar() + 1);
+    players[findYoungest()].setCanWar(true);
 
-while(true){
-
-    int warior{} ;
-    int startWar{} ;
-    for(int i{} ; i<players.size() ; i++){
-        players[i].setIsPasssed(false) ;
-        if(players[i].getCanWar() > warior)
-            warior = players[i].getCanWar() ;
-            startWar = i ;
-    }
-
-    setWar(players[startWar].getName()) ;
-    
     while (true)
     {
-        int passed{};
+
+        
+        int startWar{};
         for (int i{}; i < players.size(); i++)
         {
-            if (players[i].getIsPassed())
-                passed++;
+            players[i].setIsPasssed(false);
+            if (players[i].getCanWar())
+            startWar = i;
         }
-        if (passed == players.size())
+
+        setWar(players[startWar].getName());
+
+        while (true)
+        {
+            int passed{};
+            for (int i{}; i < players.size(); i++)
+            {
+                if (players[i].getIsPassed())
+                    passed++;
+            }
+            if (passed == players.size())
+            {
+                break;
+            }
+            else
+            {
+                handleTurn(1);
+                print();
+                input();
+            }
+        }
+        setWinner();
+        handleTurn(0) ;
+
+        if (checkForEnd())
         {
             break;
         }
-        else
-        {
-            handleTurn();
-            print();
-            input();
-        }
     }
-    setWinner();
-    for(int i{} ; i<players.size() ; i++){
-        players[i].setCanWar(0) ;
-    }
-    
-    if(checkForEnd()){
-        break ;
-    }
-}
-    exit(0) ;
+    exit(0);
 }
