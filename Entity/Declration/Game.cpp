@@ -335,6 +335,7 @@ int Game::findYoungest()
     {
         if (players[i].getAge() < minAge)
         {
+            minAge = players[i].getAge() ;
             youngest = i;
         }
     }
@@ -347,10 +348,18 @@ void Game::setWinner()
     int winner = findWinner();
     std::cout << players[winner].getName() << " won!\n";
     players[winner].addCity(war);
-    players[winner].setNumberOfCities(players[winner].getNumberOfCities() + 1);
+    players[winner].setNumberOfCities(players[winner].getCities().size());
+    players[winner].setCanWar(players[winner].getCanWar() + 1) ;
+
+    for(int i{} ; i<playedCards.size() ; i++){
+        for(int j{} ; j<playedCards[i].cards.size() ; j++){
+            cards.push_back(playedCards[i].cards[j]) ;
+            playedCards[i].cards.erase(playedCards[i].cards.begin() + j) ;
+        }
+    }
 }
 
-void Game::checkForEnd()
+bool Game::checkForEnd()
 {
 
     for (int i{}; i < players.size(); i++)
@@ -365,19 +374,20 @@ void Game::checkForEnd()
             case 5:
                 system("CLS");
                 std::cout << players[i].getName() << " won the game!\n";
-                exit(0);
+                return true ;
                 break;
             default : //to check 3 and 4
                 if (checkNeighbors(players[i].getCities()))
                 {
                     system("CLS");
                     std::cout << players[i].getName() << " won the game!\n";
-                    exit(0);
+                    return true ;
                 }
                 break;
             }
         }
     }
+    return false ;
 }
 
 bool Game::checkNeighbors(std::vector<City> playerCities)
@@ -426,8 +436,21 @@ void Game::gameFlow()
     manager.startMenue();
     takeGameInfo();
     fillCards();
-    setWar(players[findYoungest()].getName());
+    players[findYoungest()].setCanWar(players[findYoungest()].getCanWar() + 1);
 
+while(true){
+
+    int warior{} ;
+    int startWar{} ;
+    for(int i{} ; i<players.size() ; i++){
+        players[i].setIsPasssed(false) ;
+        if(players[i].getCanWar() > warior)
+            warior = players[i].getCanWar() ;
+            startWar = i ;
+    }
+
+    setWar(players[startWar].getName()) ;
+    
     while (true)
     {
         int passed{};
@@ -448,4 +471,13 @@ void Game::gameFlow()
         }
     }
     setWinner();
+    for(int i{} ; i<players.size() ; i++){
+        players[i].setCanWar(0) ;
+    }
+    
+    if(checkForEnd()){
+        break ;
+    }
+}
+    exit(0) ;
 }
