@@ -282,31 +282,32 @@ int Game::findWinner()
 
 char Game::calculationBaharZamastan()
 {
-    int countBahar{0}, countZemestan{0};
+    int baharIndex ;
+    int ZemestanIndex ;
+
     for (size_t i = 0; i < playedCards.size(); i++)
     {
         for (size_t j = 0; j < playedCards[i].cards.size(); j++)
         {
             if (playedCards[i].cards[j].getName() == "Bahar")
             {
-                countBahar++;
+                if(j>baharIndex)
+                    baharIndex = j ;
+                
             }
             if (playedCards[i].cards[j].getName() == "Zemastan")
             {
-                countZemestan++;
+                if(j>ZemestanIndex)
+                    ZemestanIndex = j ;
             }
         }
     }
-    if (countBahar > countZemestan)
-    {
+    
+    if (baharIndex>ZemestanIndex)
         return 'B';
-    }
-    else if (countZemestan > countBahar)
-    {
+    else
         return 'Z';
-    }
 
-    return 'E';
 }
 
 bool Game::isPlayedTablZan(int index)
@@ -446,16 +447,16 @@ bool Game::checkNeighbors(std::vector<City> playerCities)
 
 void Game::gameFlow()
 {
-    manager.startMenue();
-    takeGameInfo();
-    fillCards();
-    players[findYoungest()].setCanWar(true);
+    manager.startMenue(); //start menu will be shown to user
+    takeGameInfo(); //take names , ages , colors from user
+    fillCards(); //give cards to players
+    players[findYoungest()].setCanWar(true); //give the war symbol to youngest player
 
     while (true)
     {
 
         
-        int startWar{};
+        int startWar{}; //to hold the index of starter of the war
         for (int i{}; i < players.size(); i++)
         {
             players[i].setIsPasssed(false);
@@ -463,11 +464,14 @@ void Game::gameFlow()
             startWar = i;
         }
 
-        setWar(players[startWar].getName());
+        setWar(players[startWar].getName()); //ask to choose city for war
 
+    //main game loop
         while (true)
         {
-            int passed{};
+            int passed{}; //to hold the number of the player that they've passed
+
+            //to end war if all players have passed
             for (int i{}; i < players.size(); i++)
             {
                 if (players[i].getIsPassed())
@@ -477,6 +481,7 @@ void Game::gameFlow()
             {
                 break;
             }
+            //getting input and print game info
             else
             {
                 handleTurn(1);
@@ -484,13 +489,15 @@ void Game::gameFlow()
                 input();
             }
         }
-        setWinner();
-        handleTurn(0) ;
+        
+        setWinner(); //to find the winner and set him as winner
+        handleTurn(0) ; //to make the turn equal to 1 to start next war from firt player
 
+        //to check is any player has enough city to win and break loop
         if (checkForEnd())
         {
             break;
         }
     }
-    exit(0);
+    exit(0); //end game
 }
