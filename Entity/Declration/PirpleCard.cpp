@@ -31,12 +31,12 @@ const int PirpleCard::getPriority()
 }
 
 //Inheritance
-Player PirpleCard::ability(Player p)
+void PirpleCard::ability(Player& p)
 {
-    return p;
+
 }
 
-PlayedCard PirpleCard::ability(PlayedCard PC)
+void PirpleCard::ability(PlayedCard& PC)
 {
-    return PC;
+
 }

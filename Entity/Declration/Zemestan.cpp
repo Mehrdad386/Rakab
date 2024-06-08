@@ -5,17 +5,13 @@ Zemestan::Zemestan(){
     setName("Zemestan");
 };
 
-PlayedCard Zemestan::ability(PlayedCard pc)
+void Zemestan::ability(std::vector<PlayedCard> & pc)
 {
-    for (size_t i = 0; i < pc.cards.size(); i++)
-    {
-        if (pc.cards[i].getPower() > 0)
-        {
-            pc
-            .cards[i]
-            .setPower(1);
+    for(int i{} ; i<pc.size() ; i++){
+        for(int j{} ; j<pc[i].cards.size() ; j++){
+            if(pc[i].cards[j].getName() != "ShirDokht")
+                pc[i] .cards[j].setPower(((1)));
         }
     }
 
-    return pc;
 }

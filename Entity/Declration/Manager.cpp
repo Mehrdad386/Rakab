@@ -4,6 +4,7 @@
 
 void Manager::startMenue(){
 
+    system("CLS") ;
     std::cout << "-----------------------" << '\n';
     std::cout << "1- Start game" << '\n';
     std::cout << "2- help" << '\n';
@@ -34,9 +35,7 @@ void Manager::startMenue(){
 }
 
 
-void Manager::help( std::string help = "none" ){
-
-    system("CLS") ;
+void Manager::help( std::string help ){
 
     if(help == "none"){
         std::cout<<"bahar help\n" ;
@@ -57,12 +56,12 @@ void Manager::help( std::string help = "none" ){
         std::cout<<"mataarsak help\n" ;
     
 
-    std::cout<<"enter 0 to leave" ;
+    std::cout<<"enter 0 to leave: " ;
     int leave = 1 ;
     while(leave != 0 ){
         std::cin>>leave ;
         if(leave == 0)
-            break;
+            startMenue() ;
         else
          std::cout<<"invalid input\n" ;
     }

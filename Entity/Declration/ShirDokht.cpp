@@ -1,8 +1,8 @@
 #include "../Interface/ShirDokht.h"
 
-PlayedCard ShirDokht::ability(PlayedCard pc)
+void ShirDokht::ability(PlayedCard& pc)
 {
-    return pc ;
+
 }
 ShirDokht::ShirDokht()
 {

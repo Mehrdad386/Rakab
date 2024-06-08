@@ -6,7 +6,7 @@ class Matarsak : public PirpleCard
 {
 public:
     Matarsak() ;
-    virtual PlayedCard ability(PlayedCard);
+    void ability(PlayedCard& , Player&);
 
 private:
     std::string getCardName();//get the card name from player for delete

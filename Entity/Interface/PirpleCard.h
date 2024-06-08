@@ -23,8 +23,8 @@ public:
     const std::string getAbility();
     const int getPriority () ;
     //Inheritance
-    virtual PlayedCard ability(PlayedCard);
-    virtual Player ability(Player);
+    virtual void ability(PlayedCard&);
+    virtual void ability(Player&);
 
 private:
     std::string Ability;

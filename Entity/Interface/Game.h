@@ -28,7 +28,7 @@ public:
 
     void input() ; //this function will ask player which card he wants to play
 
-    void setWar() ; //this function will set a city in war situation
+    void setWar( std::string warior ) ; //this function will set a city in war situation
 
     void endWar( int ) ;  //this function will end the ward and return played cards to cards of game
 
@@ -37,10 +37,21 @@ public:
     void generateCards() ; //this function will generate game based on game information
 
 
-    int findWinner(std::vector<PlayedCard>) ; //this function will return index of winner
+    int findWinner() ; //this function will return index of winner
 
-    char calculationBaharZamastan(std::vector<PlayedCard>); //if bahar cards are more than zemestan it return true if not return false
+    void setWinner() ; //this function will give the win prices to winner
 
+    char calculationBaharZamastan(); //if bahar cards are more than zemestan it return true if not return false
+
+    void handleTurn() ; //to check that turn to get out of range
+
+    int findYoungest() ; //to find youngest player
+
+    bool isPlayedTablZan( int index ) ; //to check that is player played tablZan or not
+
+    bool checkForEnd() ; //to check that has someone won the game and end it
+
+    bool checkNeighbors( std::vector<City> ) ; //to check the players cities relation to end the game if it is possible
 
 private:
 
