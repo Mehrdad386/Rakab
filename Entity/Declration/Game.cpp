@@ -486,6 +486,20 @@ bool Game::checkNeighbors(std::vector<City> playerCities)
     return false;
 }
 
+bool Game::checkCards()
+{
+    int counter{} ;
+    for(int i{} ; i<players.size() ; i++){
+        if(players[i].getCards().empty())
+            counter++ ;
+    }
+
+    if(counter == players.size())
+        return true ;
+    else
+        return false ;
+}
+
 void Game::gameFlow()
 {
     manager.startMenue();                    // start menu will be shown to user
@@ -527,6 +541,9 @@ void Game::gameFlow()
                 handleTurn(1);
                 print();
                 input();
+                if(checkCards()){
+                    fillCards() ;
+                }
             }
         }
 

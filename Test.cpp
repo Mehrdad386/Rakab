@@ -47,10 +47,13 @@ int main()
     // cout << "after matarsak\n";
     // showVec(pc);
     Game game ;
-    game.print() ;
+    game.gameFlow() ;
 
     return 0;
 }
+
+
+
 void showVec(PlayedCard pc)
 {
     for (auto card : pc.cards)
