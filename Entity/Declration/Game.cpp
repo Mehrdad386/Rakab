@@ -59,9 +59,17 @@ void Game::takeGameInfo()
 
 void Game::print()
 {
+    //zero part
     system("CLS");
+    std::cout << "------------------------------------------------------\n";
     std::cout << "the turn is: " << turn + 1 << std::endl;
     std::cout << war.getName() << " is on war\n";
+    std::cout<<"available cities: " ;
+    for( auto city : cities ){
+        if(city.getISAvailable())
+            std::cout<<city.getName()<<" , " ;
+    }
+    std::cout<<std::endl ;
     // first part
     std::cout << "------------------------------------------------------\n";
     for (int i{}; i < players.size(); i++)
