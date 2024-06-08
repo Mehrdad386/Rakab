@@ -26,7 +26,7 @@ public:
 
     const int getNumberOfCities() ;
 
-    const int getCanWar();
+    const bool getCanWar();
 
     const std::vector<City> getCities() ;
 
@@ -40,7 +40,7 @@ public:
 
     void setCards( std::vector<Card> ) ;
 
-    void setCanWar(int );
+    void setCanWar(bool);
 
     void setNumberOfCities (int) ;
 

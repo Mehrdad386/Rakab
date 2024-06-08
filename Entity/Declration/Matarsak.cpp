@@ -7,15 +7,18 @@ Matarsak::Matarsak(){
 void Matarsak::ability(PlayedCard& pc , Player& player)
 {
     int index = findCard(pc);
-    Card c = pc.cards[index];
-    pc.cards.erase(pc.cards.begin() + index ); // delet card form array
-    player.addCard(c) ;
-
+    if(index != -1){
+        Card c = pc.cards[index];
+        pc.cards.erase(pc.cards.begin() + index ); // delet card form array
+        player.addCard(c) ;
+    }
 }
 
 int Matarsak::findCard(PlayedCard pc)
 {
-    std::string cardName = getCardName();
+    std::string cardName = getCardName(pc);
+
+    if(cardName != "none"){
     
     for(int i{} ; i<pc.cards.size() ; i++){
         if(pc.cards[i].getName() == cardName)
@@ -26,14 +29,17 @@ int Matarsak::findCard(PlayedCard pc)
             return findCard(pc) ;
         }
     }
+    }
     return -1 ;
     
 }
 
-std::string Matarsak::getCardName()
+std::string Matarsak::getCardName( PlayedCard pc )
 {
-    std::string cardName;
-    std::cout << "Please Enter Card Name :\n";
-    std::cin >> cardName;
+    std::string cardName  = "none";
+    if(!pc.cards.empty()){
+        std::cout << "Please Enter Card Name :\n";
+        std::cin >> cardName;
+    }
     return cardName;
 }

@@ -59,9 +59,17 @@ void Game::takeGameInfo()
 
 void Game::print()
 {
+    //zero part
     system("CLS");
+    std::cout << "------------------------------------------------------\n";
     std::cout << "the turn is: " << turn + 1 << std::endl;
     std::cout << war.getName() << " is on war\n";
+    std::cout<<"available cities: " ;
+    for( auto city : cities ){
+        if(city.getISAvailable())
+            std::cout<<city.getName()<<" , " ;
+    }
+    std::cout<<std::endl ;
     // first part
     std::cout << "------------------------------------------------------\n";
     for (int i{}; i < players.size(); i++)
@@ -230,26 +238,29 @@ void Game::endWar(int winner)
 
 int Game::findWinner()
 {
-    Bahar b;
-    Zemestan z;
-    TablZan t;
-    int count{0}, finalPoint{0}, index;
-    char result = calculationBaharZamastan();
+    Bahar b;  //to use ability
+    Zemestan z; //to use ability
+    TablZan t; //to use ability
+    int score[players.size()]{}; //to hold scores
+    int finalPoint{0}; //to hold maximum score
+    int index; //to hold winner index
+    int numberOfWinners{}; // to hold number of winners
+    char result = calculationBaharZamastan(); //to check the season
     switch (result)
     {
     case 'B':
-        for (size_t i = 0; i < playedCards.size(); i++)
+        for (int i = 0; i < playedCards.size(); i++)
         {
             b.ability(playedCards);
         }
         break;
     case 'Z':
-        for (size_t i = 0; i < playedCards.size(); i++)
+        for (int i = 0; i < playedCards.size(); i++)
         {
             z.ability(playedCards);
         }
-        break;
-    case 'E':
+    case 'E' : 
+
         break;
 
     default:
@@ -257,56 +268,66 @@ int Game::findWinner()
         break;
     }
 
-    for (size_t i = 0; i < playedCards.size(); i++)
+    for (int i = 0; i < playedCards.size(); i++)
     {
         if (isPlayedTablZan(i))
         {
             t.ability(playedCards[i].cards);
         }
 
-        for (size_t j = 0; j < playedCards[i].cards.size(); j++)
+        for (int j = 0; j < playedCards[i].cards.size(); j++)
         {
 
-            count += playedCards[i].cards[j].getPower();
+            score[i] += playedCards[i].cards[j].getPower();
         }
 
-        if (count > finalPoint)
+        if (score[i] > finalPoint)
         {
-            finalPoint = count;
+            finalPoint = score[i];
             index = i;
         }
-        count = 0;
     }
-    return index;
+    for (int i{}; i < players.size(); i++)
+    {
+        if (score[i] == finalPoint)
+            numberOfWinners++;
+    }
+
+    if (numberOfWinners == 1)
+        return index;
+    else
+        return -1;
 }
 
+//this function will check taht Bahar or Zemestan index and if they are played wich played last will effect
 char Game::calculationBaharZamastan()
 {
-    int countBahar{0}, countZemestan{0};
+    int baharIndex = -1 ;
+    int ZemestanIndex = -1 ;
+
     for (size_t i = 0; i < playedCards.size(); i++)
     {
         for (size_t j = 0; j < playedCards[i].cards.size(); j++)
         {
             if (playedCards[i].cards[j].getName() == "Bahar")
             {
-                countBahar++;
+                if (j > baharIndex)
+                    baharIndex = j;
             }
             if (playedCards[i].cards[j].getName() == "Zemastan")
             {
-                countZemestan++;
+                if (j > ZemestanIndex)
+                    ZemestanIndex = j;
             }
         }
     }
-    if (countBahar > countZemestan)
-    {
-        return 'B';
-    }
-    else if (countZemestan > countBahar)
-    {
-        return 'Z';
-    }
 
-    return 'E';
+    if (baharIndex > ZemestanIndex)
+        return 'B';
+    else if (ZemestanIndex > baharIndex)
+        return 'Z';
+    else
+        return 'E' ;
 }
 
 bool Game::isPlayedTablZan(int index)
@@ -319,10 +340,17 @@ bool Game::isPlayedTablZan(int index)
     return false;
 }
 
-void Game::handleTurn()
+void Game::handleTurn(int situation)
 {
-    if (turn >= players.size())
+    if (situation == 1)
+    {
+        if (turn >= players.size())
+            turn = 0;
+    }
+    else
+    {
         turn = 0;
+    }
 }
 
 int Game::findYoungest()
@@ -335,7 +363,7 @@ int Game::findYoungest()
     {
         if (players[i].getAge() < minAge)
         {
-            minAge = players[i].getAge() ;
+            minAge = players[i].getAge();
             youngest = i;
         }
     }
@@ -346,15 +374,42 @@ int Game::findYoungest()
 void Game::setWinner()
 {
     int winner = findWinner();
-    std::cout << players[winner].getName() << " won!\n";
-    players[winner].addCity(war);
-    players[winner].setNumberOfCities(players[winner].getCities().size());
-    players[winner].setCanWar(players[winner].getCanWar() + 1) ;
+    if (winner == -1)
+    {
+        for (int i{}; i < cities.size(); i++)
+        {
+            if (war.getNumber() == cities[i].getNumber())
+            {
+                cities[i].setIsAvailable(true);
+                std::cout << "no won wins!\n";
+            }
+        }
+    }
+    else
+    {
+        std::cout << players[winner].getName() << " won!\n";
+        players[winner].addCity(war);
+        players[winner].setNumberOfCities(players[winner].getCities().size());
 
-    for(int i{} ; i<playedCards.size() ; i++){
-        for(int j{} ; j<playedCards[i].cards.size() ; j++){
-            cards.push_back(playedCards[i].cards[j]) ;
-            playedCards[i].cards.erase(playedCards[i].cards.begin() + j) ;
+        for (int i{}; i < players.size(); i++)
+        {
+            if (players[i].getCanWar())
+            {
+                players[i].setCanWar(false);
+            }
+        }
+        players[winner].setCanWar(true);
+    }
+}
+
+void Game::clearBoard()
+{
+    for (int i{}; i < playedCards.size(); i++)
+    {
+        for (int j{}; j < playedCards[i].cards.size(); j++)
+        {
+            cards.push_back(playedCards[i].cards[j]);
+            playedCards[i].cards.erase(playedCards[i].cards.begin() + j);
         }
     }
 }
@@ -374,20 +429,20 @@ bool Game::checkForEnd()
             case 5:
                 system("CLS");
                 std::cout << players[i].getName() << " won the game!\n";
-                return true ;
+                return true;
                 break;
-            default : //to check 3 and 4
+            default: // to check 3 and 4
                 if (checkNeighbors(players[i].getCities()))
                 {
                     system("CLS");
                     std::cout << players[i].getName() << " won the game!\n";
-                    return true ;
+                    return true;
                 }
                 break;
             }
         }
     }
-    return false ;
+    return false;
 }
 
 bool Game::checkNeighbors(std::vector<City> playerCities)
@@ -433,51 +488,57 @@ bool Game::checkNeighbors(std::vector<City> playerCities)
 
 void Game::gameFlow()
 {
-    manager.startMenue();
-    takeGameInfo();
-    fillCards();
-    players[findYoungest()].setCanWar(players[findYoungest()].getCanWar() + 1);
+    manager.startMenue();                    // start menu will be shown to user
+    takeGameInfo();                          // take names , ages , colors from user
+    fillCards();                             // give cards to players
+    players[findYoungest()].setCanWar(true); // give the war symbol to youngest player
 
-while(true){
-
-    int warior{} ;
-    int startWar{} ;
-    for(int i{} ; i<players.size() ; i++){
-        players[i].setIsPasssed(false) ;
-        if(players[i].getCanWar() > warior)
-            warior = players[i].getCanWar() ;
-            startWar = i ;
-    }
-
-    setWar(players[startWar].getName()) ;
-    
     while (true)
     {
-        int passed{};
+
+        int startWar{}; // to hold the index of starter of the war
         for (int i{}; i < players.size(); i++)
         {
-            if (players[i].getIsPassed())
-                passed++;
+            players[i].setIsPasssed(false);
+            if (players[i].getCanWar())
+                startWar = i;
         }
-        if (passed == players.size())
+
+        setWar(players[startWar].getName()); // ask to choose city for war
+
+        // main game loop
+        while (true)
+        {
+            int passed{}; // to hold the number of the player that they've passed
+
+            // to end war if all players have passed
+            for (int i{}; i < players.size(); i++)
+            {
+                if (players[i].getIsPassed())
+                    passed++;
+            }
+            if (passed == players.size())
+            {
+                break;
+            }
+            // getting input and print game info
+            else
+            {
+                handleTurn(1);
+                print();
+                input();
+            }
+        }
+
+        setWinner();   // to find the winner and set him as winner
+        clearBoard() ; //to clear board
+        handleTurn(0); // to make the turn equal to 1 to start next war from firt player
+
+        // to check is any player has enough city to win and break loop
+        if (checkForEnd())
         {
             break;
         }
-        else
-        {
-            handleTurn();
-            print();
-            input();
-        }
     }
-    setWinner();
-    for(int i{} ; i<players.size() ; i++){
-        players[i].setCanWar(0) ;
-    }
-    
-    if(checkForEnd()){
-        break ;
-    }
-}
-    exit(0) ;
+    exit(0); // end game
 }

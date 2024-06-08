@@ -1,6 +1,7 @@
 #ifndef PIRPLECARD_H
 #define PIRPLECARD_H
 #include <vector>
+#include<string>
 #include "Card.h"
 #include"player.h"
 
@@ -25,6 +26,8 @@ public:
     //Inheritance
     virtual void ability(PlayedCard&);
     virtual void ability(Player&);
+    //other
+    bool isYellow(std::string) ;
 
 private:
     std::string Ability;

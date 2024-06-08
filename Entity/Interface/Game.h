@@ -43,7 +43,7 @@ public:
 
     char calculationBaharZamastan(); //if bahar cards are more than zemestan it return true if not return false
 
-    void handleTurn() ; //to check that turn to get out of range
+    void handleTurn(int) ; //to check that turn to get out of range
 
     int findYoungest() ; //to find youngest player
 
@@ -52,6 +52,8 @@ public:
     bool checkForEnd() ; //to check that has someone won the game and end it
 
     bool checkNeighbors( std::vector<City> ) ; //to check the players cities relation to end the game if it is possible
+
+    void clearBoard() ;
 
 private:
 
