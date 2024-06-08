@@ -53,7 +53,9 @@ public:
 
     bool checkNeighbors( std::vector<City> ) ; //to check the players cities relation to end the game if it is possible
 
-    void clearBoard() ;
+    void clearBoard() ; //to clear the board of played cards
+
+    bool checkCards() ; //to check players card if they're empty or not
 
 private:
 
