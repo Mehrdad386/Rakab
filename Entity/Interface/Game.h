@@ -53,6 +53,8 @@ public:
 
     bool checkNeighbors( std::vector<City> ) ; //to check the players cities relation to end the game if it is possible
 
+    void clearBoard() ;
+
 private:
 
     Map map ;
