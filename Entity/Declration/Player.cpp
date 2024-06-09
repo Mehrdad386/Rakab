@@ -47,7 +47,6 @@ void Player::printCities(){
     std::cout<<std::endl ;
 }
 
-
 void Player::printCards(){
     for(int i{} ; i<cards.size() ; i++)
         std::cout<<cards[i].getName()<<' ' ;
