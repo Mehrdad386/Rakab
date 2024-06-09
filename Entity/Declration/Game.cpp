@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <sstream>
 #include "../Interface/Game.h"
 #include <time.h>
 #include <string>
@@ -59,17 +60,18 @@ void Game::takeGameInfo()
 
 void Game::print()
 {
-    //zero part
+    // zero part
     system("CLS");
     std::cout << "------------------------------------------------------\n";
     std::cout << "the turn is: " << turn + 1 << std::endl;
     std::cout << war.getName() << " is on war\n";
-    std::cout<<"available cities: " ;
-    for( auto city : cities ){
-        if(city.getISAvailable())
-            std::cout<<city.getName()<<" , " ;
+    std::cout << "available cities: ";
+    for (auto city : cities)
+    {
+        if (city.getISAvailable())
+            std::cout << city.getName() << " , ";
     }
-    std::cout<<std::endl ;
+    std::cout << std::endl;
     // first part
     std::cout << "------------------------------------------------------\n";
     for (int i{}; i < players.size(); i++)
@@ -103,35 +105,44 @@ void Game::input()
     {
         std::cout << players[turn].getName() << " choose a card to play or pass: ";
         std::string choice;
-        std::cin >> choice;
+        std::getline(std::cin, choice);
 
-        if (choice == "pass")
+        std::istringstream part(choice); // use to handle hellp command
+        std::string word;                // to hold words
+        int counter{};                   // to handle loop actions
+        while (part >> word)
         {
-            players[turn].setIsPasssed(true);
-            turn++;
-        }
-        else if (choice == "help")
-        {
-            if (choice.find("help ") == 0)
-            {
-                choice = choice.substr(5);
-                manager.help(choice);
+            if (word != "help" && counter ==0){
+                if (choice == "pass")
+                {
+                    players[turn].setIsPasssed(true);
+                    turn++;
+                }
+                else
+                {
+                    Card Played = players[turn].play(choice);
+                    if (Played.getName() == "Matarsak")
+                    {
+                        Matarsak temp;
+                        temp.ability(playedCards[turn], players[turn]);
+                    }
+                    playedCards[turn].cards.push_back(Played);
+                    turn++;
+                }
             }
             else
-                manager.help("none");
+            {
+                if (counter == 1)
+                {
+                    manager.help(word);
+                }
+            }
+            counter++;
         }
 
-        else
-        {
-            Card Played = players[turn].play(choice);
-            if (Played.getName() == "Matarsak")
-            {
-                Matarsak temp;
-                temp.ability(playedCards[turn], players[turn]);
-            }
-            playedCards[turn].cards.push_back(Played);
-            turn++;
-        }
+        if (counter == 1 && choice == "help")
+            manager.help("none");
+        
     }
     else
     {
@@ -238,14 +249,14 @@ void Game::endWar(int winner)
 
 int Game::findWinner()
 {
-    Bahar b;  //to use ability
-    Zemestan z; //to use ability
-    TablZan t; //to use ability
-    int score[players.size()]{}; //to hold scores
-    int finalPoint{0}; //to hold maximum score
-    int index; //to hold winner index
-    int numberOfWinners{}; // to hold number of winners
-    char result = calculationBaharZamastan(); //to check the season
+    Bahar b;                                  // to use ability
+    Zemestan z;                               // to use ability
+    TablZan t;                                // to use ability
+    int score[players.size()]{};              // to hold scores
+    int finalPoint{0};                        // to hold maximum score
+    int index;                                // to hold winner index
+    int numberOfWinners{};                    // to hold number of winners
+    char result = calculationBaharZamastan(); // to check the season
     switch (result)
     {
     case 'B':
@@ -259,7 +270,7 @@ int Game::findWinner()
         {
             z.ability(playedCards);
         }
-    case 'E' : 
+    case 'E':
 
         break;
 
@@ -299,11 +310,11 @@ int Game::findWinner()
         return -1;
 }
 
-//this function will check taht Bahar or Zemestan index and if they are played wich played last will effect
+// this function will check taht Bahar or Zemestan index and if they are played which played last will effect
 char Game::calculationBaharZamastan()
 {
-    int baharIndex = -1 ;
-    int ZemestanIndex = -1 ;
+    int baharIndex = -1;
+    int ZemestanIndex = -1;
 
     for (size_t i = 0; i < playedCards.size(); i++)
     {
@@ -327,7 +338,7 @@ char Game::calculationBaharZamastan()
     else if (ZemestanIndex > baharIndex)
         return 'Z';
     else
-        return 'E' ;
+        return 'E';
 }
 
 bool Game::isPlayedTablZan(int index)
@@ -488,16 +499,17 @@ bool Game::checkNeighbors(std::vector<City> playerCities)
 
 bool Game::checkCards()
 {
-    int counter{} ;
-    for(int i{} ; i<players.size() ; i++){
-        if(players[i].getCards().empty())
-            counter++ ;
+    int counter{};
+    for (int i{}; i < players.size(); i++)
+    {
+        if (players[i].getCards().empty())
+            counter++;
     }
 
-    if(counter == players.size())
-        return true ;
+    if (counter == players.size())
+        return true;
     else
-        return false ;
+        return false;
 }
 
 void Game::gameFlow()
@@ -541,14 +553,15 @@ void Game::gameFlow()
                 handleTurn(1);
                 print();
                 input();
-                if(checkCards()){
-                    fillCards() ;
+                if (checkCards())
+                {
+                    fillCards();
                 }
             }
         }
 
         setWinner();   // to find the winner and set him as winner
-        clearBoard() ; //to clear board
+        clearBoard();  // to clear board
         handleTurn(0); // to make the turn equal to 1 to start next war from firt player
 
         // to check is any player has enough city to win and break loop
