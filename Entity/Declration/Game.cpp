@@ -97,6 +97,8 @@ void Game::print()
     // it is input so i call it in gameflow method
 }
 
+
+//this function explanation : we will just take  player's choice in full line and we have to type of commands help / play and help can be to words so we check the word and make it part by part then do actions
 void Game::input()
 {
     players[turn].printCards();

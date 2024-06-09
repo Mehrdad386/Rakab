@@ -9,36 +9,43 @@ Bahar::Bahar()
 
 void Bahar::ability(std::vector<PlayedCard> &pc)
 {
+
+    int bigNumber = findBigest(pc) ;
+
+    for (int i{}; i < pc.size(); i++)
+    {
+        for (int j = 0; i < pc.at(i).cards.size(); j++)
+        {
+            if (i < pc.size() && j < pc.at(i).cards.size())
+            {
+                if (pc.at(i).cards.at(j).getPower() == bigNumber)
+                {
+                    pc.at(i).cards.at(j).setPower(((bigNumber + 3)));
+                }
+            }
+        }
+    }
+}
+
+int Bahar::findBigest(std::vector<PlayedCard> &pc)
+{
     int bigNumber{0};
     for (int i{}; i < pc.size(); i++)
     {
-        for (int j{}; j < pc[i].cards.size(); j++)
+        for (int j{}; j < pc.at(i).cards.size(); j++)
         {
-            if (i < pc.size() && j < pc[i].cards.size())
+            if (i < pc.size() && j < pc.at(i).cards.size())
             {
-                if (isYellow(pc[i].cards[j].getName()))
+                if (isYellow(pc.at(i).cards.at(j).getName()))
                 {
-                    if (pc[i].cards[j].getPower() > bigNumber)
+                    if (pc.at(i).cards.at(j).getPower() > bigNumber)
                     {
-                        bigNumber = pc[i].cards[j].getPower();
+                        bigNumber = pc.at(i).cards.at(j).getPower();
                     }
                 }
             }
         }
     }
 
-    for (int i{}; i < pc.size(); i++)
-    {
-
-        for (int j = 0; i < pc[i].cards.size(); j++)
-        {
-            if (i < pc.size() && j < pc[i].cards.size())
-            {
-                if (pc[i].cards[j].getPower() == bigNumber)
-                {
-                    pc[i].cards[j].setPower(((bigNumber + 3)));
-                }
-            }
-        }
-    }
+    return bigNumber;
 }

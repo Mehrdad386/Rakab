@@ -10,14 +10,14 @@ void Zemestan::ability(std::vector<PlayedCard> &pc)
 {
     for (int i{}; i < pc.size(); i++)
     {
-        for (int j{}; j < pc[i].cards.size(); j++)
+        for (int j{}; j < pc.at(i).cards.size(); j++)
         {
 
-            if (i < pc.size() && j < pc[i].cards.size())
+            if (i < pc.size() && j < pc.at(i).cards.size())
             {
-                if (isYellow(pc[i].cards[j].getName()))
+                if (isYellow(pc.at(i).cards.at(j).getName()))
                 {
-                    pc[i].cards[j].setPower(1);
+                    pc.at(i).cards.at(j).setPower(1);
                 }
             }
         }
