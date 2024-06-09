@@ -92,7 +92,16 @@ Card Player::play( std::string choice ){
     if(i == -1){
         std::cout<<"invalid card , choose again: " ;
         std::cin>>choice ;
-        return play(choice) ;
+        if(choice == "pass"){
+            Card pass( 0 , "pass") ;
+            return pass ;
+        }
+        else if(choice == "help"){
+            Card help (0 , "help") ;
+            return help ;
+        }
+        else
+            return play(choice) ;
     }
     else{
         Card temp = cards.at(i) ;

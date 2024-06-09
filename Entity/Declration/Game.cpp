@@ -112,15 +112,11 @@ void Game::input()
         int counter{};                   // to handle loop actions
         while (part >> word)
         {
-            if (word != "help" && counter ==0){
-                if (choice == "pass")
+            if (word != "help" && counter == 0)
+            {
+                Card Played = players[turn].play(choice);
+                if (Played.getName() != "pass" && Played.getName() != "help")
                 {
-                    players[turn].setIsPasssed(true);
-                    turn++;
-                }
-                else
-                {
-                    Card Played = players[turn].play(choice);
                     if (Played.getName() == "Matarsak")
                     {
                         Matarsak temp;
@@ -129,6 +125,16 @@ void Game::input()
                     playedCards[turn].cards.push_back(Played);
                     turn++;
                 }
+                else if (Played.getName() == "pass")
+                {
+                    players[turn].setIsPasssed(true);
+                    turn++;
+                }
+                else if (Played.getName() == "help"){
+                    manager.help("none") ;
+                }
+
+    
             }
             else
             {
@@ -142,7 +148,6 @@ void Game::input()
 
         if (counter == 1 && choice == "help")
             manager.help("none");
-        
     }
     else
     {
