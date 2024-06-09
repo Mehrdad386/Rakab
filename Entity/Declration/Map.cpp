@@ -45,12 +45,12 @@ void Map::generateMap()
         {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0}
+        {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0}
     };
     
-    std::vector<int> neighbors ;
 
     for(int i{} ;i<citiesName.size(); i++){
+        std::vector<int> neighbors ;
         for(int j ; j<citiesName.size() ; j++){
             if(isNeighbor[i][j])
                 neighbors.push_back(j) ;

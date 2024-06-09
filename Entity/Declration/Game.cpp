@@ -97,7 +97,6 @@ void Game::print()
     // it is input so i call it in gameflow method
 }
 
-
 //this function explanation : we will just take  player's choice in full line and we have to type of commands help / play and help can be to words so we check the word and make it part by part then do actions
 void Game::input()
 {
@@ -232,7 +231,7 @@ void Game::setWar(std::string warior)
     {
         std::cout << "choose a city for war(first letter Upper case , other lower): ";
         std::cin >> city;
-    } while (city != "Caline" && city != "Enna" && city != "Atela" && city != "Pladaci" && city != "Borge" && city != "Dimase" && city != "Morina" && city != "Olivadi" && city != "Rollo" && city != "Talmone" && city != "Armento" && city != "Elinia" && city != "Lia");
+    } while (city != "Caline" && city != "Enna" && city != "Atela" && city != "Pladaci" && city != "Borge" && city != "Dimase" && city != "Morina" && city != "Olivadi" && city != "Rollo" && city != "Talmone" && city != "Armento" && city != "Elinia" && city != "Lia" && city != "Bella");
 
     for (int i{}; i < map.getCities().size(); i++)
     {
@@ -467,7 +466,7 @@ bool Game::checkForEnd()
 
 bool Game::checkNeighbors(std::vector<City> playerCities)
 {
-
+    //here we save cities numer on an int array to work easier with them
     int number = playerCities.size();
     int citiesNumber[number];
     for (int i{}; i < number; i++)
@@ -477,9 +476,9 @@ bool Game::checkNeighbors(std::vector<City> playerCities)
     {
         std::vector<int> nc = playerCities[0].getNeighbors();
         int check{}; // i just wnat check that do we have first city's neighbors in player's cities so if check becomes 2 it means we have thme
-        for (int i{}; i < 2; i++)
+        for (int i{}; i < nc.size(); i++)
         {
-            for (int j{}; j < 2; j++)
+            for (int j{}; j < number; j++)
             {
                 if (nc[i] == citiesNumber[j])
                     check++;
