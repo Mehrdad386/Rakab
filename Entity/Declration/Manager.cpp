@@ -58,12 +58,12 @@ void Manager::help( std::string help ){
 
     std::cout<<"enter 0 to leave: " ;
     int leave = 1 ;
-    while(leave != 0 ){
+    while(true){
         std::cin>>leave ;
         if(leave == 0)
-            startMenue() ;
+            break ;
         else
-         std::cout<<"invalid input\n" ;
+            std::cout<<"invalid input\n" ;
     }
 
 }

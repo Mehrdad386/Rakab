@@ -47,7 +47,6 @@ void Player::printCities(){
     std::cout<<std::endl ;
 }
 
-
 void Player::printCards(){
     for(int i{} ; i<cards.size() ; i++)
         std::cout<<cards[i].getName()<<' ' ;
@@ -77,6 +76,11 @@ void Player::addCity( City city ){
 
 
 Card Player::play( std::string choice ){
+
+    if(choice == "pass"){
+        Card pass( 0 , "pass") ;
+        return pass ;
+    }
     
     int i{} ;
     for( i ; i<cards.size() ; i++){
@@ -92,7 +96,16 @@ Card Player::play( std::string choice ){
     if(i == -1){
         std::cout<<"invalid card , choose again: " ;
         std::cin>>choice ;
-        return play(choice) ;
+        if(choice == "pass"){
+            Card pass( 0 , "pass") ;
+            return pass ;
+        }
+        else if(choice == "help"){
+            Card help (0 , "help") ;
+            return help ;
+        }
+        else
+            return play(choice) ;
     }
     else{
         Card temp = cards.at(i) ;
