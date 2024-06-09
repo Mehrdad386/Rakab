@@ -114,6 +114,7 @@ void Game::input()
         {
             if (word != "help" && counter == 0)
             {
+                
                 Card Played = players[turn].play(choice);
                 if (Played.getName() != "pass" && Played.getName() != "help")
                 {
@@ -420,14 +421,15 @@ void Game::setWinner()
 
 void Game::clearBoard()
 {
-    for (int i{}; i < playedCards.size(); i++)
+    for (int i = 0; i < playedCards.size(); i++)
     {
-        for (int j{}; j < playedCards[i].cards.size(); j++)
+        for (int j = 0; j < playedCards[i].cards.size(); j++)
         {
             cards.push_back(playedCards[i].cards[j]);
-            playedCards[i].cards.erase(playedCards[i].cards.begin() + j);
         }
+        playedCards[i].cards.clear();  // Clear the cards in the current player's playedCards
     }
+
 }
 
 bool Game::checkForEnd()

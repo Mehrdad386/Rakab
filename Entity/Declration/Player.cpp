@@ -76,6 +76,11 @@ void Player::addCity( City city ){
 
 
 Card Player::play( std::string choice ){
+
+    if(choice == "pass"){
+        Card pass( 0 , "pass") ;
+        return pass ;
+    }
     
     int i{} ;
     for( i ; i<cards.size() ; i++){
