@@ -43,9 +43,9 @@ void PirpleCard::ability(PlayedCard& PC)
 
 bool PirpleCard::isYellow(std::string name)
 {
-    for (char c : name)
+   
     {
-        if (!isdigit(c))//check that char is int or not ?
+        if (!isdigit(name[0]))//check that char is int or not ?
         {
             return false;
         }
