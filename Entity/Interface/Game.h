@@ -57,6 +57,8 @@ public:
 
     bool checkCards() ; //to check players card if they're empty or not
 
+    void returnPower() ; //to set the cards power as they were first
+
 private:
 
     Map map ;

@@ -420,6 +420,15 @@ void Game::setWinner()
     }
 }
 
+void Game::returnPower(){
+    for(int i{} ; i<playedCards.size() ; i++){
+        for(int j{} ; j<playedCards[i].cards.size() ; j++){
+            if(isdigit(playedCards[i].cards[j].getName()[0]))
+            playedCards[i].cards[j].setPower(std::stoi(playedCards[i].cards[j].getName())) ;
+        }
+    }
+}
+
 void Game::clearBoard()
 {
     for (int i = 0; i < playedCards.size(); i++)
@@ -468,24 +477,23 @@ bool Game::checkNeighbors(std::vector<City> playerCities)
 {
     //here we save cities numer on an int array to work easier with them
     int number = playerCities.size();
-    int citiesNumber[number];
-    for (int i{}; i < number; i++)
-        citiesNumber[i] = playerCities[i].getNumber();
+    // int citiesNumber[number];
+    // for (int i{}; i < number; i++)
+    //     citiesNumber[i] = playerCities[i].getNumber();
 
     if (number == 3)
     {
-        std::vector<int> nc = playerCities[0].getNeighbors();
+ 
         int check{}; // i just wnat check that do we have first city's neighbors in player's cities so if check becomes 2 it means we have thme
-        for (int i{}; i < nc.size(); i++)
-        {
-            for (int j{}; j < number; j++)
-            {
-                if (nc[i] == citiesNumber[j])
-                    check++;
-            }
-        }
-        if (check == 2)
-            return true;
+
+        if(map.getIsNeighbor()[playerCities[0].getNumber()][playerCities[1].getNumber()])
+            check++ ;
+        if(map.getIsNeighbor()[playerCities[0].getNumber()][playerCities[2].getNumber()])
+            check++ ;
+        
+        if(check == 2)
+            return true ;
+        
     }
 
     if (number == 4)
@@ -569,6 +577,7 @@ void Game::gameFlow()
         }
 
         setWinner();   // to find the winner and set him as winner
+        returnPower() ; //to return cards' power
         clearBoard();  // to clear board
         handleTurn(0); // to make the turn equal to 1 to start next war from firt player
 

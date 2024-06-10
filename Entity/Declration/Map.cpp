@@ -3,6 +3,7 @@
 // getters
 const int Map::getSize() { return size; }
 const std::vector<City> Map::getCities() { return cities; }
+const std::vector<std::vector<bool>> Map::getIsNeighbor(){ return isNeighbor ; }
 
 // setters
 void Map::setSize(int size) { this->size = size; }
@@ -47,6 +48,10 @@ void Map::generateMap()
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0}
     };
+
+    this->isNeighbor = isNeighbor ;
+
+    
     
 
     for(int i{} ;i<citiesName.size(); i++){
