@@ -14,7 +14,7 @@ void Bahar::ability(std::vector<PlayedCard> &pc)
 
     for (int i{}; i < pc.size(); i++)
     {
-        for (int j = 0; i < pc.at(i).cards.size(); j++)
+        for (int j = 0; j < pc.at(i).cards.size(); j++)
         {
             if (i < pc.size() && j < pc.at(i).cards.size())
             {
