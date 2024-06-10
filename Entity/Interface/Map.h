@@ -15,6 +15,8 @@ public:
 
     const std::vector<City> getCities() ;
 
+    const std::vector<std::vector<bool>> getIsNeighbor() ;
+
     void setSize ( int ) ;
 
     void setCities( std::vector<City> ) ;

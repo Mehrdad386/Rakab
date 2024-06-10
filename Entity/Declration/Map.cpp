@@ -3,6 +3,7 @@
 // getters
 const int Map::getSize() { return size; }
 const std::vector<City> Map::getCities() { return cities; }
+const std::vector<std::vector<bool>> Map::getIsNeighbor(){ return isNeighbor ; }
 
 // setters
 void Map::setSize(int size) { this->size = size; }
