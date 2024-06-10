@@ -323,26 +323,27 @@ char Game::calculationBaharZamastan()
     int baharIndex = -1;
     int ZemestanIndex = -1;
 
+    int countBahar {} ;
+    int CountZemestan{} ;
+
     for (size_t i = 0; i < playedCards.size(); i++)
     {
         for (size_t j = 0; j < playedCards[i].cards.size(); j++)
         {
             if (playedCards[i].cards[j].getName() == "Bahar")
             {
-                if (j > baharIndex)
-                    baharIndex = j;
+                countBahar++ ;
             }
             if (playedCards[i].cards[j].getName() == "Zemastan")
             {
-                if (j > ZemestanIndex)
-                    ZemestanIndex = j;
+              CountZemestan++ ;
             }
         }
     }
 
-    if (baharIndex > ZemestanIndex)
+    if (countBahar > CountZemestan)
         return 'B';
-    else if (ZemestanIndex > baharIndex)
+    else if (CountZemestan > countBahar)
         return 'Z';
     else
         return 'E';

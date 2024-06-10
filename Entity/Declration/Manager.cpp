@@ -54,7 +54,8 @@ void Manager::help( std::string help ){
         std::cout<<"shahdokht help\n" ;
     else if(help == "matarsak")
         std::cout<<"mataarsak help\n" ;
-    
+    else
+        std::cout<<"invalid card's name\n" ;
 
     std::cout<<"enter 0 to leave: " ;
     int leave = 1 ;
