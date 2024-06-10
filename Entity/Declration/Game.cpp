@@ -420,6 +420,15 @@ void Game::setWinner()
     }
 }
 
+void Game::returnPower(){
+    for(int i{} ; i<playedCards.size() ; i++){
+        for(int j{} ; j<playedCards[i].cards.size() ; j++){
+            if(isdigit(playedCards[i].cards[j].getName()[0]))
+            playedCards[i].cards[j].setPower(std::stoi(playedCards[i].cards[j].getName())) ;
+        }
+    }
+}
+
 void Game::clearBoard()
 {
     for (int i = 0; i < playedCards.size(); i++)
@@ -569,6 +578,7 @@ void Game::gameFlow()
         }
 
         setWinner();   // to find the winner and set him as winner
+        returnPower() ; //to return cards' power
         clearBoard();  // to clear board
         handleTurn(0); // to make the turn equal to 1 to start next war from firt player
 

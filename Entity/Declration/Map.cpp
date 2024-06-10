@@ -47,6 +47,10 @@ void Map::generateMap()
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0}
     };
+
+    this->isNeighbor = isNeighbor ;
+
+    
     
 
     for(int i{} ;i<citiesName.size(); i++){
