@@ -38,22 +38,22 @@ void Manager::startMenue(){
 void Manager::help( std::string help ){
 
     if(help == "none"){
-        std::cout<<"bahar help\n" ;
-        std::cout<<"zemestan help\n" ;
-        std::cout<<"tablzan help\n" ;
-        std::cout<<"shahdokht help\n" ;
-        std::cout<<"mataarsak help\n" ;
+        std::cout<<"bahar: this card will find the strongest yellow card betwwen played yellow cards and then increasse its power three units.\n" ;
+        std::cout<<"zemestan: this card will set the power of all played yellow cards one.\n" ;
+        std::cout<<"tablzan: this card will double the power of yellow played cards by its owner.\n" ;
+        std::cout<<"shirdokht: this card's power is 10 and no other card will effect on its power.\n" ;
+        std::cout<<"mataarsak: if you play this card you will be able to return back one of your played card to your hand.\n" ;
     }
     else if(help == "bahar")
-        std::cout<<"bahar help\n" ;
+        std::cout<<"bahar: this card will find the strongest yellow card betwwen played yellow cards and then increasse its power three units.\n" ;
     else if (help == "zemestan")
-        std::cout<<"zemestan help\n" ;
+        std::cout<<"zemestan: this card will set the power of all played yellow cards one.\n" ;
     else if (help =="tablzan")
-        std::cout<<"tablzan help\n" ;
-    else if(help == "shahdokht")
-        std::cout<<"shahdokht help\n" ;
+        std::cout<<"tablzan: this card will double the power of yellow played cards by its owner.\n" ;
+    else if(help == "shirdokht")
+        std::cout<<"shirdokht: this card's power is 10 and no other card will effect on its power.\n" ;
     else if(help == "matarsak")
-        std::cout<<"mataarsak help\n" ;
+        std::cout<<"mataarsak: if you play this card you will be able to return back one of your played card to your hand.\n" ;
     else
         std::cout<<"invalid card's name\n" ;
 
