@@ -4,6 +4,7 @@
 #include "../Interface/Game.h"
 #include <time.h>
 #include <string>
+#include<limits>
 
 Game::Game()
 {
@@ -16,14 +17,24 @@ Game::Game()
 
 void Game::takeGameInfo()
 {
-    std::cout << "enter the number of players: ";
     int playerNumber{};
-
+    
+    
+    std::cout << "enter the number of players(3_6): ";
     while (true)
     {
         std::cin >> playerNumber;
+
+        if(std::cin.fail()){
+            std::cout << "Invalid input. Please enter an integer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
         if (playerNumber <= 6 && playerNumber >= 3)
             break;
+        else
+            std::cout<<"enter a number between 3_6: " ;
     }
 
     players.resize(playerNumber);
@@ -36,11 +47,21 @@ void Game::takeGameInfo()
     {
         std::cout << "enter player" << i + 1 << " name: ";
         std::cin >> name;
-        do
+        while(true)
         {
             std::cout << "enter player" << i + 1 << " age: ";
             std::cin >> age;
-        } while (age < 0);
+
+            if(std::cin.fail()){
+                std::cout << "Invalid input. Please enter an integer." << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+
+        if(age>0)
+            break;
+
+        }
         do
         {
             std::cout << "choose player" << i + 1 << "'s color(red,blue,yellow,green,purple,gray): ";
