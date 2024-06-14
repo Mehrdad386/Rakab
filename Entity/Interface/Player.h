@@ -57,6 +57,8 @@ public:
 
     void addCity( City city ) ;
 
+    void clearCards() ;
+
 private:
 
     std::string name ;

@@ -565,6 +565,15 @@ bool Game::checkPassed()
         return false;
     }
 }
+
+void Game::takeRemainingCard(){
+    for(int i{} ; i<players.size() ; i++){
+        if(!players[i].getCards().empty()){
+            players[i].clearCards() ;
+        }
+    }
+}
+
 void Game::gameFlow()
 {
     manager.startMenue();                    // start menu will be shown to user
@@ -588,7 +597,7 @@ void Game::gameFlow()
         // main game loop
         while (true)
         {
-            if (checkCards() == 4 || checkPassed())
+            if (checkCards() == players.size() || checkPassed())
             {
                 break;
             }
@@ -601,7 +610,7 @@ void Game::gameFlow()
             }
         }
 
-        if (checkCards() >= 3)
+        if (checkCards() >= players.size() - 1)
         {
             fillCards();
         }

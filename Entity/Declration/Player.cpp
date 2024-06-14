@@ -116,3 +116,5 @@ Card Player::play( std::string choice ){
 
 }
 
+void Player::clearCards(){ cards.clear() ; }
+
