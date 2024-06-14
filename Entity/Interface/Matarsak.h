@@ -11,6 +11,7 @@ public:
 private:
     std::string getCardName(PlayedCard);//get the card name from player for delete
     int findCard(PlayedCard); // find the choosen card index
+    bool canWork(PlayedCard) ; //to check is that possible for Matarsak to do his ability
 };
 
 #endif

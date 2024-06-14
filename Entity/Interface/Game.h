@@ -55,9 +55,13 @@ public:
 
     void clearBoard() ; //to clear the board of played cards
 
-    bool checkCards() ; //to check players card if they're empty or not
+    int checkCards() ; //to check player's cards if they're empty or not
 
     void returnPower() ; //to set the cards power as they were first
+
+    bool checkPassed() ; //to check have all the players passed
+
+    void takeRemainingCard() ; //to take remaining cards from last player
 
 private:
 

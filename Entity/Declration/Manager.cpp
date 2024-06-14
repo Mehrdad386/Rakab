@@ -21,6 +21,7 @@ void Manager::startMenue(){
             break;
         case 2:
             help("none");
+            startMenue() ;
             break;
         case 3:
             exitGame();
