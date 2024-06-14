@@ -612,6 +612,7 @@ void Game::gameFlow()
 
         if (checkCards() >= players.size() - 1)
         {
+            takeRemainingCard() ;
             fillCards();
         }
         setWinner();   // to find the winner and set him as winner
