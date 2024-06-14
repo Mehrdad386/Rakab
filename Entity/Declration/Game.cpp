@@ -4,7 +4,7 @@
 #include "../Interface/Game.h"
 #include <time.h>
 #include <string>
-#include<limits>
+#include <limits>
 
 Game::Game()
 {
@@ -18,14 +18,14 @@ Game::Game()
 void Game::takeGameInfo()
 {
     int playerNumber{};
-    
-    
+
     std::cout << "enter the number of players(3_6): ";
     while (true)
     {
         std::cin >> playerNumber;
 
-        if(std::cin.fail()){
+        if (std::cin.fail())
+        {
             std::cout << "Invalid input. Please enter an integer." << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -34,7 +34,7 @@ void Game::takeGameInfo()
         if (playerNumber <= 6 && playerNumber >= 3)
             break;
         else
-            std::cout<<"enter a number between 3_6: " ;
+            std::cout << "enter a number between 3_6: ";
     }
 
     players.resize(playerNumber);
@@ -47,20 +47,20 @@ void Game::takeGameInfo()
     {
         std::cout << "enter player" << i + 1 << " name: ";
         std::cin >> name;
-        while(true)
+        while (true)
         {
             std::cout << "enter player" << i + 1 << " age: ";
             std::cin >> age;
 
-            if(std::cin.fail()){
+            if (std::cin.fail())
+            {
                 std::cout << "Invalid input. Please enter an integer." << std::endl;
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
 
-        if(age>0)
-            break;
-
+            if (age > 0)
+                break;
         }
         do
         {
@@ -118,7 +118,7 @@ void Game::print()
     // it is input so i call it in gameflow method
 }
 
-//this function explanation : we will just take  player's choice in full line and we have to type of commands help / play and help can be to words so we check the word and make it part by part then do actions
+// this function explanation : we will just take  player's choice in full line and we have to type of commands help / play and help can be to words so we check the word and make it part by part then do actions
 void Game::input()
 {
     players[turn].printCards();
@@ -136,7 +136,7 @@ void Game::input()
         {
             if (word != "help" && counter == 0)
             {
-                
+
                 Card Played = players[turn].play(choice);
                 if (Played.getName() != "pass" && Played.getName() != "help")
                 {
@@ -153,11 +153,10 @@ void Game::input()
                     players[turn].setIsPasssed(true);
                     turn++;
                 }
-                else if (Played.getName() == "help"){
-                    manager.help("none") ;
+                else if (Played.getName() == "help")
+                {
+                    manager.help("none");
                 }
-
-    
             }
             else
             {
@@ -344,8 +343,8 @@ char Game::calculationBaharZamastan()
     int baharIndex = -1;
     int ZemestanIndex = -1;
 
-    int countBahar {} ;
-    int CountZemestan{} ;
+    int countBahar{};
+    int CountZemestan{};
 
     for (size_t i = 0; i < playedCards.size(); i++)
     {
@@ -353,11 +352,11 @@ char Game::calculationBaharZamastan()
         {
             if (playedCards[i].cards[j].getName() == "Bahar")
             {
-                countBahar++ ;
+                countBahar++;
             }
             if (playedCards[i].cards[j].getName() == "Zemastan")
             {
-              CountZemestan++ ;
+                CountZemestan++;
             }
         }
     }
@@ -442,11 +441,14 @@ void Game::setWinner()
     }
 }
 
-void Game::returnPower(){
-    for(int i{} ; i<playedCards.size() ; i++){
-        for(int j{} ; j<playedCards[i].cards.size() ; j++){
-            if(isdigit(playedCards[i].cards[j].getName()[0]))
-            playedCards[i].cards[j].setPower(std::stoi(playedCards[i].cards[j].getName())) ;
+void Game::returnPower()
+{
+    for (int i{}; i < playedCards.size(); i++)
+    {
+        for (int j{}; j < playedCards[i].cards.size(); j++)
+        {
+            if (isdigit(playedCards[i].cards[j].getName()[0]))
+                playedCards[i].cards[j].setPower(std::stoi(playedCards[i].cards[j].getName()));
         }
     }
 }
@@ -459,9 +461,8 @@ void Game::clearBoard()
         {
             cards.push_back(playedCards[i].cards[j]);
         }
-        playedCards[i].cards.clear();  // Clear the cards in the current player's playedCards
+        playedCards[i].cards.clear(); // Clear the cards in the current player's playedCards
     }
-
 }
 
 bool Game::checkForEnd()
@@ -497,7 +498,7 @@ bool Game::checkForEnd()
 
 bool Game::checkNeighbors(std::vector<City> playerCities)
 {
-    //here we save cities numer on an int array to work easier with them
+    // here we save cities numer on an int array to work easier with them
     int number = playerCities.size();
     // int citiesNumber[number];
     // for (int i{}; i < number; i++)
@@ -505,17 +506,16 @@ bool Game::checkNeighbors(std::vector<City> playerCities)
 
     if (number == 3)
     {
- 
+
         int check{}; // i just wnat check that do we have first city's neighbors in player's cities so if check becomes 2 it means we have thme
 
-        if(map.getIsNeighbor()[playerCities[0].getNumber()][playerCities[1].getNumber()])
-            check++ ;
-        if(map.getIsNeighbor()[playerCities[0].getNumber()][playerCities[2].getNumber()])
-            check++ ;
-        
-        if(check == 2)
-            return true ;
-        
+        if (map.getIsNeighbor()[playerCities[0].getNumber()][playerCities[1].getNumber()])
+            check++;
+        if (map.getIsNeighbor()[playerCities[0].getNumber()][playerCities[2].getNumber()])
+            check++;
+
+        if (check == 2)
+            return true;
     }
 
     if (number == 4)
@@ -535,7 +535,7 @@ bool Game::checkNeighbors(std::vector<City> playerCities)
     return false;
 }
 
-bool Game::checkCards()
+int Game::checkCards()
 {
     int counter{};
     for (int i{}; i < players.size(); i++)
@@ -544,12 +544,27 @@ bool Game::checkCards()
             counter++;
     }
 
-    if (counter == players.size())
-        return true;
-    else
-        return false;
+    return counter;
 }
 
+bool Game::checkPassed()
+{
+    int passed{}; // to hold the number of the player that they've passed
+    // to end war if all players have passed
+    for (int i{}; i < players.size(); i++)
+    {
+        if (players[i].getIsPassed())
+            passed++;
+    }
+    if (passed == players.size())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 void Game::gameFlow()
 {
     manager.startMenue();                    // start menu will be shown to user
@@ -573,33 +588,25 @@ void Game::gameFlow()
         // main game loop
         while (true)
         {
-            int passed{}; // to hold the number of the player that they've passed
-
-            // to end war if all players have passed
-            for (int i{}; i < players.size(); i++)
-            {
-                if (players[i].getIsPassed())
-                    passed++;
-            }
-            if (passed == players.size())
+            if (checkCards() == 4 || checkPassed())
             {
                 break;
             }
-            // getting input and print game info
             else
             {
+                // getting input and print game info
                 handleTurn(1);
                 print();
                 input();
-                if (checkCards())
-                {
-                    fillCards();
-                }
             }
         }
 
+        if (checkCards() == 3)
+        {
+            fillCards();
+        }
         setWinner();   // to find the winner and set him as winner
-        returnPower() ; //to return cards' power
+        returnPower(); // to return cards' power
         clearBoard();  // to clear board
         handleTurn(0); // to make the turn equal to 1 to start next war from firt player
 
