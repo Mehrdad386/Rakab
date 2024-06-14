@@ -601,7 +601,7 @@ void Game::gameFlow()
             }
         }
 
-        if (checkCards() == 3)
+        if (checkCards() >= 3)
         {
             fillCards();
         }

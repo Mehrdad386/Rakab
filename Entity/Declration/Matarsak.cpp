@@ -37,9 +37,26 @@ int Matarsak::findCard(PlayedCard pc)
 std::string Matarsak::getCardName( PlayedCard pc )
 {
     std::string cardName  = "none";
-    if(!pc.cards.empty()){
+    if(canWork(pc)){
         std::cout << "Please Enter Card Name :\n";
         std::cin >> cardName;
+        if(!isYellow(cardName)){
+            std::cout<<"you can't return a purple card.\n" ;
+            getCardName(pc) ;
+        }
     }
     return cardName;
+}
+
+
+bool Matarsak::canWork( PlayedCard pc ){
+
+    for(int i{} ; i<pc.cards.size() ; i++){
+        if(isYellow(pc.cards[i].getName()))
+            return true ;
+        
+    }
+
+    return false ;
+
 }
