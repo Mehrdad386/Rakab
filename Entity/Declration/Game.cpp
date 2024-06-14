@@ -287,20 +287,13 @@ int Game::findWinner()
     switch (result)
     {
     case 'B':
-        for (int i = 0; i < playedCards.size(); i++)
-        {
-            b.ability(playedCards);
-        }
+        b.ability(playedCards); 
         break;
     case 'Z':
-        for (int i = 0; i < playedCards.size(); i++)
-        {
-            z.ability(playedCards);
-        }
-    case 'E':
-
+        z.ability(playedCards);
         break;
-
+    case 'E':
+        break;
     default:
         std::cout << "UNHANDELED ERROR WE FUCKED!";
         break;
@@ -340,8 +333,6 @@ int Game::findWinner()
 // this function will check taht Bahar or Zemestan index and if they are played which played last will effect
 char Game::calculationBaharZamastan()
 {
-    int baharIndex = -1;
-    int ZemestanIndex = -1;
 
     int countBahar{};
     int CountZemestan{};
