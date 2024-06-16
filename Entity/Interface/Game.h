@@ -63,6 +63,8 @@ public:
 
     void takeRemainingCard() ; //to take remaining cards from last player
 
+    int findStarterOfWar() ; //to find the index of the player with ( canWar = true )
+
 private:
 
     Map map ;
