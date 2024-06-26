@@ -287,20 +287,13 @@ int Game::findWinner()
     switch (result)
     {
     case 'B':
-        for (int i = 0; i < playedCards.size(); i++)
-        {
-            b.ability(playedCards);
-        }
+        b.ability(playedCards);
         break;
     case 'Z':
-        for (int i = 0; i < playedCards.size(); i++)
-        {
-            z.ability(playedCards);
-        }
-    case 'E':
-
+        z.ability(playedCards);
         break;
-
+    case 'E':
+        break;
     default:
         std::cout << "UNHANDELED ERROR WE FUCKED!";
         break;
@@ -340,8 +333,6 @@ int Game::findWinner()
 // this function will check taht Bahar or Zemestan index and if they are played which played last will effect
 char Game::calculationBaharZamastan()
 {
-    int baharIndex = -1;
-    int ZemestanIndex = -1;
 
     int countBahar{};
     int CountZemestan{};
@@ -354,7 +345,7 @@ char Game::calculationBaharZamastan()
             {
                 countBahar++;
             }
-            if (playedCards[i].cards[j].getName() == "Zemastan")
+            if (playedCards[i].cards[j].getName() == "Zemestan")
             {
                 CountZemestan++;
             }
@@ -566,12 +557,28 @@ bool Game::checkPassed()
     }
 }
 
-void Game::takeRemainingCard(){
-    for(int i{} ; i<players.size() ; i++){
-        if(!players[i].getCards().empty()){
-            players[i].clearCards() ;
+void Game::takeRemainingCard()
+{
+    for (int i{}; i < players.size(); i++)
+    {
+        if (!players[i].getCards().empty())
+        {
+            players[i].clearCards();
         }
     }
+}
+
+int Game::findStarterOfWar()
+{
+    int startWar ;
+    for (int i{}; i < players.size(); i++)
+    {
+        players[i].setIsPasssed(false);
+        if (players[i].getCanWar())
+            startWar = i;
+    }
+
+    return startWar ;
 }
 
 void Game::gameFlow()
@@ -584,14 +591,7 @@ void Game::gameFlow()
     while (true)
     {
 
-        int startWar{}; // to hold the index of starter of the war
-        for (int i{}; i < players.size(); i++)
-        {
-            players[i].setIsPasssed(false);
-            if (players[i].getCanWar())
-                startWar = i;
-        }
-
+        int startWar = findStarterOfWar(); // to hold the index of starter of the war
         setWar(players[startWar].getName()); // ask to choose city for war
 
         // main game loop
@@ -610,9 +610,10 @@ void Game::gameFlow()
             }
         }
 
+        //to check should we charge the players hands or not
         if (checkCards() >= players.size() - 1)
         {
-            takeRemainingCard() ;
+            takeRemainingCard();
             fillCards();
         }
         setWinner();   // to find the winner and set him as winner
@@ -628,3 +629,4 @@ void Game::gameFlow()
     }
     exit(0); // end game
 }
+
