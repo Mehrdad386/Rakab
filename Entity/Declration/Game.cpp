@@ -345,7 +345,7 @@ char Game::calculationBaharZamastan()
             {
                 countBahar++;
             }
-            if (playedCards[i].cards[j].getName() == "Zemastan")
+            if (playedCards[i].cards[j].getName() == "Zemestan")
             {
                 CountZemestan++;
             }
@@ -629,3 +629,4 @@ void Game::gameFlow()
     }
     exit(0); // end game
 }
+
