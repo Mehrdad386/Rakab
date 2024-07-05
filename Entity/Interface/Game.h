@@ -8,7 +8,7 @@
 #include"YellowCard.h"
 #include"PirpleCard.h"
 #include"TablZan.h"
-#include"ShahDokht.h"
+#include"ShirZan.h"
 #include"Bahar.h"
 #include"Zemestan.h"
 #include"Matarsak.h"

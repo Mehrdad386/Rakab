@@ -1,5 +1,5 @@
 #include "Entity/Interface/Card.h"
-#include "Entity/Interface/ShahDokht.h"
+#include "Entity/Interface/ShirZan.h"
 #include "Entity/Interface/PirpleCard.h"
 #include "Entity/Interface/Bahar.h"
 #include "Entity/Interface/Zemestan.h"
