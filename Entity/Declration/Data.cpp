@@ -1,6 +1,6 @@
 #include "../Interface/Data.h"
 
-void Data::SaveGame(std::vector<Player> players, std::vector<City> cities, std::vector<Card> cards, int turn, City war, City peace)
+void Data::SaveGame( std::vector<Player>& players, std::vector<City>& cities, std::vector<Card>& cards, int& turn, City& war, City& peace )
 {
 
     std::ofstream Save;
@@ -50,4 +50,9 @@ void Data::SaveGame(std::vector<Player> players, std::vector<City> cities, std::
     }
 
     Save.close();
+}
+
+
+void Data::loadGame( std::vector<Player>& players, std::vector<City>& cities, std::vector<Card>& cards, int& turn, City& war, City& peace ){
+
 }
