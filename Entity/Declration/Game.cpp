@@ -157,6 +157,7 @@ void Game::input()
                 {
                     manager.help("none");
                 }
+                
             }
             else
             {
@@ -608,6 +609,7 @@ void Game::gameFlow()
                 print();
                 input();
             }
+            data.SaveGame(players , cities , cards , turn , war , peace) ;
         }
 
         //to check should we charge the players hands or not

@@ -77,6 +77,7 @@ private:
     int turn ;
     City war ; //to hold the city that is on war
     City peace ; //to hold the city that is on peace
+    Data data ; //to save and load game
     
 
 };
