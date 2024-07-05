@@ -13,6 +13,7 @@
 #include"Zemestan.h"
 #include"Matarsak.h"
 #include"ShirDokht.h"
+#include"Data.h"
 
 class Game{
 
