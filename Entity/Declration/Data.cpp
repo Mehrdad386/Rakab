@@ -64,6 +64,7 @@ void Data::loadGame(std::vector<Player> &players, std::vector<City> &cities, std
     int counter{};
     int index{}; // for case 3
     int playerLineCounter{}; //to be used in case 4
+    int tempCounter{}; //for case 1
 
     // to be used for adding cards
     YellowCard y1(1, "1");
@@ -98,7 +99,6 @@ void Data::loadGame(std::vector<Player> &players, std::vector<City> &cities, std
             {
             case 1:
 
-                int tempCounter{};
                 while (cutter >> word)
                 {
                     tempCounter++;
