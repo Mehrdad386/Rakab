@@ -3,9 +3,15 @@
 #include"fstream"
 #include<vector>
 #include"Player.h"
-#include"Card.h"
+#include"YellowCard.h"
+#include"PirpleCard.h"
 #include"City.h"
-
+#include"Bahar.h"
+#include"Zemestan.h"
+#include"TablZan.h"
+#include"ShirDokht.h"
+#include"ShirZan.h"
+#include"Matarsak.h"
 
 class Data{
 
