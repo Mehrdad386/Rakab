@@ -1,4 +1,5 @@
 #include "../Interface/Data.h"
+#include<sstream>
 
 void Data::SaveGame( std::vector<Player>& players, std::vector<City>& cities, std::vector<Card>& cards, int& turn, City& war, City& peace )
 {
@@ -54,5 +55,72 @@ void Data::SaveGame( std::vector<Player>& players, std::vector<City>& cities, st
 
 
 void Data::loadGame( std::vector<Player>& players, std::vector<City>& cities, std::vector<Card>& cards, int& turn, City& war, City& peace ){
+
+    std::ifstream Load ;
+    Load.open("Information/GameInfo.txt", std::ios::in);
+    int counter {} ;
+
+    if(Load.is_open()){
+
+        std::string line ;
+
+        while(std::getline(std::cin , line)){
+            
+            counter++ ;
+            std::stringstream cutter(line);
+            std::string word;
+
+            switch (counter)
+            {
+            case 1 :
+
+                int tempCounter{} ;
+                while(cutter>>word){
+                    tempCounter++ ;
+                    switch (tempCounter)
+                    {
+                    case 1:
+                        turn = std::stoi(word) ;
+                        break;
+                    case 2 :
+                        for(int i{} ; i<cities.size() ; i++){
+                            if(word == cities.at(i).getName()){
+                                war = cities.at(i) ;
+                                break;
+                            }
+                        }
+                        break;
+                    case 3 :
+                        if(word == "no where"){
+                            City p ;
+                            peace = p ;
+                            break;
+                        }
+                        for(int i{} ; i<cities.size() ; i++){
+                            if(word == cities.at(i).getName()){
+                                peace = cities.at(i) ;
+                                break;
+                            }
+                        }
+                        break;
+                    default:
+                        std::cout<<"UNHANDELED ERROR , WE FUCKED" ;
+                        break;
+                    }
+                }
+                break;
+            
+            case 2 :
+
+            default:
+                break;
+            }
+
+        }
+
+    }
+    else{
+        std::cerr<<"can't open the file" ;
+    }
 
 }
