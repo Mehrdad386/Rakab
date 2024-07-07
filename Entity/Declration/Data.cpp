@@ -1,7 +1,7 @@
 #include "../Interface/Data.h"
 #include <sstream>
 
-void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, std::vector<Card> &cards, int &turn, City &war, City &peace)
+void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, std::vector<Card> &cards, int &turn, City &war, City &peace, std::vector<PlayedCard> &playedCards)
 {
 
     std::ofstream Save;
@@ -25,6 +25,19 @@ void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, std
             Save << cities.at(i).getISAvailable() << ' ';
         }
         Save << '\n';
+
+        // to save number of players
+        Save << players.size() << '\n';
+
+        // to save playedCards name
+        for (int i{}; i < playedCards.size(); i++)
+        {
+            for (int j{}; j < playedCards.at(i).cards.size(); j++)
+            {
+                Save << playedCards.at(i).cards.at(j).getName() << ' ';
+            }
+            Save << '\n';
+        }
 
         // to save players info
         for (int i{}; i < players.size(); i++)
@@ -56,9 +69,9 @@ void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, std
     Save.close();
 }
 
-GameData Data::loadGame( std::vector<City>& cities )
+GameData Data::loadGame(std::vector<City> &cities)
 {
-
+    std::vector<PlayedCard> playedCard;
     std::vector<Player> players;
     std::vector<Card> cards;
     int turn;
@@ -67,10 +80,13 @@ GameData Data::loadGame( std::vector<City>& cities )
 
     std::ifstream Load;
     Load.open("Information/GameInfo.txt", std::ios::in);
-    int counter{};
-    int index{}; // for case 3
-    int playerLineCounter{}; //to be used in case 4
-    int tempCounter{}; //for case 1
+    int counter{};               // to count line's number
+    int index{};                 // for case 3
+    int playerLineCounter{};     // to be used in default case
+    int tempCounter{};           // for case 1
+    int playerSize;              // to hold size of players
+    int counterForplayedCards{}; // this counter will help us to seperate played cards from players in default case
+    int playedCardCounter{} ; //to count played cards
 
     // to be used for adding cards
     YellowCard y1(1, "1");
@@ -210,62 +226,158 @@ GameData Data::loadGame( std::vector<City>& cities )
                 }
                 index = 0;
                 break;
-
-            default:
-                
+            case 4:
                 while (cutter >> word)
                 {
-                playerLineCounter++;
-                if(word != "Caline" && word != "Enna" && word != "Atela" && word != "Pladaci" && word != "Borge" && word != "Dimase" && word != "Morina" && word != "Olivadi" && word != "Rollo" && word != "Talmone" && word != "Armento" && word != "Elinia" && word != "Lia" && word != "Bella"){
-                    switch (playerLineCounter)
-                    {
-                    case 1:
-                        player.setName(word);
-                        break;
-                    case 2:
-                        player.setAge(std::stoi(word));
-                        break;
-                    case 3:
-                        player.setColor(word);
-                        break;
-                    case 4:
-                        player.setCanWar(std::stoi(word));
-                        break;
-                    case 5:
-                        player.setIsPasssed(std::stoi(word));
-                        break;
-                    case 6:
-                        player.setNumberOfCities(std::stoi(word));
-                        break;
-                    default:
-                        if (word == "TablZan")
-                            player.addCard(tablzan);
-                        else if (word == "Zemestan")
-                            player.addCard(Zemestan);
-                        else if (word == "Bahar")
-                            player.addCard(bahar);
-                        else if (word == "Matarsak")
-                            player.addCard(matarsak);
-                        else if (word == "ShirZan")
-                            player.addCard(shirzan);
-                        else if (word == "ShirDokht")
-                            player.addCard(shirdokht);
+                    playerSize = std::stoi(word);
+                    playedCard.resize(playerSize) ;
+                }
+                break;
+            default:
 
-                        break;
+                if (counterForplayedCards < playerSize)
+                {
+                    while (cutter >> word)
+                    {
+                        if (isdigit(word[0]))
+                        {
+                            int check = std::stoi(word);
+                            switch (check)
+                            {
+                            case 1:
+                                playedCard.at(playedCardCounter).cards.push_back(y1);
+                                break;
+                            case 2:
+                                playedCard.at(playedCardCounter).cards.push_back(y2);
+                                break;
+                            case 3:
+                                playedCard.at(playedCardCounter).cards.push_back(y3);
+                                break;
+                            case 4:
+                                playedCard.at(playedCardCounter).cards.push_back(y4);
+                                break;
+                            case 5:
+                                playedCard.at(playedCardCounter).cards.push_back(y5);
+                                break;
+                            case 6:
+                                playedCard.at(playedCardCounter).cards.push_back(y6);
+                                break;
+                            case 10:
+                                playedCard.at(playedCardCounter).cards.push_back(y10);
+                                break;
+                            default:
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (word == "TablZan")
+                                playedCard.at(playedCardCounter).cards.push_back(tablzan);
+                            else if (word == "Zemestan")
+                                playedCard.at(playedCardCounter).cards.push_back(Zemestan);
+                            else if (word == "Bahar")
+                                playedCard.at(playedCardCounter).cards.push_back(bahar);
+                            else if (word == "Matarsak")
+                                playedCard.at(playedCardCounter).cards.push_back(matarsak);
+                            else if (word == "ShirZan")
+                                playedCard.at(playedCardCounter).cards.push_back(shirzan);
+                            else if (word == "ShirDokht")
+                                playedCard.at(playedCardCounter).cards.push_back(shirdokht);
+                        }
                     }
+                    playedCardCounter++ ;
                 }
                 else
                 {
-                    for(int i{} ; i<cities.size() ; i++){
-                        if(word == cities.at(i).getName()){
-                            player.addCity(cities.at(i)) ;
-                            break;
+                    while (cutter >> word)
+                    {
+                        playerLineCounter++;
+                        if (word != "Caline" && word != "Enna" && word != "Atela" && word != "Pladaci" && word != "Borge" && word != "Dimase" && word != "Morina" && word != "Olivadi" && word != "Rollo" && word != "Talmone" && word != "Armento" && word != "Elinia" && word != "Lia" && word != "Bella")
+                        {
+                            switch (playerLineCounter)
+                            {
+                            case 1:
+                                player.setName(word);
+                                break;
+                            case 2:
+                                player.setAge(std::stoi(word));
+                                break;
+                            case 3:
+                                player.setColor(word);
+                                break;
+                            case 4:
+                                player.setCanWar(std::stoi(word));
+                                break;
+                            case 5:
+                                player.setIsPasssed(std::stoi(word));
+                                break;
+                            case 6:
+                                player.setNumberOfCities(std::stoi(word));
+                                break;
+                            default:
+                                if (isdigit(word[0]))
+                                {
+                                    int check = std::stoi(word);
+                                    switch (check)
+                                    {
+                                    case 1:
+                                        player.addCard(y1);
+                                        break;
+                                    case 2:
+                                        player.addCard(y2);
+                                        break;
+                                    case 3:
+                                        player.addCard(y3);
+                                        break;
+                                    case 4:
+                                        player.addCard(y4);
+                                        break;
+                                    case 5:
+                                        player.addCard(y5);
+                                        break;
+                                    case 6:
+                                        player.addCard(y6);
+                                        break;
+                                    case 10:
+                                        player.addCard(y10);
+                                        break;
+                                    default:
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    if (word == "TablZan")
+                                        player.addCard(tablzan);
+                                    else if (word == "Zemestan")
+                                        player.addCard(Zemestan);
+                                    else if (word == "Bahar")
+                                        player.addCard(bahar);
+                                    else if (word == "Matarsak")
+                                        player.addCard(matarsak);
+                                    else if (word == "ShirZan")
+                                        player.addCard(shirzan);
+                                    else if (word == "ShirDokht")
+                                        player.addCard(shirdokht);
+                                }
+                                break;
+                            }
                         }
+                        else
+                        {
+                            for (int i{}; i < cities.size(); i++)
+                            {
+                                if (word == cities.at(i).getName())
+                                {
+                                    player.addCity(cities.at(i));
+                                    break;
+                                }
+                            }
+                        }
+                        players.push_back(player);
+                        player.clearCards();
+                        playerLineCounter = 0;
                     }
-                }
-                players.push_back(player) ;
-                player.clearCards() ;
-                playerLineCounter = 0 ;
                 }
                 break;
             }
@@ -276,14 +388,14 @@ GameData Data::loadGame( std::vector<City>& cities )
         std::cerr << "can't open the file";
     }
 
-    GameData data ;
-    data.cards = cards ;
-    data.players = players ;
-    data.cities = cities ;
-    data.peace = peace ; 
-    data.war = war ;
-    data.turn = turn ;
+    GameData data;
+    data.cards = cards;
+    data.players = players;
+    data.cities = cities;
+    data.peace = peace;
+    data.war = war;
+    data.turn = turn;
+    data.playedCards = playedCard ;
 
-    return data ;
-
+    return data;
 }

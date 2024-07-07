@@ -599,6 +599,7 @@ void Game::gameFlow()
         turn = gameData.turn ;
         war = gameData.war ;
         peace = gameData.peace ;
+        playedCards = gameData.playedCards ;
     }
         while (true)
         {
@@ -620,7 +621,7 @@ void Game::gameFlow()
                     print();
                     input();
                 }
-                data.SaveGame(players, cities, cards, turn, war, peace);
+                data.SaveGame(players, cities, cards, turn, war, peace , playedCards);
             }
 
             // to check should we charge the players hands or not
