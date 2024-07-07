@@ -156,7 +156,7 @@ GameData Data::loadGame(std::vector<City> &cities)
                         }
                         break;
                     default:
-                        std::cout << "UNHANDELED ERROR , WE FUCKED";
+                        std::cout << "UNHANDELED ERROR , Case1\n";
                         break;
                     }
                 }
@@ -215,7 +215,8 @@ GameData Data::loadGame(std::vector<City> &cities)
                 break;
 
             case 3:
-                while (cutter >> word)
+            
+                while (cutter >> word && index < cities.size())
                 {
                     if (word == "1")
                         cities.at(index).setIsAvailable(1);
@@ -225,6 +226,7 @@ GameData Data::loadGame(std::vector<City> &cities)
                     index++;
                 }
                 index = 0;
+            
                 break;
             case 4:
                 while (cutter >> word)
@@ -285,9 +287,9 @@ GameData Data::loadGame(std::vector<City> &cities)
                                 playedCard.at(playedCardCounter).cards.push_back(shirdokht);
                         }
                     }
-                    playedCardCounter++ ;
+                    
                 }
-                else
+                else if(counterForplayedCards >= playerSize)
                 {
                     while (cutter >> word)
                     {
@@ -379,6 +381,7 @@ GameData Data::loadGame(std::vector<City> &cities)
                         playerLineCounter = 0;
                     }
                 }
+                playedCardCounter++ ;
                 break;
             }
         }
