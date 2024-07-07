@@ -2,13 +2,14 @@
 #include<iostream>
 
 
-void Manager::startMenue(){
+int Manager::startMenue(){
 
     system("CLS") ;
     std::cout << "-----------------------" << '\n';
     std::cout << "1- Start game" << '\n';
-    std::cout << "2- help" << '\n';
-    std::cout << "3- Exit game" << '\n';
+    std::cout<<"2- load game"<<'\n' ;
+    std::cout << "3- help" << '\n';
+    std::cout << "4- Exit game" << '\n';
     std::cout << "-----------------------" << '\n';
     int choice;
     do
@@ -18,12 +19,17 @@ void Manager::startMenue(){
         {
         case 1:
             clear() ;
+            return 1 ;
             break;
-        case 2:
+        case 2 :
+            clear() ;
+            return 2 ;
+            break;
+        case 3:
             help("none");
             startMenue() ;
             break;
-        case 3:
+        case 4:
             exitGame();
             break;
 
@@ -32,7 +38,7 @@ void Manager::startMenue(){
             break;
         }
     } while (choice != 1 && choice != 2 && choice != 3);
-
+    return 0 ;
 }
 
 

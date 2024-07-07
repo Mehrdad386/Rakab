@@ -56,8 +56,14 @@ void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, std
     Save.close();
 }
 
-void Data::loadGame(std::vector<Player> &players, std::vector<City> &cities, std::vector<Card> &cards, int &turn, City &war, City &peace)
+GameData Data::loadGame( std::vector<City>& cities )
 {
+
+    std::vector<Player> players;
+    std::vector<Card> cards;
+    int turn;
+    City war;
+    City peace;
 
     std::ifstream Load;
     Load.open("Information/GameInfo.txt", std::ios::in);
@@ -269,4 +275,15 @@ void Data::loadGame(std::vector<Player> &players, std::vector<City> &cities, std
     {
         std::cerr << "can't open the file";
     }
+
+    GameData data ;
+    data.cards = cards ;
+    data.players = players ;
+    data.cities = cities ;
+    data.peace = peace ; 
+    data.war = war ;
+    data.turn = turn ;
+
+    return data ;
+
 }

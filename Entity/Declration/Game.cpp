@@ -157,7 +157,6 @@ void Game::input()
                 {
                     manager.help("none");
                 }
-                
             }
             else
             {
@@ -571,7 +570,7 @@ void Game::takeRemainingCard()
 
 int Game::findStarterOfWar()
 {
-    int startWar ;
+    int startWar;
     for (int i{}; i < players.size(); i++)
     {
         players[i].setIsPasssed(false);
@@ -579,56 +578,67 @@ int Game::findStarterOfWar()
             startWar = i;
     }
 
-    return startWar ;
+    return startWar;
 }
 
 void Game::gameFlow()
 {
-    manager.startMenue();                    // start menu will be shown to user
-    takeGameInfo();                          // take names , ages , colors from user
-    fillCards();                             // give cards to players
-    players[findYoungest()].setCanWar(true); // give the war symbol to youngest player
-
-    while (true)
+    int situation = manager.startMenue(); // start menu will be shown to user and return 1 as new game 2 as load old game
+    if (situation == 1)
     {
-
-        int startWar = findStarterOfWar(); // to hold the index of starter of the war
-        setWar(players[startWar].getName()); // ask to choose city for war
-
-        // main game loop
+        takeGameInfo();                          // take names , ages , colors from user
+        fillCards();                             // give cards to players
+        players[findYoungest()].setCanWar(true); // give the war symbol to youngest player
+    }
+    else
+    {
+        GameData gameData = data.loadGame( cities ) ;
+        cards = gameData.cards ;
+        players = gameData.players ;
+        cities = gameData.cities ;
+        turn = gameData.turn ;
+        war = gameData.war ;
+        peace = gameData.peace ;
+    }
         while (true)
         {
-            if (checkCards() == players.size() || checkPassed())
+            if(situation == 1){
+                int startWar = findStarterOfWar();   // to hold the index of starter of the war
+                setWar(players[startWar].getName()); // ask to choose city for war
+            }
+            // main game loop
+            while (true)
+            {
+                if (checkCards() == players.size() || checkPassed())
+                {
+                    break;
+                }
+                else
+                {
+                    // getting input and print game info
+                    handleTurn(1);
+                    print();
+                    input();
+                }
+                data.SaveGame(players, cities, cards, turn, war, peace);
+            }
+
+            // to check should we charge the players hands or not
+            if (checkCards() >= players.size() - 1)
+            {
+                takeRemainingCard();
+                fillCards();
+            }
+            setWinner();   // to find the winner and set him as winner
+            returnPower(); // to return cards' power
+            clearBoard();  // to clear board
+            handleTurn(0); // to make the turn equal to 1 to start next war from firt player
+
+            // to check is any player has enough city to win and break loop
+            if (checkForEnd())
             {
                 break;
             }
-            else
-            {
-                // getting input and print game info
-                handleTurn(1);
-                print();
-                input();
-            }
-            data.SaveGame(players , cities , cards , turn , war , peace) ;
         }
-
-        //to check should we charge the players hands or not
-        if (checkCards() >= players.size() - 1)
-        {
-            takeRemainingCard();
-            fillCards();
-        }
-        setWinner();   // to find the winner and set him as winner
-        returnPower(); // to return cards' power
-        clearBoard();  // to clear board
-        handleTurn(0); // to make the turn equal to 1 to start next war from firt player
-
-        // to check is any player has enough city to win and break loop
-        if (checkForEnd())
-        {
-            break;
-        }
-    }
     exit(0); // end game
 }
-
