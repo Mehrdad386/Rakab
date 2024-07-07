@@ -110,7 +110,7 @@ GameData Data::loadGame(std::vector<City> &cities)
 
         std::string line;
 
-        while (std::getline(std::cin, line))
+        while (std::getline(Load, line))
         {
 
             counter++;
