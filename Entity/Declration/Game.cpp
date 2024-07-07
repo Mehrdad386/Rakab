@@ -145,6 +145,10 @@ void Game::input()
                         Matarsak temp;
                         temp.ability(playedCards[turn], players[turn]);
                     }
+                    if(Played.getName() == "ParchamDar"){
+                        ParchamDar temp ;
+                        temp.ability(players) ;
+                    }
                     playedCards[turn].cards.push_back(Played);
                     turn++;
                 }
@@ -208,6 +212,8 @@ void Game::generateCards()
     ShirDokht shirdokht;
     TablZan tablzan;
     Matarsak matarsak;
+    ParchamDar parchamdar;
+    ShirZan shirzan;
 
     // pushing yellow cards
     for (int i{}; i < 10; i++)
@@ -227,6 +233,10 @@ void Game::generateCards()
 
         cards.push_back(matarsak);
 
+        if (i < 12)
+        {
+            cards.push_back(shirzan);
+        }
         if (i < 6)
         {
             cards.push_back(tablzan);
@@ -237,6 +247,7 @@ void Game::generateCards()
             cards.push_back(bahar);
             cards.push_back(zemestan);
             cards.push_back(shirdokht);
+            cards.push_back(parchamdar);
         }
     }
 }
@@ -425,10 +436,11 @@ void Game::setWinner()
         {
             if (players[i].getCanWar())
             {
-                players[i].setCanWar(false);
+                players[i].setCanWar(0);
             }
         }
-        players[winner].setCanWar(true);
+        players[winner].setCanWar(1);
+
     }
 }
 
@@ -570,15 +582,45 @@ void Game::takeRemainingCard()
 
 int Game::findStarterOfWar()
 {
-    int startWar;
+    int startWar ;
+    int compare{} ;
+    int winner ;
+
+    for (int i{}; i < players.size(); i++){
+        players[i].setIsPasssed(false);
+    }
+
     for (int i{}; i < players.size(); i++)
     {
-        players[i].setIsPasssed(false);
-        if (players[i].getCanWar())
-            startWar = i;
+        if(players.at(i).getCanWar() == 1){
+            winner = i ;
+        }
+        if(compare < players.at(i).getCanWar()){
+            startWar = i ;
+            compare = players.at(i).getCanWar() ;
+        }
+        if(compare != 0 && compare == players.at(i).getCanWar()){
+            startWar = winner ;
+            break;
+        }
+    }
+    for(int i{} ; i<players.size() ; i++){
+        players.at(i).setCanWar(0) ;
     }
 
     return startWar;
+}
+
+void Game::load()
+{
+    GameData gameData = data.loadGame(cities);
+    cards = gameData.cards;
+    players = gameData.players;
+    cities = gameData.cities;
+    turn = gameData.turn;
+    war = gameData.war;
+    peace = gameData.peace;
+    playedCards = gameData.playedCards;
 }
 
 void Game::gameFlow()
@@ -588,58 +630,52 @@ void Game::gameFlow()
     {
         takeGameInfo();                          // take names , ages , colors from user
         fillCards();                             // give cards to players
-        players[findYoungest()].setCanWar(true); // give the war symbol to youngest player
+        players[findYoungest()].setCanWar(1); // give the war symbol to youngest player
     }
     else
     {
-        GameData gameData = data.loadGame( cities ) ;
-        cards = gameData.cards ;
-        players = gameData.players ;
-        cities = gameData.cities ;
-        turn = gameData.turn ;
-        war = gameData.war ;
-        peace = gameData.peace ;
-        playedCards = gameData.playedCards ;
+        load() ; //load game from data class
     }
+    while (true)
+    {
+        if (situation == 1)
+        {
+            int startWar = findStarterOfWar();   // to hold the index of starter of the war
+            setWar(players[startWar].getName()); // ask to choose city for war
+        }
+        // main game loop
         while (true)
         {
-            if(situation == 1){
-                int startWar = findStarterOfWar();   // to hold the index of starter of the war
-                setWar(players[startWar].getName()); // ask to choose city for war
-            }
-            // main game loop
-            while (true)
-            {
-                if (checkCards() == players.size() || checkPassed())
-                {
-                    break;
-                }
-                else
-                {
-                    // getting input and print game info
-                    handleTurn(1);
-                    print();
-                    input();
-                }
-                data.SaveGame(players, cities, cards, turn, war, peace , playedCards);
-            }
-
-            // to check should we charge the players hands or not
-            if (checkCards() >= players.size() - 1)
-            {
-                takeRemainingCard();
-                fillCards();
-            }
-            setWinner();   // to find the winner and set him as winner
-            returnPower(); // to return cards' power
-            clearBoard();  // to clear board
-            handleTurn(0); // to make the turn equal to 1 to start next war from firt player
-
-            // to check is any player has enough city to win and break loop
-            if (checkForEnd())
+            if (checkCards() == players.size() || checkPassed())
             {
                 break;
             }
+            else
+            {
+                // getting input and print game info
+                handleTurn(1);
+                print();
+                input();
+            }
+            data.SaveGame(players, cities, cards, turn, war, peace, playedCards);
         }
+
+        // to check should we charge the players hands or not
+        if (checkCards() >= players.size() - 1)
+        {
+            takeRemainingCard();
+            fillCards();
+        }
+        setWinner();   // to find the winner and set him as winner
+        returnPower(); // to return cards' power
+        clearBoard();  // to clear board
+        handleTurn(0); // to make the turn equal to 1 to start next war from firt player
+
+        // to check is any player has enough city to win and break loop
+        if (checkForEnd())
+        {
+            break;
+        }
+    }
     exit(0); // end game
 }

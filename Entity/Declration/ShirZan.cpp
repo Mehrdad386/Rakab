@@ -7,7 +7,7 @@ ShirZan::ShirZan(){
 
 void ShirZan::ability(Player& p)
 {
-    p.setCanWar((p.getCanWar() + 1));
+    p.setCanWar((p.getCanWar() + 2));
 
 
 }

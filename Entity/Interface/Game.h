@@ -14,6 +14,8 @@
 #include"Matarsak.h"
 #include"ShirDokht.h"
 #include"Data.h"
+#include"ParchamDar.h"
+#include"RishSefid.h"
 
 class Game{
 
@@ -65,6 +67,8 @@ public:
     void takeRemainingCard() ; //to take remaining cards from last player
 
     int findStarterOfWar() ; //to find the index of the player with ( canWar = true )
+
+    void load() ; //to load ame from data class
 
 private:
 
