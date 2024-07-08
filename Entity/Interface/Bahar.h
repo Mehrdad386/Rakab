@@ -10,6 +10,6 @@ public:
     void ability(std::vector<PlayedCard>&) ;
 
 private:
-    int findBigest(std::vector<PlayedCard>&) ; //to return the biggest power of the played cards
+
 };
 #endif
