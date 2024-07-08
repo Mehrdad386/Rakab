@@ -6,7 +6,7 @@ RishSefid::RishSefid()
     setName("RishSefid");
 }
 
-void RishSefid::ability(std::vector<PlayedCard> &pc, std::vector<Player> &players)
+void RishSefid::ability(std::vector<PlayedCard> &pc)
 {
     int bigNumber = findBigest(pc);
 

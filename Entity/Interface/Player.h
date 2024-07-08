@@ -30,6 +30,8 @@ public:
 
     const std::vector<City> getCities() ;
 
+    const int getCanPeace() ;
+
     void setName( std::string ) ;
 
     void setAge( int ) ;
@@ -44,6 +46,7 @@ public:
 
     void setNumberOfCities (int) ;
 
+    void setCanPeace(int) ;
 
     Card play( std::string choice ) ;
 
@@ -68,6 +71,7 @@ private:
     int age ;
     bool isPassed ;
     int CanWar;
+    int CanPeace ;
     std::vector<City> cities ; //owned cities
     std::vector<Card> cards ;
     int numberOfCities ;

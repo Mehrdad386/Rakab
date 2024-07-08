@@ -70,6 +70,9 @@ public:
 
     void load() ; //to load ame from data class
 
+    int calculateRishSefid() ; //to check is RishSefid played and return player's index that played RishSefid last
+
+    void makingPeace() ;
 private:
 
     Map map ;
