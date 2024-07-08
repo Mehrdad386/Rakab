@@ -118,3 +118,4 @@ Card Player::play( std::string choice ){
 
 void Player::clearCards(){ cards.clear() ; }
 
+void Player::addCanWar(){ CanWar += 2; }

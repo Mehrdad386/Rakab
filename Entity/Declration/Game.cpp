@@ -81,8 +81,11 @@ void Game::takeGameInfo()
 
 void Game::print()
 {
-    // zero part
     system("CLS");
+    // for(int i{} ; i<players.size() ; i++){
+    //     std::cout<<"1: "<<players.at(i).getCanWar()<<'\n' ;
+    // }
+    // zero part
     std::cout << "------------------------------------------------------\n";
     std::cout << "the turn is: " << turn + 1 << std::endl;
     std::cout << war.getName() << " is on war\n";
@@ -148,6 +151,10 @@ void Game::input()
                     if(Played.getName() == "ParchamDar"){
                         ParchamDar temp ;
                         temp.ability(players) ;
+                    }
+                    if(Played.getName() == "ShirZan"){
+                        ShirZan temp ;
+                        temp.ability(players.at(turn)) ;
                     }
                     playedCards[turn].cards.push_back(Played);
                     turn++;
@@ -431,14 +438,6 @@ void Game::setWinner()
         std::cout << players[winner].getName() << " won!\n";
         players[winner].addCity(war);
         players[winner].setNumberOfCities(players[winner].getCities().size());
-
-        for (int i{}; i < players.size(); i++)
-        {
-            if (players[i].getCanWar())
-            {
-                players[i].setCanWar(0);
-            }
-        }
         players[winner].setCanWar(1);
 
     }
@@ -585,6 +584,7 @@ int Game::findStarterOfWar()
     int startWar ;
     int compare{} ;
     int winner ;
+    int countEquals {} ;
 
     for (int i{}; i < players.size(); i++){
         players[i].setIsPasssed(false);
@@ -595,17 +595,20 @@ int Game::findStarterOfWar()
         if(players.at(i).getCanWar() == 1){
             winner = i ;
         }
+        if(compare != 0 && compare == players.at(i).getCanWar()){
+            countEquals++ ;
+        }
         if(compare < players.at(i).getCanWar()){
             startWar = i ;
             compare = players.at(i).getCanWar() ;
         }
-        if(compare != 0 && compare == players.at(i).getCanWar()){
-            startWar = winner ;
-            break;
-        }
     }
     for(int i{} ; i<players.size() ; i++){
         players.at(i).setCanWar(0) ;
+    }
+
+    if(countEquals > 0){
+        startWar = winner ;
     }
 
     return startWar;

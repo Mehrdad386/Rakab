@@ -59,6 +59,8 @@ public:
 
     void clearCards() ;
 
+    void addCanWar() ;
+
 private:
 
     std::string name ;
