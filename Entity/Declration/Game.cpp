@@ -460,7 +460,7 @@ void Game::setWinner()
     {
         for (int i{}; i < cities.size(); i++)
         {
-            if (war.getNumber() == cities[i].getNumber())
+            if (war.getName() == cities[i].getName())
             {
                 cities[i].setIsAvailable(1);
                 std::cout << "no won wins!\n";
@@ -477,7 +477,7 @@ void Game::setWinner()
             }
         }
         players[winner].setNumberOfCities(players[winner].getCities().size());
-        players[winner].setCanWar(1);
+        players[winner].setCanWar(players[winner].getCanWar() + 1);
     }
 }
 
@@ -631,7 +631,7 @@ int Game::findStarterOfWar()
 
     for (int i{}; i < players.size(); i++)
     {
-        if (players.at(i).getCanWar() == 1)
+        if (players.at(i).getCanWar()%2 == 1)
         {
             winner = i;
         }
@@ -653,6 +653,9 @@ int Game::findStarterOfWar()
     if (countEquals > 0)
     {
         startWar = winner;
+    }
+    if(compare == 0){
+        startWar = findYoungest() ;
     }
 
     return startWar;
