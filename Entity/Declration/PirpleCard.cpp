@@ -52,3 +52,27 @@ bool PirpleCard::isYellow(std::string name)
     }
     return true;
 }
+
+
+int PirpleCard::findBigest(std::vector<PlayedCard> &pc)
+{
+    int bigNumber{0};
+    for (int i{}; i < pc.size(); i++)
+    {
+        for (int j{}; j < pc.at(i).cards.size(); j++)
+        {
+            if (i < pc.size() && j < pc.at(i).cards.size())
+            {
+                if (isYellow(pc.at(i).cards.at(j).getName()))
+                {
+                    if (pc.at(i).cards.at(j).getPower() > bigNumber)
+                    {
+                        bigNumber = pc.at(i).cards.at(j).getPower();
+                    }
+                }
+            }
+        }
+    }
+
+    return bigNumber;
+}

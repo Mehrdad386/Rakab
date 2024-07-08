@@ -11,6 +11,7 @@ const int Player::getCanWar() { return CanWar; } // add by SIna
 const std::vector<Card> Player::getCards(){ return cards ; }
 const int Player::getNumberOfCities(){ return numberOfCities ; }
 const std::vector<City> Player::getCities(){ return cities ; }
+const int Player::getCanPeace(){ return CanPeace ; }
 
 
 //setters
@@ -21,10 +22,10 @@ void Player::setIsPasssed( bool isPassed ){ this->isPassed = isPassed ; }
 void Player::setCanWar(int canwar) { CanWar = canwar; } // add by Sina
 void Player::setCards( std::vector<Card> cards ){ this->cards = cards ; }
 void Player::setNumberOfCities( int numberOfCities ){ this->numberOfCities = numberOfCities ; }
-
+void Player::setCanPeace( int CanPeace ){ this->CanPeace = CanPeace ; }
 
 //constructors
-Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false) , numberOfCities(0) , CanWar(0) {}
+Player::Player() : name("unknown") , age(0) , color("red") , isPassed(false) , numberOfCities(0) , CanWar(0) , CanPeace(0) {}
 
 
 Player::Player( std::string name , std::string color , bool isPassed , int age ){

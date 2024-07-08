@@ -19,6 +19,10 @@ public:
 
     const std::vector<int> getNeighbors () ;
 
+    const std::string getPOW() ;
+
+    void setPow(std::string) ;
+
     void setName( std::string ) ;
     
     void setIsAvailable( bool isAvaiable ) ;
@@ -34,6 +38,7 @@ private:
     std::string name ;
     bool isAvailable ;
     std::vector<int> neighbors ;
+    std::string POW ; //peace or war
 
 };
 

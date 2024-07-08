@@ -29,6 +29,8 @@ public:
     //other
     bool isYellow(std::string) ;
 
+    int findBigest(std::vector<PlayedCard> &pc) ;
+
 private:
     std::string Ability;
     int priority ;
