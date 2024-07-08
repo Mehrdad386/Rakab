@@ -1,0 +1,1 @@
+#include"../Interface/RishSefid.h"

@@ -81,8 +81,11 @@ void Game::takeGameInfo()
 
 void Game::print()
 {
-    // zero part
     system("CLS");
+    // for(int i{} ; i<players.size() ; i++){
+    //     std::cout<<"1: "<<players.at(i).getCanWar()<<'\n' ;
+    // }
+    // zero part
     std::cout << "------------------------------------------------------\n";
     std::cout << "the turn is: " << turn + 1 << std::endl;
     std::cout << war.getName() << " is on war\n";
@@ -144,6 +147,14 @@ void Game::input()
                     {
                         Matarsak temp;
                         temp.ability(playedCards[turn], players[turn]);
+                    }
+                    if(Played.getName() == "ParchamDar"){
+                        ParchamDar temp ;
+                        temp.ability(players) ;
+                    }
+                    if(Played.getName() == "ShirZan"){
+                        ShirZan temp ;
+                        temp.ability(players.at(turn)) ;
                     }
                     playedCards[turn].cards.push_back(Played);
                     turn++;
@@ -208,6 +219,8 @@ void Game::generateCards()
     ShirDokht shirdokht;
     TablZan tablzan;
     Matarsak matarsak;
+    ParchamDar parchamdar;
+    ShirZan shirzan;
 
     // pushing yellow cards
     for (int i{}; i < 10; i++)
@@ -227,6 +240,10 @@ void Game::generateCards()
 
         cards.push_back(matarsak);
 
+        if (i < 12)
+        {
+            cards.push_back(shirzan);
+        }
         if (i < 6)
         {
             cards.push_back(tablzan);
@@ -237,6 +254,7 @@ void Game::generateCards()
             cards.push_back(bahar);
             cards.push_back(zemestan);
             cards.push_back(shirdokht);
+            cards.push_back(parchamdar);
         }
     }
 }
@@ -420,15 +438,8 @@ void Game::setWinner()
         std::cout << players[winner].getName() << " won!\n";
         players[winner].addCity(war);
         players[winner].setNumberOfCities(players[winner].getCities().size());
+        players[winner].setCanWar(1);
 
-        for (int i{}; i < players.size(); i++)
-        {
-            if (players[i].getCanWar())
-            {
-                players[i].setCanWar(false);
-            }
-        }
-        players[winner].setCanWar(true);
     }
 }
 
@@ -571,29 +582,70 @@ void Game::takeRemainingCard()
 int Game::findStarterOfWar()
 {
     int startWar ;
-    for (int i{}; i < players.size(); i++)
-    {
+    int compare{} ;
+    int winner ;
+    int countEquals {} ;
+
+    for (int i{}; i < players.size(); i++){
         players[i].setIsPasssed(false);
-        if (players[i].getCanWar())
-            startWar = i;
     }
 
-    return startWar ;
+    for (int i{}; i < players.size(); i++)
+    {
+        if(players.at(i).getCanWar() == 1){
+            winner = i ;
+        }
+        if(compare != 0 && compare == players.at(i).getCanWar()){
+            countEquals++ ;
+        }
+        if(compare < players.at(i).getCanWar()){
+            startWar = i ;
+            compare = players.at(i).getCanWar() ;
+        }
+    }
+    for(int i{} ; i<players.size() ; i++){
+        players.at(i).setCanWar(0) ;
+    }
+
+    if(countEquals > 0){
+        startWar = winner ;
+    }
+
+    return startWar;
+}
+
+void Game::load()
+{
+    GameData gameData = data.loadGame(cities);
+    cards = gameData.cards;
+    players = gameData.players;
+    cities = gameData.cities;
+    turn = gameData.turn;
+    war = gameData.war;
+    peace = gameData.peace;
+    playedCards = gameData.playedCards;
 }
 
 void Game::gameFlow()
 {
-    manager.startMenue();                    // start menu will be shown to user
-    takeGameInfo();                          // take names , ages , colors from user
-    fillCards();                             // give cards to players
-    players[findYoungest()].setCanWar(true); // give the war symbol to youngest player
-
+    int situation = manager.startMenue(); // start menu will be shown to user and return 1 as new game 2 as load old game
+    if (situation == 1)
+    {
+        takeGameInfo();                          // take names , ages , colors from user
+        fillCards();                             // give cards to players
+        players[findYoungest()].setCanWar(1); // give the war symbol to youngest player
+    }
+    else
+    {
+        load() ; //load game from data class
+    }
     while (true)
     {
-
-        int startWar = findStarterOfWar(); // to hold the index of starter of the war
-        setWar(players[startWar].getName()); // ask to choose city for war
-
+        if (situation == 1)
+        {
+            int startWar = findStarterOfWar();   // to hold the index of starter of the war
+            setWar(players[startWar].getName()); // ask to choose city for war
+        }
         // main game loop
         while (true)
         {
@@ -608,9 +660,10 @@ void Game::gameFlow()
                 print();
                 input();
             }
+            data.SaveGame(players, cities, cards, turn, war, peace, playedCards);
         }
 
-        //to check should we charge the players hands or not
+        // to check should we charge the players hands or not
         if (checkCards() >= players.size() - 1)
         {
             takeRemainingCard();
@@ -629,4 +682,3 @@ void Game::gameFlow()
     }
     exit(0); // end game
 }
-

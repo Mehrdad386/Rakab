@@ -8,7 +8,7 @@ public:
 
     void help( std::string help ) ;
 
-    void startMenue() ;
+    int startMenue() ;
 
     void clear() ;
 

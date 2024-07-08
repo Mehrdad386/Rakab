@@ -13,6 +13,9 @@
 #include"Zemestan.h"
 #include"Matarsak.h"
 #include"ShirDokht.h"
+#include"Data.h"
+#include"ParchamDar.h"
+#include"RishSefid.h"
 
 class Game{
 
@@ -65,6 +68,8 @@ public:
 
     int findStarterOfWar() ; //to find the index of the player with ( canWar = true )
 
+    void load() ; //to load ame from data class
+
 private:
 
     Map map ;
@@ -76,6 +81,7 @@ private:
     int turn ;
     City war ; //to hold the city that is on war
     City peace ; //to hold the city that is on peace
+    Data data ; //to save and load game
     
 
 };

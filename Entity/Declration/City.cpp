@@ -21,6 +21,6 @@ City::City( std::string name , bool isAvailable , int number ){
     setNumber(number) ;
 }
 
-City::City() : name("no where") , isAvailable(true) {} ;
+City::City() : name("nowhere") , isAvailable(true) {} ;
 
 
