@@ -737,7 +737,12 @@ void Game::gameFlow()
         // main game loop
         while (true)
         {
-
+            for(int i{} ; i<players.size() ; i++){
+                for(int j {} ; j<playedCards.at(i).cards.size() ; j++){
+                    std::cout<<playedCards.at(i).cards.at(j).getName()<<' ' ;
+                }
+                std::cout<<std::endl ;
+            }
             if (checkCards() == players.size() || checkPassed())
             {
                 break;
@@ -749,7 +754,7 @@ void Game::gameFlow()
                 print();
                 input();
             }
-            data.SaveGame(players, cities, turn, war, peace, playedCards);
+            //data.SaveGame(players, cities, turn, war, peace, playedCards);
 
         }
 

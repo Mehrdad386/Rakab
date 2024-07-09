@@ -256,7 +256,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
     data.war = war;
     data.turn = turn;
     data.playedCards = playedCard;
-    
+
     return data;
 }
 
@@ -268,6 +268,7 @@ void Data::exchangeCard(std::vector<Card> &cards, std::string cardName, PlayedCa
         {
             pc.cards.push_back(cards.at(i));
             cards.erase(cards.begin() + i);
+            break;
         }
     }
 }
