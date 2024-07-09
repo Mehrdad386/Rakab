@@ -39,7 +39,6 @@ public:
 
     void generateCards() ; //this function will generate game based on game information
 
-
     int findWinner() ; //this function will return index of winner
 
     void setWinner() ; //this function will give the win prices to winner
