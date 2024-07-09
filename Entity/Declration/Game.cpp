@@ -100,7 +100,7 @@ void Game::print()
     std::cout << "------------------------------------------------------\n";
     for (int i{}; i < players.size(); i++)
     {
-        std::cout << playedCards[i].person.getName() << ": ";
+        std::cout << players[i].getName() << ": ";
 
         for (int j{}; j < playedCards[i].cards.size(); j++)
         {
@@ -715,6 +715,7 @@ void Game::load()
 void Game::gameFlow()
 {
     int situation = manager.startMenue(); // start menu will be shown to user and return 1 as new game 2 as load old game
+    int roundCounter{} ; //to count how many rounds the while loop is working
     if (situation == 1)
     {
         takeGameInfo();                       // take names , ages , colors from user
@@ -725,24 +726,20 @@ void Game::gameFlow()
     {
         load(); // load game from data class
     }
+
     while (true)
     {
-        if (situation == 1)
-        {
+        roundCounter++ ;
+        if(roundCounter != 1 || situation == 1){
             int startWar = findStarterOfWar();   // to hold the index of starter of the war
             setWar(players[startWar].getName()); // ask to choose city for war
             makingPeace() ;
-        }
+        } 
 
         // main game loop
         while (true)
         {
-            for(int i{} ; i<players.size() ; i++){
-                for(int j {} ; j<playedCards.at(i).cards.size() ; j++){
-                    std::cout<<playedCards.at(i).cards.at(j).getName()<<' ' ;
-                }
-                std::cout<<std::endl ;
-            }
+
             if (checkCards() == players.size() || checkPassed())
             {
                 break;
@@ -754,7 +751,7 @@ void Game::gameFlow()
                 print();
                 input();
             }
-            //data.SaveGame(players, cities, turn, war, peace, playedCards);
+            data.SaveGame(players, cities, turn, war, peace, playedCards);
 
         }
 

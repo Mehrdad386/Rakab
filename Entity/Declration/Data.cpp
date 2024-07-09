@@ -153,7 +153,6 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                         break;
                     }
                 }
-                std::cout<<"case 1 worked\n" ;
                 break;
 
             case 2:
@@ -169,7 +168,6 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                 }
                 index = 0;
 
-                std::cout<<"case 2 worked\n" ;
                 break;
 
 
@@ -179,7 +177,6 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                     playerSize = std::stoi(word);
                     playedCard.resize(playerSize);
                 }
-                std::cout<<"case 3 worked\n" ;
                 break;
 
             default:
@@ -188,7 +185,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                 {
                     while (cutter >> word)
                     {
-                        exchangeCard(cards , word , playedCard.at(counterForplayedCards)) ;
+                        exchangeCard1(cards , word , playedCard.at(counterForplayedCards)) ;
                     }
                 }
                 else if (counterForplayedCards >= playerSize)
@@ -219,7 +216,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                                 player.setNumberOfCities(std::stoi(word));
                                 break;
                             default:
-                                exchangeCard(cards , word , playedCard.at(counterForplayedCards - playerSize)) ;
+                                exChangeCard2(cards , word , player) ;
                                 break;
                             }
                         }
@@ -238,6 +235,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                     }
                     players.push_back(player);
                     player.clearCards();
+                    player.clearCity() ;
                     playerLineCounter = 0;
                 }
                 counterForplayedCards++;
@@ -260,7 +258,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
     return data;
 }
 
-void Data::exchangeCard(std::vector<Card> &cards, std::string cardName, PlayedCard &pc)
+void Data::exchangeCard1(std::vector<Card> &cards, std::string cardName, PlayedCard &pc)
 {
     for (int i{}; i < cards.size(); i++)
     {
@@ -271,4 +269,20 @@ void Data::exchangeCard(std::vector<Card> &cards, std::string cardName, PlayedCa
             break;
         }
     }
+}
+
+
+void Data::exChangeCard2(std::vector<Card> &cards, std::string cardName, Player& player)
+{
+
+    for (int i{}; i < cards.size(); i++)
+    {
+        if (cards.at(i).getName() == cardName)
+        {
+            player.addCard(cards.at(i));
+            cards.erase(cards.begin() + i);
+            break;
+        }
+    }
+
 }

@@ -32,7 +32,8 @@ public:
 
 private:
 
-    void exchangeCard( std::vector<Card>& , std::string , PlayedCard& ) ;
+    void exchangeCard1( std::vector<Card>& , std::string , PlayedCard& ) ; //for played cards
+    void exChangeCard2(std::vector<Card>& , std::string , Player&) ; //for player'scards
 };
 
 #endif
