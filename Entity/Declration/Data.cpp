@@ -1,7 +1,7 @@
 #include "../Interface/Data.h"
 #include <sstream>
 
-void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, std::vector<Card> &cards, int &turn, City &war, City &peace, std::vector<PlayedCard> &playedCards)
+void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, int &turn, City &war, City &peace, std::vector<PlayedCard> &playedCards)
 {
 
     std::ofstream Save;
@@ -11,13 +11,6 @@ void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, std
     {
         // to save war , peace and turn
         Save << turn << ' ' << war.getName() << ' ' << peace.getName() << '\n';
-
-        // to save cards
-        for (int i{}; i < cards.size(); i++)
-        {
-            Save << cards.at(i).getName() << ' ';
-        }
-        Save << '\n';
 
         // to save cities availability
         for (int i{}; i < cities.size(); i++)
@@ -69,11 +62,10 @@ void Data::SaveGame(std::vector<Player> &players, std::vector<City> &cities, std
     Save.close();
 }
 
-GameData Data::loadGame(std::vector<City> &cities)
+GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
 {
     std::vector<PlayedCard> playedCard;
     std::vector<Player> players;
-    std::vector<Card> cards;
     int turn;
     City war;
     City peace;
@@ -81,12 +73,11 @@ GameData Data::loadGame(std::vector<City> &cities)
     std::ifstream Load;
     Load.open("Information/GameInfo.txt", std::ios::in);
     int counter{};               // to count line's number
-    int index{};                 // for case 3
+    int index{};                 // for case 2
     int playerLineCounter{};     // to be used in default case
     int tempCounter{};           // for case 1
     int playerSize;              // to hold size of players
     int counterForplayedCards{}; // this counter will help us to seperate played cards from players in default case
-    int playedCardCounter{} ; //to count played cards
 
     // to be used for adding cards
     YellowCard y1(1, "1");
@@ -135,12 +126,13 @@ GameData Data::loadGame(std::vector<City> &cities)
                             if (word == cities.at(i).getName())
                             {
                                 war = cities.at(i);
+                                cities.at(i).setPow("war") ;
                                 break;
                             }
                         }
                         break;
                     case 3:
-                        if (word == "no where")
+                        if (word == "nowhere")
                         {
                             City p;
                             peace = p;
@@ -151,6 +143,7 @@ GameData Data::loadGame(std::vector<City> &cities)
                             if (word == cities.at(i).getName())
                             {
                                 peace = cities.at(i);
+                                cities.at(i).setPow("peace") ;
                                 break;
                             }
                         }
@@ -160,62 +153,11 @@ GameData Data::loadGame(std::vector<City> &cities)
                         break;
                     }
                 }
+                std::cout<<"case 1 worked\n" ;
                 break;
 
             case 2:
 
-                while (cutter >> word)
-                {
-                    if (isdigit(word[0]))
-                    {
-                        int check = std::stoi(word);
-                        switch (check)
-                        {
-                        case 1:
-                            cards.push_back(y1);
-                            break;
-                        case 2:
-                            cards.push_back(y2);
-                            break;
-                        case 3:
-                            cards.push_back(y3);
-                            break;
-                        case 4:
-                            cards.push_back(y4);
-                            break;
-                        case 5:
-                            cards.push_back(y5);
-                            break;
-                        case 6:
-                            cards.push_back(y6);
-                            break;
-                        case 10:
-                            cards.push_back(y10);
-                            break;
-                        default:
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (word == "TablZan")
-                            cards.push_back(tablzan);
-                        else if (word == "Zemestan")
-                            cards.push_back(Zemestan);
-                        else if (word == "Bahar")
-                            cards.push_back(bahar);
-                        else if (word == "Matarsak")
-                            cards.push_back(matarsak);
-                        else if (word == "ShirZan")
-                            cards.push_back(shirzan);
-                        else if (word == "ShirDokht")
-                            cards.push_back(shirdokht);
-                    }
-                }
-                break;
-
-            case 3:
-            
                 while (cutter >> word && index < cities.size())
                 {
                     if (word == "1")
@@ -226,70 +168,30 @@ GameData Data::loadGame(std::vector<City> &cities)
                     index++;
                 }
                 index = 0;
-            
+
+                std::cout<<"case 2 worked\n" ;
                 break;
-            case 4:
+
+
+            case 3:
                 while (cutter >> word)
                 {
                     playerSize = std::stoi(word);
-                    playedCard.resize(playerSize) ;
+                    playedCard.resize(playerSize);
                 }
+                std::cout<<"case 3 worked\n" ;
                 break;
+
             default:
 
                 if (counterForplayedCards < playerSize)
                 {
                     while (cutter >> word)
                     {
-                        if (isdigit(word[0]))
-                        {
-                            int check = std::stoi(word);
-                            switch (check)
-                            {
-                            case 1:
-                                playedCard.at(playedCardCounter).cards.push_back(y1);
-                                break;
-                            case 2:
-                                playedCard.at(playedCardCounter).cards.push_back(y2);
-                                break;
-                            case 3:
-                                playedCard.at(playedCardCounter).cards.push_back(y3);
-                                break;
-                            case 4:
-                                playedCard.at(playedCardCounter).cards.push_back(y4);
-                                break;
-                            case 5:
-                                playedCard.at(playedCardCounter).cards.push_back(y5);
-                                break;
-                            case 6:
-                                playedCard.at(playedCardCounter).cards.push_back(y6);
-                                break;
-                            case 10:
-                                playedCard.at(playedCardCounter).cards.push_back(y10);
-                                break;
-                            default:
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (word == "TablZan")
-                                playedCard.at(playedCardCounter).cards.push_back(tablzan);
-                            else if (word == "Zemestan")
-                                playedCard.at(playedCardCounter).cards.push_back(Zemestan);
-                            else if (word == "Bahar")
-                                playedCard.at(playedCardCounter).cards.push_back(bahar);
-                            else if (word == "Matarsak")
-                                playedCard.at(playedCardCounter).cards.push_back(matarsak);
-                            else if (word == "ShirZan")
-                                playedCard.at(playedCardCounter).cards.push_back(shirzan);
-                            else if (word == "ShirDokht")
-                                playedCard.at(playedCardCounter).cards.push_back(shirdokht);
-                        }
+                        exchangeCard(cards , word , playedCard.at(counterForplayedCards)) ;
                     }
-                    
                 }
-                else if(counterForplayedCards >= playerSize)
+                else if (counterForplayedCards >= playerSize)
                 {
                     while (cutter >> word)
                     {
@@ -317,51 +219,7 @@ GameData Data::loadGame(std::vector<City> &cities)
                                 player.setNumberOfCities(std::stoi(word));
                                 break;
                             default:
-                                if (isdigit(word[0]))
-                                {
-                                    int check = std::stoi(word);
-                                    switch (check)
-                                    {
-                                    case 1:
-                                        player.addCard(y1);
-                                        break;
-                                    case 2:
-                                        player.addCard(y2);
-                                        break;
-                                    case 3:
-                                        player.addCard(y3);
-                                        break;
-                                    case 4:
-                                        player.addCard(y4);
-                                        break;
-                                    case 5:
-                                        player.addCard(y5);
-                                        break;
-                                    case 6:
-                                        player.addCard(y6);
-                                        break;
-                                    case 10:
-                                        player.addCard(y10);
-                                        break;
-                                    default:
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    if (word == "TablZan")
-                                        player.addCard(tablzan);
-                                    else if (word == "Zemestan")
-                                        player.addCard(Zemestan);
-                                    else if (word == "Bahar")
-                                        player.addCard(bahar);
-                                    else if (word == "Matarsak")
-                                        player.addCard(matarsak);
-                                    else if (word == "ShirZan")
-                                        player.addCard(shirzan);
-                                    else if (word == "ShirDokht")
-                                        player.addCard(shirdokht);
-                                }
+                                exchangeCard(cards , word , playedCard.at(counterForplayedCards - playerSize)) ;
                                 break;
                             }
                         }
@@ -372,6 +230,7 @@ GameData Data::loadGame(std::vector<City> &cities)
                                 if (word == cities.at(i).getName())
                                 {
                                     player.addCity(cities.at(i));
+                                    cities.at(i).setPow(player.getColor()) ;
                                     break;
                                 }
                             }
@@ -381,7 +240,8 @@ GameData Data::loadGame(std::vector<City> &cities)
                         playerLineCounter = 0;
                     }
                 }
-                playedCardCounter++ ;
+                std::cout<<"index: "<<counterForplayedCards<<" worked\n" ;
+                counterForplayedCards++;
                 break;
             }
         }
@@ -392,13 +252,23 @@ GameData Data::loadGame(std::vector<City> &cities)
     }
 
     GameData data;
-    data.cards = cards;
     data.players = players;
-    data.cities = cities;
     data.peace = peace;
     data.war = war;
     data.turn = turn;
-    data.playedCards = playedCard ;
-
+    data.playedCards = playedCard;
+    std::cout<<"THE END\n" ;
     return data;
+}
+
+void Data::exchangeCard(std::vector<Card> &cards, std::string cardName, PlayedCard &pc)
+{
+    for (int i{}; i < cards.size(); i++)
+    {
+        if (cards.at(i).getName() == cardName)
+        {
+            pc.cards.push_back(cards.at(i));
+            cards.erase(cards.begin() + i);
+        }
+    }
 }

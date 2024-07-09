@@ -16,8 +16,6 @@
 struct GameData
 {
     std::vector<Player> players;
-    std::vector<City> cities;
-    std::vector<Card> cards;
     std::vector<PlayedCard> playedCards ;
     int turn;
     City war;
@@ -28,11 +26,13 @@ class Data
 {
 
 public:
-    void SaveGame(std::vector<Player> &, std::vector<City> &, std::vector<Card> &, int &, City &, City & , std::vector<PlayedCard>&); // this method will save players , cities , cards , turn , war and peace in txt file
+    void SaveGame(std::vector<Player> &, std::vector<City> &, int &, City &, City & , std::vector<PlayedCard>&); // this method will save players , cities , cards , turn , war and peace in txt file
 
-    GameData loadGame( std::vector<City>& ); // this method is supposted to read and load info from a txt file
+    GameData loadGame( std::vector<City>&  , std::vector<Card>&); // this method is supposted to read and load info from a txt file
 
 private:
+
+    void exchangeCard( std::vector<Card>& , std::string , PlayedCard& ) ;
 };
 
 #endif

@@ -670,7 +670,7 @@ void Game::makingPeace()
             for(int j{} ; j<cities.size() ; j++){
                 if(cities[i].getPOW() == "peace"){
                     cities[i].setIsAvailable(true) ;
-                    cities[i].setPow("") ;
+                    cities[i].setPow("nothing") ;
                 }
             }
             std::string city;
@@ -703,10 +703,8 @@ void Game::makingPeace()
 
 void Game::load()
 {
-    GameData gameData = data.loadGame(cities);
-    cards = gameData.cards;
+    GameData gameData = data.loadGame(cities , cards);
     players = gameData.players;
-    cities = gameData.cities;
     turn = gameData.turn;
     war = gameData.war;
     peace = gameData.peace;
@@ -748,7 +746,7 @@ void Game::gameFlow()
                 print();
                 input();
             }
-            data.SaveGame(players, cities, cards, turn, war, peace, playedCards);
+            data.SaveGame(players, cities, turn, war, peace, playedCards);
         }
 
         // to check should we charge the players hands or not
