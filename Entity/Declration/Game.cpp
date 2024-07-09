@@ -100,7 +100,7 @@ void Game::print()
     std::cout << "------------------------------------------------------\n";
     for (int i{}; i < players.size(); i++)
     {
-        std::cout << playedCards[i].person.getName() << ": ";
+        std::cout << players[i].getName() << ": ";
 
         for (int j{}; j < playedCards[i].cards.size(); j++)
         {
@@ -670,7 +670,7 @@ void Game::makingPeace()
             for(int j{} ; j<cities.size() ; j++){
                 if(cities[i].getPOW() == "peace"){
                     cities[i].setIsAvailable(true) ;
-                    cities[i].setPow("") ;
+                    cities[i].setPow("nothing") ;
                 }
             }
             std::string city;
@@ -703,19 +703,19 @@ void Game::makingPeace()
 
 void Game::load()
 {
-    GameData gameData = data.loadGame(cities);
-    cards = gameData.cards;
+    GameData gameData = data.loadGame(cities , cards);
     players = gameData.players;
-    cities = gameData.cities;
     turn = gameData.turn;
     war = gameData.war;
     peace = gameData.peace;
     playedCards = gameData.playedCards;
+    std::cout<<"is loading...\n" ;
 }
 
 void Game::gameFlow()
 {
     int situation = manager.startMenue(); // start menu will be shown to user and return 1 as new game 2 as load old game
+    int roundCounter{} ; //to count how many rounds the while loop is working
     if (situation == 1)
     {
         takeGameInfo();                       // take names , ages , colors from user
@@ -726,17 +726,20 @@ void Game::gameFlow()
     {
         load(); // load game from data class
     }
+
     while (true)
     {
-        if (situation == 1)
-        {
+        roundCounter++ ;
+        if(roundCounter != 1 || situation == 1){
             int startWar = findStarterOfWar();   // to hold the index of starter of the war
             setWar(players[startWar].getName()); // ask to choose city for war
             makingPeace() ;
-        }
+        } 
+
         // main game loop
         while (true)
         {
+
             if (checkCards() == players.size() || checkPassed())
             {
                 break;
@@ -748,7 +751,8 @@ void Game::gameFlow()
                 print();
                 input();
             }
-            data.SaveGame(players, cities, cards, turn, war, peace, playedCards);
+            data.SaveGame(players, cities, turn, war, peace, playedCards);
+
         }
 
         // to check should we charge the players hands or not

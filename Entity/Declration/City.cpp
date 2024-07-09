@@ -21,6 +21,7 @@ City::City( std::string name , bool isAvailable , int number ){
     setName(name) ;
     setIsAvailable(isAvailable) ;
     setNumber(number) ;
+    setPow("nothing") ;
 }
 
 City::City() : name("nowhere") , isAvailable(true) {} ;

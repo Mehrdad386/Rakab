@@ -62,6 +62,8 @@ public:
 
     void clearCards() ;
 
+    void clearCity() ;
+
     void addCanWar() ;
 
 private:
