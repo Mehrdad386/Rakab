@@ -60,11 +60,12 @@ public:
 
     void addCity( City city ) ;
 
+    void addCanWar() ;
+    
     void clearCards() ;
 
     void clearCity() ;
 
-    void addCanWar() ;
 
 private:
 
