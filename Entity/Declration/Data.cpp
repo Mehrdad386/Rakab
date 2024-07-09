@@ -235,12 +235,11 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                                 }
                             }
                         }
-                        players.push_back(player);
-                        player.clearCards();
-                        playerLineCounter = 0;
                     }
+                    players.push_back(player);
+                    player.clearCards();
+                    playerLineCounter = 0;
                 }
-                std::cout<<"index: "<<counterForplayedCards<<" worked\n" ;
                 counterForplayedCards++;
                 break;
             }
@@ -257,7 +256,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
     data.war = war;
     data.turn = turn;
     data.playedCards = playedCard;
-    std::cout<<"THE END\n" ;
+    
     return data;
 }
 

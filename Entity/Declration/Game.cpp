@@ -709,6 +709,7 @@ void Game::load()
     war = gameData.war;
     peace = gameData.peace;
     playedCards = gameData.playedCards;
+    std::cout<<"is loading...\n" ;
 }
 
 void Game::gameFlow()
@@ -732,9 +733,11 @@ void Game::gameFlow()
             setWar(players[startWar].getName()); // ask to choose city for war
             makingPeace() ;
         }
+
         // main game loop
         while (true)
         {
+
             if (checkCards() == players.size() || checkPassed())
             {
                 break;
@@ -747,6 +750,7 @@ void Game::gameFlow()
                 input();
             }
             data.SaveGame(players, cities, turn, war, peace, playedCards);
+
         }
 
         // to check should we charge the players hands or not
