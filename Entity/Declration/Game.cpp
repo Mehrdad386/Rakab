@@ -280,7 +280,7 @@ void Game::setWar(std::string warior)
         if (city == cities[i].getName() && cities[i].getISAvailable())
         {
             cities[i].setIsAvailable(false);
-            cities[i].setPow("war") ;
+            cities[i].setPow("war");
             war = cities[i];
         }
         else if (city == cities[i].getName() && !cities[i].getISAvailable())
@@ -388,6 +388,10 @@ char Game::calculationBaharZamastan()
 
     int countBahar{};
     int CountZemestan{};
+    int baharIndex = -1;          // to save j
+    int ZemestanIndex = -1;       // to save j
+    int secondBahrIndex = -1;     // to save j
+    int secondZemestanIndex = -1; // to save j
 
     for (size_t i = 0; i < playedCards.size(); i++)
     {
@@ -396,20 +400,36 @@ char Game::calculationBaharZamastan()
             if (playedCards[i].cards[j].getName() == "Bahar")
             {
                 countBahar++;
+                baharIndex = j;
+                secondBahrIndex = i;
             }
             if (playedCards[i].cards[j].getName() == "Zemestan")
             {
                 CountZemestan++;
+                ZemestanIndex = j;
+                secondZemestanIndex = i;
             }
         }
     }
 
-    if (countBahar > CountZemestan)
-        return 'B';
-    else if (CountZemestan > countBahar)
-        return 'Z';
-    else
+    if (baharIndex == -1 && ZemestanIndex == -1)
+    {
         return 'E';
+    }
+    else
+    {
+        if (baharIndex > ZemestanIndex)
+            return 'B';
+        else if (ZemestanIndex > baharIndex)
+            return 'Z';
+        else
+        {
+            if (secondBahrIndex > secondZemestanIndex)
+                return 'B';
+            else
+                return 'Z';
+        }
+    }
 }
 
 bool Game::isPlayedTablZan(int index)
@@ -471,9 +491,11 @@ void Game::setWinner()
     {
         std::cout << players[winner].getName() << " won!\n";
         players[winner].addCity(war);
-        for(int j{} ; j<cities.size() ; j++){
-            if(cities[j].getName() == war.getName()){
-                cities[j].setPow(players[winner].getColor()) ;
+        for (int j{}; j < cities.size(); j++)
+        {
+            if (cities[j].getName() == war.getName())
+            {
+                cities[j].setPow(players[winner].getColor());
             }
         }
         players[winner].setNumberOfCities(players[winner].getCities().size());
@@ -631,7 +653,7 @@ int Game::findStarterOfWar()
 
     for (int i{}; i < players.size(); i++)
     {
-        if (players.at(i).getCanWar()%2 == 1)
+        if (players.at(i).getCanWar() % 2 == 1)
         {
             winner = i;
         }
@@ -654,8 +676,9 @@ int Game::findStarterOfWar()
     {
         startWar = winner;
     }
-    if(compare == 0){
-        startWar = findYoungest() ;
+    if (compare == 0)
+    {
+        startWar = findYoungest();
     }
 
     return startWar;
@@ -667,10 +690,12 @@ void Game::makingPeace()
     {
         if (players.at(i).getCanPeace() == 1)
         {
-            for(int j{} ; j<cities.size() ; j++){
-                if(cities[i].getPOW() == "peace"){
-                    cities[i].setIsAvailable(true) ;
-                    cities[i].setPow("nothing") ;
+            for (int j{}; j < cities.size(); j++)
+            {
+                if (cities[i].getPOW() == "peace")
+                {
+                    cities[i].setIsAvailable(true);
+                    cities[i].setPow("nothing");
                 }
             }
             std::string city;
@@ -685,7 +710,7 @@ void Game::makingPeace()
                 if (city == cities[i].getName() && cities[i].getISAvailable())
                 {
                     cities[i].setIsAvailable(false);
-                    cities[i].setPow("peace") ;
+                    cities[i].setPow("peace");
                     peace = cities[i];
                 }
                 else if (city == cities[i].getName() && !cities[i].getISAvailable())
@@ -696,26 +721,27 @@ void Game::makingPeace()
             }
         }
     }
-    for(int i{} ; i<players.size() ; i++){
-        players.at(i).setCanPeace(0) ;
+    for (int i{}; i < players.size(); i++)
+    {
+        players.at(i).setCanPeace(0);
     }
 }
 
 void Game::load()
 {
-    GameData gameData = data.loadGame(cities , cards);
+    GameData gameData = data.loadGame(cities, cards);
     players = gameData.players;
     turn = gameData.turn;
     war = gameData.war;
     peace = gameData.peace;
     playedCards = gameData.playedCards;
-    std::cout<<"is loading...\n" ;
+    std::cout << "is loading...\n";
 }
 
 void Game::gameFlow()
 {
     int situation = manager.startMenue(); // start menu will be shown to user and return 1 as new game 2 as load old game
-    int roundCounter{} ; //to count how many rounds the while loop is working
+    int roundCounter{};                   // to count how many rounds the while loop is working
     if (situation == 1)
     {
         takeGameInfo();                       // take names , ages , colors from user
@@ -729,12 +755,13 @@ void Game::gameFlow()
 
     while (true)
     {
-        roundCounter++ ;
-        if(roundCounter != 1 || situation == 1){
+        roundCounter++;
+        if (roundCounter != 1 || situation == 1)
+        {
             int startWar = findStarterOfWar();   // to hold the index of starter of the war
             setWar(players[startWar].getName()); // ask to choose city for war
-            makingPeace() ;
-        } 
+            makingPeace();
+        }
 
         // main game loop
         while (true)
@@ -752,7 +779,6 @@ void Game::gameFlow()
                 input();
             }
             data.SaveGame(players, cities, turn, war, peace, playedCards);
-
         }
 
         // to check should we charge the players hands or not
