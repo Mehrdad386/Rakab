@@ -82,10 +82,6 @@ void Game::takeGameInfo()
 void Game::print()
 {
     system("CLS");
-    // for(int i{} ; i<players.size() ; i++){
-    //     std::cout<<"1: "<<players.at(i).getCanWar()<<'\n' ;
-    // }
-    // zero part
     std::cout << "------------------------------------------------------\n";
     std::cout << "the turn is: " << turn + 1 << std::endl;
     std::cout << war.getName() << " is on war\n";
@@ -267,13 +263,13 @@ void Game::setWar(std::string warior)
 {
     std::string city;
 
-    std::cout << warior << ' ';
 
     do
     {
+        std::cout << warior << ' ';
         std::cout << "choose a city for war(first letter Upper case , other lower): ";
         std::cin >> city;
-    } while (city != "Caline" && city != "Enna" && city != "Atela" && city != "Pladaci" && city != "Borge" && city != "Dimase" && city != "Morina" && city != "Olivadi" && city != "Rollo" && city != "Talmone" && city != "Armento" && city != "Elinia" && city != "Lia" && city != "Bella");
+    } while (city != "Caline" && city != "Enna" && city != "Atela" && city != "Pladaci" && city != "Borge" && city != "Dimase" && city != "Morina" && city != "Olivadi" && city != "Rollo" && city != "Talmone" && city != "Armento" && city != "Elinia" && city != "Lia" && city != "Bella" && city != "Winterfell");
 
     for (int i{}; i < map.getCities().size(); i++)
     {
