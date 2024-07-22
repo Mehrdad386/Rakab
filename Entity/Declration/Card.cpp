@@ -8,7 +8,7 @@ Card::Card(int power, std::string name)
 }
 
 //setters
-void Card::setPower(int power)
+void Card::setPower(double power)
 {
     Power = power;
 }
@@ -19,7 +19,7 @@ void Card::setName(std::string name)
 }
 
 //getters
-const int Card::getPower()
+const double Card::getPower()
 {
     return Power;
 }

@@ -49,7 +49,7 @@ public:
 
     int findYoungest() ; //to find youngest player
 
-    bool isPlayedTablZan( int index ) ; //to check that is player played tablZan or not
+    int isPlayedTablZan( int index ) ; //to check that is player played tablZan or not
 
     bool checkForEnd() ; //to check that has someone won the game and end it
 

@@ -332,9 +332,10 @@ int Game::findWinner()
 
     for (int i = 0; i < playedCards.size(); i++)
     {
-        if (isPlayedTablZan(i))
+        int numberOfTablZan = isPlayedTablZan(i) ;
+        if (numberOfTablZan > 0)
         {
-            t.ability(playedCards[i].cards);
+            t.ability(playedCards[i].cards , numberOfTablZan);
         }
 
         for (int j = 0; j < playedCards[i].cards.size(); j++)
@@ -428,14 +429,15 @@ char Game::calculationBaharZamastan()
     }
 }
 
-bool Game::isPlayedTablZan(int index)
+int Game::isPlayedTablZan(int index)
 {
+    int counter{} ;
     for (int i{}; i < playedCards[index].cards.size(); i++)
     {
         if (playedCards[index].cards[i].getName() == "TablZan")
-            return true;
+            counter++;
     }
-    return false;
+    return counter;
 }
 
 void Game::handleTurn(int situation)

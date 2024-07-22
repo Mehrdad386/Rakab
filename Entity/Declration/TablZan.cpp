@@ -6,13 +6,16 @@ TablZan::TablZan(){
         setName("TablZan") ;
 };
 
-void TablZan::ability(std::vector<Card> & cards)
+void TablZan::ability(std::vector<Card> & cards , int count)
 {
     for (size_t i = 0; i < cards.size(); i++)
     {
         if (isYellow(cards[i].getName()))
         {
-            cards[i].setPower((cards[i].getPower() * 2));
+            if(count ==1)
+                cards[i].setPower((cards[i].getPower() * 1.5));
+            else
+                cards[i].setPower((cards[i].getPower() * 2.25));
         }
     }
 

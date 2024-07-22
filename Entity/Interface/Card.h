@@ -11,15 +11,15 @@ public:
     Card(int , std::string);
 
     //setters
-    void setPower(int);
+    void setPower(double);
     void setName(std::string);
 
     //getters
-    const int getPower();
+    const double getPower();
     const std::string getName();
 
 private:
-    int Power;
+    double Power;
     std::string Name;
 };
 
