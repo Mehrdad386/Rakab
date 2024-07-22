@@ -140,6 +140,7 @@ void Game::input()
                 {
                     doAbility(Played) ;
                     playedCards[turn].cards.push_back(Played);
+                    doAbility2(Played) ;
                     turn++;
                 }
                 else if (Played.getName() == "pass")
@@ -171,7 +172,7 @@ void Game::input()
     }
 }
 
-void Game::doAbility(Card &Played)
+void Game::doAbility(Card& Played)
 {
     if (Played.getName() == "ShirinAghl")
     {
@@ -204,6 +205,14 @@ void Game::doAbility(Card &Played)
     }
 }
 
+void Game::doAbility2(Card& Played)
+{
+    if (Played.getName() == "FokSefid")
+    {
+        FokSefid temp ;
+        temp.ability(playedCards) ;
+    }
+}
 // to fill the players hand based on the number of the token cities by them
 void Game::fillCards()
 {
@@ -240,6 +249,7 @@ void Game::generateCards()
     RishSefid rishsefid;
     RakhshSefid rakhshsefid;
     ShirinAghl shirinaghl;
+    FokSefid foksefid ;
 
     // pushing yellow cards
     for (int i{}; i < 10; i++)
@@ -280,6 +290,7 @@ void Game::generateCards()
         if (i < 2)
         {
             cards.push_back(rakhshsefid);
+            cards.push_back(foksefid);
         }
     }
 }

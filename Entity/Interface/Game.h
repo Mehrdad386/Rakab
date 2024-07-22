@@ -18,6 +18,7 @@
 #include"RishSefid.h"
 #include"RakhshSefid.h"
 #include"ShirinAghl.h"
+#include"FokSefid.h"
 
 class Game{
 
@@ -78,6 +79,8 @@ public:
     void makingPeace() ; //to choose city for peace
 
     void doAbility(Card&) ; //to do ability of the cards that they must be done when you play them not the end
+
+    void doAbility2(Card&) ; //same as doAbility but difference in the flow (when we call it for cards such as FokSefid)
 private:
 
     Map map ;

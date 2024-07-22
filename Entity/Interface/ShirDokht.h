@@ -4,10 +4,10 @@
 
 class ShirDokht : public PirpleCard
 {
-    public:
+public:
     ShirDokht();
     void ability(PlayedCard&) override;
-    private:
+private:
 
 };
 
