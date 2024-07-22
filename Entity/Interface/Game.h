@@ -61,7 +61,7 @@ public:
 
     void returnPower() ; //to set the cards power as they were first
 
-    bool checkPassed() ; //to check have all the players passed
+    int checkPassed() ; //to check have all the players passed
 
     void takeRemainingCard() ; //to take remaining cards from last player
 

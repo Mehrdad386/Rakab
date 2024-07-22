@@ -147,6 +147,9 @@ void Game::input()
                     if (Played.getName() == "ParchamDar")
                     {
                         ParchamDar temp;
+                        if(checkPassed() ==0){
+                            players.at(turn).setCanWar(100) ;
+                        }
                         temp.ability(players);
                     }
                     if (Played.getName() == "ShirZan")
@@ -607,7 +610,7 @@ int Game::checkCards()
     return counter;
 }
 
-bool Game::checkPassed()
+int Game::checkPassed()
 {
     int passed{}; // to hold the number of the player that they've passed
     // to end war if all players have passed
@@ -616,14 +619,7 @@ bool Game::checkPassed()
         if (players[i].getIsPassed())
             passed++;
     }
-    if (passed == players.size())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return passed ;
 }
 
 void Game::takeRemainingCard()
@@ -765,7 +761,7 @@ void Game::gameFlow()
         while (true)
         {
 
-            if (checkCards() == players.size() || checkPassed())
+            if (checkCards() == players.size() || checkPassed() == players.size())
             {
                 break;
             }
