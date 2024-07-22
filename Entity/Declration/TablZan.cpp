@@ -1,5 +1,5 @@
 #include "../Interface/TablZan.h"
-
+#include<cmath>
 
 TablZan::TablZan(){ 
         setPriority(3) ; 
@@ -12,10 +12,7 @@ void TablZan::ability(std::vector<Card> & cards , int count)
     {
         if (isYellow(cards[i].getName()))
         {
-            if(count ==1)
-                cards[i].setPower((cards[i].getPower() * 1.5));
-            else
-                cards[i].setPower((cards[i].getPower() * 2.25));
+            cards[i].setPower((cards[i].getPower() * std::pow(1.5 , count)));
         }
     }
 
