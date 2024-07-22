@@ -6,7 +6,7 @@ class TablZan : public PirpleCard
 {
 public:
     TablZan() ; 
-    void ability(std::vector<Card> & cards);
+    void ability(std::vector<Card> & cards , int);
 
 private:
 

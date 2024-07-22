@@ -16,6 +16,9 @@
 #include"Data.h"
 #include"ParchamDar.h"
 #include"RishSefid.h"
+#include"RakhshSefid.h"
+#include"ShirinAghl.h"
+#include"FokSefid.h"
 
 class Game{
 
@@ -49,7 +52,9 @@ public:
 
     int findYoungest() ; //to find youngest player
 
-    bool isPlayedTablZan( int index ) ; //to check that is player played tablZan or not
+    int isPlayedTablZan( int ) ; //to check that is player played tablZan or not
+
+    bool isPlayedRakhshSefid() ;
 
     bool checkForEnd() ; //to check that has someone won the game and end it
 
@@ -61,7 +66,7 @@ public:
 
     void returnPower() ; //to set the cards power as they were first
 
-    bool checkPassed() ; //to check have all the players passed
+    int checkPassed() ; //to check have all the players passed
 
     void takeRemainingCard() ; //to take remaining cards from last player
 
@@ -71,7 +76,11 @@ public:
 
     int calculateRishSefid() ; //to check is RishSefid played and return player's index that played RishSefid last
 
-    void makingPeace() ;
+    void makingPeace() ; //to choose city for peace
+
+    void doAbility(Card&) ; //to do ability of the cards that they must be done when you play them not the end
+
+    void doAbility2(Card&) ; //same as doAbility but difference in the flow (when we call it for cards such as FokSefid)
 private:
 
     Map map ;
