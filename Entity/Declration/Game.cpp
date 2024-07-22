@@ -256,12 +256,12 @@ void Game::generateCards()
         if (i < 12)
         {
             cards.push_back(shirzan);
-            cards.push_back(shirinaghl) ;
         }
         if (i < 6)
         {
             cards.push_back(tablzan);
             cards.push_back(rishsefid);
+            cards.push_back(shirinaghl) ;
         }
 
         if (i < 3)
