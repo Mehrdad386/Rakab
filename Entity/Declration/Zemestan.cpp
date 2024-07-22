@@ -1,5 +1,5 @@
 #include "../Interface/Zemestan.h"
-
+#include<cmath>
 Zemestan::Zemestan()
 {
     setPriority(2);
@@ -15,7 +15,7 @@ void Zemestan::ability(std::vector<PlayedCard> &pc)
 
                 if (isYellow(pc.at(i).cards.at(j).getName()))
                 {
-                    pc.at(i).cards.at(j).setPower(1);
+                    pc.at(i).cards.at(j).setPower(floor(pc.at(i).cards.at(j).getPower() / 2));
                 }
     
         }
