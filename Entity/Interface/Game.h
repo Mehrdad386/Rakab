@@ -16,6 +16,7 @@
 #include"Data.h"
 #include"ParchamDar.h"
 #include"RishSefid.h"
+#include"RakhshSefid.h"
 
 class Game{
 
@@ -49,7 +50,9 @@ public:
 
     int findYoungest() ; //to find youngest player
 
-    int isPlayedTablZan( int index ) ; //to check that is player played tablZan or not
+    int isPlayedTablZan( int ) ; //to check that is player played tablZan or not
+
+    bool isPlayedRakhshSefid() ;
 
     bool checkForEnd() ; //to check that has someone won the game and end it
 

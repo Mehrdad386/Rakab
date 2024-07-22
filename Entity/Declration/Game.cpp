@@ -152,6 +152,11 @@ void Game::input()
                         }
                         temp.ability(players);
                     }
+                    if(Played.getName() == "RakhshSefid")
+                    {
+                        RakhshSefid temp ;
+                        temp.ability(players , turn) ;
+                    }
                     if (Played.getName() == "ShirZan")
                     {
                         ShirZan temp;
@@ -223,6 +228,7 @@ void Game::generateCards()
     ParchamDar parchamdar;
     ShirZan shirzan;
     RishSefid rishsefid;
+    RakhshSefid rakhshsefid ;
 
     // pushing yellow cards
     for (int i{}; i < 10; i++)
@@ -258,6 +264,9 @@ void Game::generateCards()
             cards.push_back(zemestan);
             cards.push_back(shirdokht);
             cards.push_back(parchamdar);
+        }
+        if(i<2){
+            cards.push_back(rakhshsefid) ;
         }
     }
 }
@@ -308,6 +317,13 @@ int Game::findWinner()
     int numberOfWinners{};                          // to hold number of winners
     char resultSeason = calculationBaharZamastan(); // to check the season
     int resultRishSefid = calculateRishSefid();
+
+    if(isPlayedRakhshSefid()){
+        if(turn ==0)
+            return players.size() - 1 ;
+        else
+            return turn - 1 ;
+    }
     switch (resultRishSefid)
     {
     case -1:
@@ -441,6 +457,24 @@ int Game::isPlayedTablZan(int index)
             counter++;
     }
     return counter;
+}
+
+bool Game::isPlayedRakhshSefid()
+{
+    //after getting input from user turn will be added 1 so we minus 1 here from turn to check the player who played last card
+    int index {} ;
+    if(turn == 0){
+        index = players.size() - 1 ;
+    }
+    else{
+        index = turn-1 ;
+    }
+
+    for(int i{} ; i<playedCards.at(index).cards.size() ; i++){
+        if(playedCards.at(index).cards.at(i).getName() == "RakhshSefid")
+            return true ;
+    }
+    return false ;
 }
 
 void Game::handleTurn(int situation)
