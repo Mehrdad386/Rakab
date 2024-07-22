@@ -25,7 +25,7 @@ Map::Map(int size, std::vector<City> cities)
 // to generate map based on game info
 void Map::generateMap()
 {
-    std::vector<std::string> citiesName{"Bella", "Caline", "Enna", "Atela", "Pladaci", "Borge", "Dimase", "Morina", "Olivadi", "Rollo", "Talmone", "Armento", "Elinia", "Lia" , "Winterfell"};
+    std::vector<std::string> citiesName{"Bella", "Caline", "Lia", "Atela", "Pladaci", "Borge", "Dimase", "Morina", "Olivadi", "Rollo", "Talmone", "Armento", "Elinia", "Enna" , "Winterfell"};
     cities.resize(citiesName.size());
     for (int i{}; i < citiesName.size(); i++)
     {
