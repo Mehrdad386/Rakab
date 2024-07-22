@@ -75,7 +75,9 @@ public:
 
     int calculateRishSefid() ; //to check is RishSefid played and return player's index that played RishSefid last
 
-    void makingPeace() ;
+    void makingPeace() ; //to choose city for peace
+
+    void doAbility(Card&) ; //to do ability of the cards that they must be done when you play them not the end
 private:
 
     Map map ;

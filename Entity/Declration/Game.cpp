@@ -138,34 +138,7 @@ void Game::input()
                 Card Played = players[turn].play(choice);
                 if (Played.getName() != "pass" && Played.getName() != "help")
                 {
-                    if (Played.getName() == "ShirinAghl")
-                    {
-                        ShirinAghl temp ;
-                        Played = temp.ability(playedCards.at(turn).cards) ;
-                    }
-                    if (Played.getName() == "Matarsak")
-                    {
-                        Matarsak temp;
-                        temp.ability(playedCards[turn], players[turn]);
-                    }
-                    if (Played.getName() == "ParchamDar")
-                    {
-                        ParchamDar temp;
-                        if(checkPassed() ==0){
-                            players.at(turn).setCanWar(100) ;
-                        }
-                        temp.ability(players);
-                    }
-                    if(Played.getName() == "RakhshSefid")
-                    {
-                        RakhshSefid temp ;
-                        temp.ability(players , turn) ;
-                    }
-                    if (Played.getName() == "ShirZan")
-                    {
-                        ShirZan temp;
-                        temp.ability(players.at(turn));
-                    }
+                    doAbility(Played) ;
                     playedCards[turn].cards.push_back(Played);
                     turn++;
                 }
@@ -195,6 +168,39 @@ void Game::input()
     else
     {
         turn++;
+    }
+}
+
+void Game::doAbility(Card &Played)
+{
+    if (Played.getName() == "ShirinAghl")
+    {
+        ShirinAghl temp;
+        Played = temp.ability(playedCards.at(turn).cards);
+    }
+    if (Played.getName() == "Matarsak")
+    {
+        Matarsak temp;
+        temp.ability(playedCards[turn], players[turn]);
+    }
+    if (Played.getName() == "ParchamDar")
+    {
+        ParchamDar temp;
+        if (checkPassed() == 0)
+        {
+            players.at(turn).setCanWar(100);
+        }
+        temp.ability(players);
+    }
+    if (Played.getName() == "RakhshSefid")
+    {
+        RakhshSefid temp;
+        temp.ability(players, turn);
+    }
+    if (Played.getName() == "ShirZan")
+    {
+        ShirZan temp;
+        temp.ability(players.at(turn));
     }
 }
 
@@ -232,8 +238,8 @@ void Game::generateCards()
     ParchamDar parchamdar;
     ShirZan shirzan;
     RishSefid rishsefid;
-    RakhshSefid rakhshsefid ;
-    ShirinAghl shirinaghl ;
+    RakhshSefid rakhshsefid;
+    ShirinAghl shirinaghl;
 
     // pushing yellow cards
     for (int i{}; i < 10; i++)
@@ -261,7 +267,7 @@ void Game::generateCards()
         {
             cards.push_back(tablzan);
             cards.push_back(rishsefid);
-            cards.push_back(shirinaghl) ;
+            cards.push_back(shirinaghl);
         }
 
         if (i < 3)
@@ -271,8 +277,9 @@ void Game::generateCards()
             cards.push_back(shirdokht);
             cards.push_back(parchamdar);
         }
-        if(i<2){
-            cards.push_back(rakhshsefid) ;
+        if (i < 2)
+        {
+            cards.push_back(rakhshsefid);
         }
     }
 }
@@ -280,7 +287,6 @@ void Game::generateCards()
 void Game::setWar(std::string warior)
 {
     std::string city;
-
 
     do
     {
@@ -324,11 +330,12 @@ int Game::findWinner()
     char resultSeason = calculationBaharZamastan(); // to check the season
     int resultRishSefid = calculateRishSefid();
 
-    if(isPlayedRakhshSefid()){
-        if(turn ==0)
-            return players.size() - 1 ;
+    if (isPlayedRakhshSefid())
+    {
+        if (turn == 0)
+            return players.size() - 1;
         else
-            return turn - 1 ;
+            return turn - 1;
     }
     switch (resultRishSefid)
     {
@@ -357,10 +364,10 @@ int Game::findWinner()
 
     for (int i = 0; i < playedCards.size(); i++)
     {
-        int numberOfTablZan = isPlayedTablZan(i) ;
+        int numberOfTablZan = isPlayedTablZan(i);
         if (numberOfTablZan > 0)
         {
-            t.ability(playedCards[i].cards , numberOfTablZan);
+            t.ability(playedCards[i].cards, numberOfTablZan);
         }
 
         for (int j = 0; j < playedCards[i].cards.size(); j++)
@@ -456,7 +463,7 @@ char Game::calculationBaharZamastan()
 
 int Game::isPlayedTablZan(int index)
 {
-    int counter{} ;
+    int counter{};
     for (int i{}; i < playedCards[index].cards.size(); i++)
     {
         if (playedCards[index].cards[i].getName() == "TablZan")
@@ -467,20 +474,23 @@ int Game::isPlayedTablZan(int index)
 
 bool Game::isPlayedRakhshSefid()
 {
-    //after getting input from user turn will be added 1 so we minus 1 here from turn to check the player who played last card
-    int index {} ;
-    if(turn == 0){
-        index = players.size() - 1 ;
+    // after getting input from user turn will be added 1 so we minus 1 here from turn to check the player who played last card
+    int index{};
+    if (turn == 0)
+    {
+        index = players.size() - 1;
     }
-    else{
-        index = turn-1 ;
+    else
+    {
+        index = turn - 1;
     }
 
-    for(int i{} ; i<playedCards.at(index).cards.size() ; i++){
-        if(playedCards.at(index).cards.at(i).getName() == "RakhshSefid")
-            return true ;
+    for (int i{}; i < playedCards.at(index).cards.size(); i++)
+    {
+        if (playedCards.at(index).cards.at(i).getName() == "RakhshSefid")
+            return true;
     }
-    return false ;
+    return false;
 }
 
 void Game::handleTurn(int situation)
@@ -659,7 +669,7 @@ int Game::checkPassed()
         if (players[i].getIsPassed())
             passed++;
     }
-    return passed ;
+    return passed;
 }
 
 void Game::takeRemainingCard()
