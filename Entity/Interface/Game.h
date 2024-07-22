@@ -17,6 +17,7 @@
 #include"ParchamDar.h"
 #include"RishSefid.h"
 #include"RakhshSefid.h"
+#include"ShirinAghl.h"
 
 class Game{
 

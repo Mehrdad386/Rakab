@@ -9,7 +9,6 @@
 Game::Game()
 {
     std::srand(time(0));
-
     turn = 0;
     generateCards();
     cities = map.getCities();
@@ -139,6 +138,11 @@ void Game::input()
                 Card Played = players[turn].play(choice);
                 if (Played.getName() != "pass" && Played.getName() != "help")
                 {
+                    if (Played.getName() == "ShirinAghl")
+                    {
+                        ShirinAghl temp ;
+                        Played = temp.ability(playedCards.at(turn).cards) ;
+                    }
                     if (Played.getName() == "Matarsak")
                     {
                         Matarsak temp;
@@ -229,6 +233,7 @@ void Game::generateCards()
     ShirZan shirzan;
     RishSefid rishsefid;
     RakhshSefid rakhshsefid ;
+    ShirinAghl shirinaghl ;
 
     // pushing yellow cards
     for (int i{}; i < 10; i++)
@@ -251,6 +256,7 @@ void Game::generateCards()
         if (i < 12)
         {
             cards.push_back(shirzan);
+            cards.push_back(shirinaghl) ;
         }
         if (i < 6)
         {
