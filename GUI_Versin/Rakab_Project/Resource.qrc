@@ -1,0 +1,57 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>src/Back_final.jpg</file>
+        <file>src/Play_But.png</file>
+        <file>src/Gobtn.png</file>
+        <file>src/Minecraft.ttf</file>
+        <file>src/select.png</file>
+        <file>src/Mapbtn.png</file>
+        <file>src/setting.png</file>
+        <file>src/bg (2).png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>src/Exit_but.png</file>
+        <file>src/help_Btn.png</file>
+        <file>src/Title.png</file>
+        <file>src/empty_But.png</file>
+        <file>src/number 3.png</file>
+        <file>src/number 5.png</file>
+        <file>src/number 6.png</file>
+        <file>src/number4.png</file>
+        <file>src/select.png</file>
+        <file>src/LineEdit_selected.png</file>
+        <file>src/LineEdit_selected2.png</file>
+        <file>src/Gobtn.png</file>
+        <file>src/Map.png</file>
+        <file>src/scorebtn.png</file>
+        <file>src/bg.png</file>
+        <file>src/Bahar.png</file>
+        <file>src/Matarsak.png</file>
+        <file>src/Zemestan.png</file>
+        <file>src/pass.btn.png</file>
+        <file>src/RishSefid.png</file>
+        <file>src/ParchamDar.png</file>
+        <file>src/ShirZan.png</file>
+        <file>src/TablZan.png</file>
+        <file>src/Play_ButBig.png</file>
+        <file>src/1.png</file>
+        <file>src/2.png</file>
+        <file>src/3.png</file>
+        <file>src/4.png</file>
+        <file>src/5.png</file>
+        <file>src/6.png</file>
+        <file>src/7.png</file>
+        <file>src/8.png</file>
+        <file>src/9.png</file>
+        <file>src/10.png</file>
+        <file>src/ShirDokht.png</file>
+        <file>src/Shah_Dokht.png</file>
+        <file>src/Back.png</file>
+        <file>src/FokSefid.png</file>
+        <file>src/RakhshSefid.png</file>
+        <file>src/ShirinAghl.png</file>
+    </qresource>
+    <qresource prefix="/Font">
+        <file>src/Minecraft.ttf</file>
+    </qresource>
+</RCC>

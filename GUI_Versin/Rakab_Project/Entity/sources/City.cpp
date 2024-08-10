@@ -1,0 +1,29 @@
+#include"../header/City.h"
+
+
+//getters
+const std::string City::getName(){ return name ; }
+const bool City::getISAvailable(){ return isAvailable ; }
+const std::vector<int> City::getNeighbors(){ return neighbors ; }
+const int City::getNumber (){ return number ; }
+const std::string City::getPOW(){ return POW ; }
+
+//setters
+void City::setName( std::string name ){ this->name = name ; }
+void City::setIsAvailable( bool isAvailable ){ this->isAvailable = isAvailable ; }
+void City::setNeighbors( std::vector<int> neighbors ){ this->neighbors = neighbors ; }
+void City::setNumber( int number ){ this->number = number ; }
+void City::setPow( std::string POW ){ this->POW = POW ; }
+
+//constructors
+
+City::City( std::string name , bool isAvailable , int number ){
+    setName(name) ;
+    setIsAvailable(isAvailable) ;
+    setNumber(number) ;
+    setPow("nothing") ;
+}
+
+City::City() : name("nowhere") , isAvailable(true) {} ;
+
+
