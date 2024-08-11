@@ -79,20 +79,6 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
     int playerSize;              // to hold size of players
     int counterForplayedCards{}; // this counter will help us to seperate played cards from players in default case
 
-    // to be used for adding cards
-    YellowCard y1(1, "1");
-    YellowCard y2(2, "2");
-    YellowCard y3(3, "3");
-    YellowCard y4(4, "4");
-    YellowCard y5(5, "5");
-    YellowCard y6(6, "6");
-    YellowCard y10(10, "10");
-    TablZan tablzan;
-    Bahar bahar;
-    Zemestan Zemestan;
-    Matarsak matarsak;
-    ShirDokht shirdokht;
-    ShirZan shirzan;
     // to be used for adding players
     Player player;
 
@@ -110,6 +96,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
 
             switch (counter)
             {
+            //to load turn , war , peace
             case 1:
 
                 while (cutter >> word)
@@ -154,7 +141,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                     }
                 }
                 break;
-
+            //to load availability of cities
             case 2:
 
                 while (cutter >> word && index < cities.size())
@@ -170,7 +157,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
 
                 break;
 
-
+            //to load number of players
             case 3:
                 while (cutter >> word)
                 {
@@ -179,6 +166,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                 }
                 break;
 
+            //to load playedcards and players
             default:
 
                 if (counterForplayedCards < playerSize)
@@ -193,7 +181,7 @@ GameData Data::loadGame(std::vector<City> &cities, std::vector<Card> &cards)
                     while (cutter >> word)
                     {
                         playerLineCounter++;
-                        if (word != "Caline" && word != "Enna" && word != "Atela" && word != "Pladaci" && word != "Borge" && word != "Dimase" && word != "Morina" && word != "Olivadi" && word != "Rollo" && word != "Talmone" && word != "Armento" && word != "Elinia" && word != "Lia" && word != "Bella")
+                        if (word != "Caline" && word != "Enna" && word != "Atela" && word != "Pladaci" && word != "Borge" && word != "Dimase" && word != "Morina" && word != "Olivadi" && word != "Rollo" && word != "Talmone" && word != "Armento" && word != "Elinia" && word != "Lia" && word != "Bella" && word !="Winterfell")
                         {
                             switch (playerLineCounter)
                             {

@@ -12,6 +12,11 @@
 #include "ShirDokht.h"
 #include "ShirZan.h"
 #include "Matarsak.h"
+#include"RishSefid.h"
+#include"ParchamDar.h"
+#include"FokSefid.h"
+#include"RakhshSefid.h"
+#include"ShirinAghl.h"
 
 struct GameData
 {
