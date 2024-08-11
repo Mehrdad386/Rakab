@@ -710,6 +710,7 @@ int Game::findStarterOfWar()
     {
         if (players.at(i).getCanWar() % 2 == 1)
         {
+            //if can war is odd number it means that the player won the last battle
             winner = i;
         }
         if (compare != 0 && compare == players.at(i).getCanWar())
@@ -758,7 +759,7 @@ void Game::makingPeace()
             {
                 std::cout << players.at(i).getName() << " choose a city to bring peace to it: ";
                 std::cin >> city;
-            } while (city != "Caline" && city != "Enna" && city != "Atela" && city != "Pladaci" && city != "Borge" && city != "Dimase" && city != "Morina" && city != "Olivadi" && city != "Rollo" && city != "Talmone" && city != "Armento" && city != "Elinia" && city != "Lia" && city != "Bella");
+            } while (city != "Caline" && city != "Enna" && city != "Atela" && city != "Pladaci" && city != "Borge" && city != "Dimase" && city != "Morina" && city != "Olivadi" && city != "Rollo" && city != "Talmone" && city != "Armento" && city != "Elinia" && city != "Lia" && city != "Bella" && city != "Winterfell");
 
             for (int i{}; i < map.getCities().size(); i++)
             {
